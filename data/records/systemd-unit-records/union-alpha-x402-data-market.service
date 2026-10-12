@@ -1,0 +1,30 @@
+[Unit]
+Description=Union Alpha x402 paid ERC-5219 data market
+After=network-online.target union-alpha-chain-node.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/emsenn/.local/share/561-group/releases/paid-data-endpoint-service/current
+ExecStart=/usr/bin/node src/alpha-chain-service.mjs
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=15626
+Environment=EVM_RPC_URL=http://127.0.0.1:8561
+Environment=ONCHAIN_RESOURCE_CONTRACT=0x35D53D38B7603B73D76F4c1Dc1e95ECCd8631e58
+Environment=X402_ASSET=0x8AbF0f67745e0F64818157f7D3f18e0DA5b64fb1
+Environment=X402_PAY_TO=0xfDb2D721fCbd9F547Fc5363f9F91142C486c17CA
+Environment=X402_WRITE_AMOUNT=1000
+Environment=X402_READ_AMOUNT=100
+Environment=EVM_KEYSTORE_PATH=/home/emsenn/.config/red-cup-engineering/settlement-pulse/evm-wallet.json
+Environment=EVM_KEYSTORE_PASSWORD_PATH=/home/emsenn/.config/red-cup-engineering/settlement-pulse/evm-wallet.password
+Restart=on-failure
+RestartSec=3s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadOnlyPaths=/home/emsenn/.config/red-cup-engineering/settlement-pulse
+
+[Install]
+WantedBy=default.target
