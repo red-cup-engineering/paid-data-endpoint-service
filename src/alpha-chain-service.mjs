@@ -64,6 +64,17 @@ export function marketResource(value) {
   return ["paid-data", ...parts];
 }
 
+/** Admit the exact existing Datom carrier and the chain's physical byte bound
+ * BEFORE advertising x402 payment for a write. No parser fork, payment effect,
+ * source witness or network call occurs here. */
+export function prepareAlphaDataWrite({ resource, mediaType, body } = {}) {
+  const name = marketResource(resource);
+  const carrier = canonicalEavtDatomJsonl({ mediaType, body });
+  if (Buffer.byteLength(carrier.body) > 16_384)
+    throw new RangeError("inline chain body exceeds 16384 bytes");
+  return Object.freeze({ resource: name, mediaType: carrier.mediaType, body: carrier.body });
+}
+
 export async function loadAlphaAccount({ keystorePath, passwordPath }) {
   const [keystore, password] = await Promise.all([
     privateText(keystorePath, "EVM keystore"),
@@ -128,16 +139,14 @@ export function createOnchainDataClient({ contractAddress, account, publicClient
   }
   function write({ resource, mediaType, body }) {
     const operation = async () => {
-      const carrier = canonicalEavtDatomJsonl({ mediaType, body });
-      const content = carrier.body;
-      if (Buffer.byteLength(content) > 16_384) throw new RangeError("inline chain body exceeds 16384 bytes");
+      const prepared = prepareAlphaDataWrite({ resource, mediaType, body });
       const price = await publicClient.readContract({ address: contract, abi: RESOURCE_ABI, functionName: "writePrice" });
       const hash = await walletClient.writeContract({
         account,
         address: contract,
         abi: RESOURCE_ABI,
         functionName: "publishInline",
-        args: [marketResource(resource), carrier.mediaType, content],
+        args: [prepared.resource, prepared.mediaType, prepared.body],
         value: price,
       });
       const receipt = await publicClient.waitForTransactionReceipt({ hash });
@@ -219,26 +228,43 @@ export function createAlphaDataMarket({ account, publicClient, walletClient, res
       },
       {
         match: "/x402/data/write", methods: ["POST"],
-        handler: (context) => payment.handle(context.request, async () => {
+        handler: async (context) => {
+          let body;
           try {
-            const body = await context.input.json();
-            return Response.json({ ok: true, result: await data.write(body) }, { status: 201 });
+            body = await context.input.json();
+            prepareAlphaDataWrite(body);
           } catch (error) {
             return Response.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 400 });
           }
-        }),
+          // This admitted request may still fail network settlement or chain
+          // execution, but no invalid local Datom crosses a payment gate.
+          return payment.handle(context.request, async () => {
+            try {
+              return Response.json({ ok: true, result: await data.write(body) }, { status: 201 });
+            } catch (error) {
+              return Response.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 400 });
+            }
+          });
+        },
       },
       {
         match: "/x402/data/read", methods: ["GET"],
-        handler: (context) => payment.handle(context.request, async () => {
+        handler: (context) => {
+          const resource = context.url.searchParams.get("resource");
+          try { marketResource(resource); }
+          catch (error) {
+            return Response.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 400 });
+          }
+          return payment.handle(context.request, async () => {
           try {
-            const result = await data.read(context.url.searchParams.get("resource"));
+            const result = await data.read(resource);
             if (result === undefined) return Response.json({ ok: false, error: "resource not found" }, { status: 404 });
             return Response.json({ ok: true, result });
           } catch (error) {
             return Response.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 400 });
           }
-        }),
+          });
+        },
       },
     ],
   });
