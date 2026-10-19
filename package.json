@@ -5,8 +5,7 @@
   "description": "Forms one durable x402 actor for one paid read, write, or data-rights trade operation.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/computer-systems-engineering-services-section.git",
-    "directory": "services/computer-economic-systems-engineering-services-section/services/x402-services-section/services/paid-data-endpoint-service"
+    "url": "git+https://github.com/red-cup-engineering/paid-data-endpoint-service.git"
   },
   "exports": {
     ".": "./src/paid-data-endpoint.mjs",
