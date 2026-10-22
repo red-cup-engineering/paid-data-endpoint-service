@@ -5,23 +5,26 @@
  */
 import originalPack from "../data/fortunes/561-original-october-2026.json" with { type: "json" };
 import {
-  qualifyShortTextPack, admitShortTextSelection,
-  createQualifiedShortTextShelf,
+  qualifyShortTextPack, createQualifiedShortTextShelf,
 } from "./qualified-short-text-inventory.mjs";
 
 const qualifiedPack = qualifyShortTextPack(originalPack);
 const shelf = createQualifiedShortTextShelf({ packs: [qualifiedPack] });
-const sourceRequest = (tag) => ({
-  packId: qualifiedPack.packId,
-  edition: qualifiedPack.edition,
-  packDigest: qualifiedPack.digest,
-  ...(tag === null ? {} : { tag }),
-});
+const sourceRequest = (query = {}) => {
+  if (query === null || typeof query !== "object" || Array.isArray(query) ||
+      Object.keys(query).some(key => key !== "tag"))
+    throw new TypeError("fortune request permits only an optional tag filter");
+  return {
+    packId: qualifiedPack.packId,
+    edition: qualifiedPack.edition,
+    packDigest: qualifiedPack.digest,
+    ...(Object.hasOwn(query, "tag") ? { tag: query.tag } : {}),
+  };
+};
 
 /** Cheap, side-effect-free pre-402 request admission by the original seller. */
 export async function admitRandomFortuneQuery(query = {}) {
-  const selected = admitShortTextSelection(query, qualifiedPack);
-  const admitted = await shelf.admit(sourceRequest(selected.tag), "before-payment");
+  const admitted = await shelf.admit(sourceRequest(query), "before-payment");
   return Object.freeze({
     admitted: true, packId: qualifiedPack.packId,
     edition: qualifiedPack.edition,
@@ -33,8 +36,7 @@ export async function admitRandomFortuneQuery(query = {}) {
 
 /** One bounded market compute invocation after ordinary x402 settlement. */
 export async function drawRandomFortune(query = {}) {
-  const selected = admitShortTextSelection(query, qualifiedPack);
-  const sample = await shelf.draw(sourceRequest(selected.tag));
+  const sample = await shelf.draw(sourceRequest(query));
   return Object.freeze({
     ...sample,
     interpretation: "A playful aphorism, not a prediction or factual oracle.",
