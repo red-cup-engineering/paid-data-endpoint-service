@@ -113,8 +113,8 @@ test("live ready original corpus is selected through generic machinery with no p
   const manifest = fortuneProductManifest();
   assert.equal(manifest.entryCount, 50);
   assert.ok(manifest.tags.includes("computing"));
-  assert.equal(manifest.externalPaymentReceived, false);
-  assert.equal(manifest.deploymentConfirmed, false);
+  assert.equal(manifest.paymentEvidence, null);
+  assert.equal(manifest.deploymentEvidence, null);
   assert.equal((await admitRandomFortuneQuery({tag:"sea"})).admitted, true);
   const result = await drawRandomFortune({tag:"sea"});
   assert.equal(result.kind, "561.qualified-short-text-sample.v1");
