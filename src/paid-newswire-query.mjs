@@ -7,6 +7,9 @@
 const SHA = /^sha256:[0-9a-f]{64}$/u;
 const MAX_QUERY_BYTES = 4096;
 const DAY = 86_400_000;
+const DEFAULT_MAX_SNAPSHOT_ITEMS = 10_000;
+const DEFAULT_MAX_SNAPSHOT_BYTES = 8 * 1024 * 1024;
+const DEFAULT_MAX_RESPONSE_BYTES = 1024 * 1024;
 
 function requireObject(value, name) {
   if (value === null || typeof value !== 'object' || Array.isArray(value))
@@ -27,6 +30,34 @@ export function admitNewswirePaidQueryRequest(request) {
   return Object.freeze({ snapshotDigest: value.snapshotDigest, query: structuredClone(query) });
 }
 
+function httpUrl(value, name) {
+  let parsed;
+  try { parsed = new URL(value); }
+  catch { throw new TypeError(name + ' must be an HTTPS source URL'); }
+  if (parsed.protocol !== 'https:' || parsed.username || parsed.password)
+    throw new TypeError(name + ' must be an HTTPS URL without credentials');
+  return parsed.href;
+}
+
+function rfc3339Millis(value, name) {
+  if (typeof value !== 'string' ||
+      !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?(?:Z|[+-]\d{2}:\d{2})$/u.test(value) ||
+      !Number.isFinite(Date.parse(value))) {
+    throw new TypeError(name + ' must be a real RFC 3339 timestamp with timezone');
+  }
+  return Date.parse(value);
+}
+
+function boundedByteSize(value, name, max) {
+  let json;
+  try { json = JSON.stringify(value); }
+  catch { throw new TypeError(name + ' must be finite JSON'); }
+  if (typeof json !== 'string') throw new TypeError(name + ' must be finite JSON');
+  const bytes = Buffer.byteLength(json, 'utf8');
+  if (bytes > max) throw new RangeError(name + ' exceeds qualified maximum bytes');
+  return bytes;
+}
+
 function requireFunction(value, name) {
   if (typeof value !== 'function') throw new TypeError(name + ' must be an original injected operation');
   return value;
@@ -39,6 +70,9 @@ function requireFunction(value, name) {
 export function createNewswirePaidQueryHandlers({
   snapshotStore, verifySnapshot, admitQuery, queryReleased, qualifyRights,
   authorizeRequest, now = Date.now, maxSnapshotAgeMs = DAY,
+  maxSnapshotItems = DEFAULT_MAX_SNAPSHOT_ITEMS,
+  maxSnapshotBytes = DEFAULT_MAX_SNAPSHOT_BYTES,
+  maxResponseBytes = DEFAULT_MAX_RESPONSE_BYTES,
 } = {}) {
   if (typeof snapshotStore?.read !== 'function') throw new TypeError('original durable snapshotStore.read is required');
   for (const [label, fn] of Object.entries({verifySnapshot, admitQuery, queryReleased, qualifyRights, authorizeRequest, now})) {
@@ -46,6 +80,14 @@ export function createNewswirePaidQueryHandlers({
   }
   if (!Number.isSafeInteger(maxSnapshotAgeMs) || maxSnapshotAgeMs < 60_000 || maxSnapshotAgeMs > 366 * DAY)
     throw new RangeError('snapshot freshness window must be bounded');
+  for (const [name, number, min, max] of [
+    ['maxSnapshotItems',maxSnapshotItems,1,100_000],
+    ['maxSnapshotBytes',maxSnapshotBytes,1024,64 * 1024 * 1024],
+    ['maxResponseBytes',maxResponseBytes,1024,8 * 1024 * 1024],
+  ]) {
+    if (!Number.isSafeInteger(number) || number < min || number > max)
+      throw new RangeError(name + ' is outside its bounded merchant resource budget');
+  }
 
   async function qualify(rawRequest, stage, invocationContext) {
     const admitted = admitNewswirePaidQueryRequest(rawRequest);
@@ -55,20 +97,36 @@ export function createNewswirePaidQueryHandlers({
       throw new TypeError('original Newswire must admit a bounded query object');
     const originalSnapshot = await snapshotStore.read({digest: admitted.snapshotDigest});
     if (originalSnapshot === undefined || originalSnapshot === null) throw new Error('requested Newswire release snapshot is unavailable');
+    // Reject a plainly excessive or unpublished snapshot BEFORE cloning it.
+    // The source-owned cryptographic validator remains a separate MUST.
+    if (!Array.isArray(originalSnapshot.public) || originalSnapshot.public.length > maxSnapshotItems) {
+      throw new RangeError('Newswire release snapshot exceeds admitted item budget');
+    }
+    boundedByteSize(originalSnapshot, 'Newswire release snapshot', maxSnapshotBytes);
     const snapshot = structuredClone(originalSnapshot);
     const verified = await verifySnapshot({snapshot, digest: admitted.snapshotDigest});
     if (verified !== true || snapshot.digest !== admitted.snapshotDigest ||
         !Array.isArray(snapshot.public)) throw new Error('original Newswire release snapshot is unverified');
     const at = now();
     if (!Number.isSafeInteger(at)) throw new TypeError('observed clock must be epoch milliseconds');
-    const refreshedAt = Date.parse(snapshot.verifiedAt);
+    httpUrl(snapshot.wireUri, 'original publisher wireUri');
+    const sourceSubjects = new Set();
+    for (const item of snapshot.public) {
+      if (item?.isPublic !== true || typeof item.subject !== 'string' || !item.subject ||
+          typeof item.url !== 'string' || sourceSubjects.has(item.subject)) {
+        throw new Error('Newswire snapshot has an unreleased or conflicting subject');
+      }
+      sourceSubjects.add(item.subject);
+    }
+    const refreshedAt = rfc3339Millis(snapshot.verifiedAt, 'snapshot.verifiedAt');
     if (!Number.isFinite(refreshedAt) || refreshedAt > at + 300_000 || at - refreshedAt > maxSnapshotAgeMs)
       throw new Error('Newswire snapshot verification freshness has expired');
     const rights = await qualifyRights({snapshot, query: predicate, at, stage, invocationContext});
     if (rights?.admitted !== true || !rights.evidenceUri ||
-        typeof rights.evidenceUri !== 'string' || !rights.evidenceUri.startsWith('https://'))
+        typeof rights.evidenceUri !== 'string')
       throw new Error('licensed Newswire distribution has not been authorized');
-    const expiresAt = Date.parse(rights.expiresAt);
+    httpUrl(rights.evidenceUri, 'licensed source evidence');
+    const expiresAt = rfc3339Millis(rights.expiresAt, 'rights.expiresAt');
     if (!Number.isFinite(expiresAt) || expiresAt <= at) throw new Error('Newswire source rights evidence has expired');
     const authority = await authorizeRequest({snapshot, query: predicate, at, stage, invocationContext});
     if (authority?.admitted !== true) throw new Error('merchant/buyer authorization refused the Newswire query');
@@ -86,8 +144,20 @@ export function createNewswirePaidQueryHandlers({
     const supplied = await queryReleased({public: result.snapshot.public}, result.predicate);
     const body = requireObject(supplied, 'original Newswire query result');
     if (!Array.isArray(body.items) || body.returnedCount !== body.items.length ||
-        !Number.isInteger(body.returnedCount) || body.returnedCount > 100)
+        !Number.isSafeInteger(body.returnedCount) || body.returnedCount > 100 ||
+        !Number.isSafeInteger(body.totalMatched) || body.totalMatched < body.returnedCount ||
+        typeof body.truncated !== 'boolean' || body.truncated !== (body.totalMatched > body.returnedCount))
       throw new Error('original Newswire query returned unbounded or inconsistent results');
+    const currentSubjects = new Set(result.snapshot.public.map((item) => item.subject));
+    if (body.items.some((item) => !item || typeof item.subject !== 'string' ||
+        !currentSubjects.has(item.subject))) {
+      throw new Error('original Newswire query returned an unapproved source subject');
+    }
+    if ((Object.hasOwn(body,'settlement') && body.settlement !== null) ||
+        (Object.hasOwn(body,'buyerAcceptance') && body.buyerAcceptance !== null)) {
+      throw new Error('Newswire data query may not manufacture payment or customer receiving');
+    }
+    boundedByteSize(body, 'Newswire purchased query output', maxResponseBytes);
     return Object.freeze({
       type: 'NewswirePaidQueryDelivery',
       schemaVersion: '561.newswire.paid-query.v1',
@@ -108,7 +178,7 @@ export function createNewswirePaidQueryHandlers({
  */
 export async function createNewswirePaidQueryActor({
   snapshotStore, verifySnapshot, admitQuery, queryReleased, qualifyRights,
-  authorizeRequest, now, maxSnapshotAgeMs,
+  authorizeRequest, now, maxSnapshotAgeMs, maxSnapshotItems, maxSnapshotBytes, maxResponseBytes,
   sellerOffer, priceTerms, append, recoveredRecords,
   basePath = '/x402/newswire/query', facilitatorUrl, facilitatorClient,
   actorFactory, paymentBoundaryFactory, paymentIdentity, settlementProjection,
@@ -120,6 +190,7 @@ export async function createNewswirePaidQueryActor({
   const handlers = createNewswirePaidQueryHandlers({
     snapshotStore, verifySnapshot, admitQuery, queryReleased, qualifyRights,
     authorizeRequest, now, maxSnapshotAgeMs,
+    maxSnapshotItems, maxSnapshotBytes, maxResponseBytes,
   });
   const formActor = actorFactory ?? (await import('./paid-data-endpoint.mjs')).createPaidDataEndpointActor;
   const payment = paymentBoundaryFactory ??

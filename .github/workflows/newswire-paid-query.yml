@@ -1,0 +1,37 @@
+name: Original Newswire x402 query contract tests
+on:
+  pull_request:
+    paths:
+      - 'src/paid-newswire-query.mjs'
+      - 'test/paid-newswire-query.test.mjs'
+      - 'docs/NEWSWIRE-PAID-QUERY.md'
+      - '.github/workflows/newswire-paid-query.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/paid-newswire-query.mjs'
+      - 'test/paid-newswire-query.test.mjs'
+      - '.github/workflows/newswire-paid-query.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-paid-query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22.18.0'
+      - name: Original adapter and test parser acceptance
+        run: |
+          node --check src/paid-newswire-query.mjs
+          node --check test/paid-newswire-query.test.mjs
+      - name: Run original source-only paid-query contract tests without payment credentials
+        run: node --test test/paid-newswire-query.test.mjs
+      - name: Declare the external settlement receiving boundary
+        run: |
+          echo "This original source/test gate is not a real merchant, funded x402 settlement, or independent customer acceptance." >> "$GITHUB_STEP_SUMMARY"
