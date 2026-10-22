@@ -31,11 +31,12 @@ source**, not another payment provider. It admits content-addressed packs with
 source-class-specific commercial rights; parses the traditional Unix
 percent-separated `fortune` format without assuming distribution rights; and
 samples uniformly from exactly one approved edition and optional tag.
+`createQualifiedShortTextShelf` provides a finite, digest-pinned multi-corpus registry with precompiled topic indexes, rights reauthorization on both purchase admission and delivery, and a 20,000-entry/4 MiB capacity guard.
 Third-party entries need individually evidenced rights, while unknown and
 expired rights refuse.
 
 The first source-owned consumer is `./fortune-product`: fifty newly composed
-Unix-style fortunes, sold only through a future ordinary x402 Market compute
+Unix-style fortunes, simultaneously available as an actual percent-delimited Unix fortune textfile in `data/fortunes/561-original-october-2026.fortune`, sold only through a future ordinary x402 Market compute
 binding (`drawRandomFortune` after the existing payment boundary and
 `admitRandomFortuneQuery` before it). Reuse the canonical merchant's
 facilitator, wallet authority, receipt and process-window cost meter. Neither
