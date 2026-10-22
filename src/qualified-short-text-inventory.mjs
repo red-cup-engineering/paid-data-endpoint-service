@@ -200,9 +200,7 @@ export function uniformRandomIndex(count, drawWord = () => randomBytes(4).readUI
   }
   throw new Error("random source failed to supply unbiased sample");
 }
-export function selectQualifiedShortText(lot, query = {}, { drawWord } = {}) {
-  const admitted = admitShortTextSelection(query, lot);
-  const selected = admitted.eligible[uniformRandomIndex(admitted.eligible.length, drawWord)];
+function projectQualifiedShortText(lot, selected) {
   return Object.freeze({
     kind: "561.qualified-short-text-sample.v1",
     packId: lot.packId, edition: lot.edition, packDigest: lot.digest,
@@ -217,12 +215,21 @@ export function selectQualifiedShortText(lot, query = {}, { drawWord } = {}) {
   });
 }
 
+/** Standalone sample from a supplied lot; independently re-verifies source. */
+export function selectQualifiedShortText(lot, query = {}, { drawWord } = {}) {
+  const admitted = admitShortTextSelection(query, lot);
+  const selected = admitted.eligible[uniformRandomIndex(admitted.eligible.length, drawWord)];
+  return projectQualifiedShortText(lot, selected);
+}
+
+const SHELF_MAX_ENTRIES = 20_000;
+const SHELF_MAX_TEXT_BYTES = 4 * 1024 * 1024;
 
 /**
- * Finite, edition-pinned reusable merchandise shelf. Each producer owns its
- * corpus and qualified lot; the original merchant owns pricing and checkout.
- * The buyer cannot upload a pack, pick an entry, change rights, or select an
- * unstated edition after the same request has been admitted for sale.
+ * Finite, revision-pinned, index-prepared merchandise shelf. The merchant
+ * owns prices and checkout. Precomputed tag indexes make paid selection O(1)
+ * over the selected topic rather than rehashing every text at every request.
+ * Immutable source editions and current rights are independently checked.
  */
 export function createQualifiedShortTextShelf({ packs, authorizeUse } = {}) {
   if (!Array.isArray(packs) || packs.length === 0 || packs.length > 128)
@@ -230,33 +237,57 @@ export function createQualifiedShortTextShelf({ packs, authorizeUse } = {}) {
   if (authorizeUse !== undefined && typeof authorizeUse !== "function")
     throw new TypeError("authorizeUse must be an independently supplied rights-policy function");
   const byIdentity = new Map();
+  let totalEntries = 0, totalTextBytes = 0;
   for (const supplied of packs) {
     verifyQualifiedShortTextPack(supplied);
-    // Own an independently frozen snapshot rather than holding a mutable
-    // external reference that a catalog publisher can rewrite after admission.
-    const immutable = qualifyShortTextPack(supplied);
-    const identity = immutable.packId + "@" + immutable.edition;
+    // Store an independently frozen source snapshot: never retain the caller's
+    // mutable pack and never accept buyer-supplied replacement text.
+    const pack = qualifyShortTextPack(supplied);
+    const identity = pack.packId + "@" + pack.edition;
     if (byIdentity.has(identity)) throw new Error("duplicate corpus edition in shelf");
-    if (immutable.sourceKind === "third-party" && !authorizeUse)
+    if (pack.sourceKind === "third-party" && !authorizeUse)
       throw new Error("third-party corpus requires live seller rights reauthorization");
-    byIdentity.set(identity, immutable);
+    totalEntries += pack.entryCount;
+    if (totalEntries > SHELF_MAX_ENTRIES) throw new RangeError("short-text shelf entry capacity exceeded");
+    const byTag = new Map();
+    for (const entry of pack.entries) {
+      totalTextBytes += Buffer.byteLength(entry.text, "utf8");
+      if (totalTextBytes > SHELF_MAX_TEXT_BYTES)
+        throw new RangeError("short-text shelf text-byte capacity exceeded");
+      for (const tag of entry.tags) {
+        if (!byTag.has(tag)) byTag.set(tag, []);
+        byTag.get(tag).push(entry);
+      }
+    }
+    byIdentity.set(identity, { pack, byTag });
   }
-  const catalog = () => Object.freeze([...byIdentity.values()].map(p => Object.freeze({
-    packId: p.packId, edition: p.edition, packDigest: p.digest,
-    entryCount: p.entryCount, source: p.source.name, rightsBasis: p.rights.basis,
+  const catalog = () => Object.freeze([...byIdentity.values()].map(({pack}) => Object.freeze({
+    packId: pack.packId, edition: pack.edition, packDigest: pack.digest,
+    entryCount: pack.entryCount, source: pack.source.name, rightsBasis: pack.rights.basis,
   })));
-  async function admit(request, stage = "before-payment") {
-    const q = requireObject(request, "pack selection");
-    if (!["before-payment", "after-settlement"].includes(stage))
-      throw new TypeError("unsupported rights verification stage");
+  function selectRequest(raw) {
+    const q = requireObject(raw, "pack selection");
     const keys = Object.keys(q);
     if (keys.length < 3 || keys.some(k => !["packId", "edition", "packDigest", "tag"].includes(k)))
       throw new TypeError("select one listed packId, edition and SHA-256 digest, optionally tag");
     const key = token(q.packId, "packId") + "@" + token(q.edition, "edition");
-    const pack = byIdentity.get(key);
-    if (!pack || q.packDigest !== pack.digest)
+    const row = byIdentity.get(key);
+    if (!row || q.packDigest !== row.pack.digest)
       throw new Error("requested corpus is not a currently admitted exact edition");
-    const eligible = admitShortTextSelection(q.tag === undefined ? {} : {tag: q.tag}, pack);
+    const tag = q.tag === undefined ? null : token(q.tag, "tag");
+    const entries = tag === null ? row.pack.entries : row.byTag.get(tag) ?? [];
+    if (entries.length === 0) throw new RangeError("no qualified entries for requested tag");
+    // Rights expiry is checked at each invocation; the immutable corpus
+    // digest is checked only at shelf construction.
+    if (row.pack.rights.expiresOn && row.pack.rights.expiresOn < new Date().toISOString().slice(0, 10))
+      throw new Error("corpus rights expired");
+    return { row, tag, entries };
+  }
+  async function admit(request, stage = "before-payment") {
+    if (!["before-payment", "after-settlement"].includes(stage))
+      throw new TypeError("unsupported rights verification stage");
+    const {row, tag, entries} = selectRequest(request);
+    const pack = row.pack;
     if (authorizeUse && await authorizeUse({
       packId: pack.packId, edition: pack.edition, packDigest: pack.digest,
       sourceKind: pack.sourceKind, rights: structuredClone(pack.rights),
@@ -264,14 +295,14 @@ export function createQualifiedShortTextShelf({ packs, authorizeUse } = {}) {
     }) !== true) throw new Error("current source rights authority refused commercial selection");
     return Object.freeze({
       packId: pack.packId, edition: pack.edition, packDigest: pack.digest,
-      tag: eligible.tag, eligibleCount: eligible.eligible.length,
+      tag, eligibleCount: entries.length,
     });
   }
-  async function draw(request, options = {}) {
+  async function draw(request, { drawWord } = {}) {
     const accepted = await admit(request, "after-settlement");
-    const pack = byIdentity.get(accepted.packId + "@" + accepted.edition);
-    return selectQualifiedShortText(pack,
-      accepted.tag === null ? {} : {tag: accepted.tag}, options);
+    const {row, entries} = selectRequest(request);
+    const selected = entries[uniformRandomIndex(accepted.eligibleCount, drawWord)];
+    return projectQualifiedShortText(row.pack, selected);
   }
   return Object.freeze({catalog, admit, draw});
 }
