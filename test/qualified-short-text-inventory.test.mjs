@@ -3,7 +3,7 @@ import test from "node:test";
 import {
   parseUnixFortuneData, qualifyShortTextPack, verifyQualifiedShortTextPack,
   qualifiedTextDigest, admitShortTextSelection, selectQualifiedShortText,
-  uniformRandomIndex,
+  uniformRandomIndex, createQualifiedShortTextShelf,
 } from "../src/qualified-short-text-inventory.mjs";
 import {
   admitRandomFortuneQuery, drawRandomFortune, fortuneProductManifest,
@@ -109,17 +109,54 @@ test("chosen fortune preserves corpus identity, per-entry digest and selected to
   assert.equal(chosen.rightsBasis, "seller-originated-text");
 });
 
-test("live ready original corpus is selected through generic machinery with no payment fiction", () => {
+test("live ready original corpus is selected through generic machinery with no payment fiction", async () => {
   const manifest = fortuneProductManifest();
   assert.equal(manifest.entryCount, 50);
   assert.ok(manifest.tags.includes("computing"));
   assert.equal(manifest.externalPaymentReceived, false);
   assert.equal(manifest.deploymentConfirmed, false);
-  assert.equal(admitRandomFortuneQuery({tag:"sea"}).admitted, true);
-  const result = drawRandomFortune({tag:"sea"});
+  assert.equal((await admitRandomFortuneQuery({tag:"sea"})).admitted, true);
+  const result = await drawRandomFortune({tag:"sea"});
   assert.equal(result.kind, "561.qualified-short-text-sample.v1");
   assert.equal(result.packDigest, manifest.packDigest);
   assert.ok(result.tags.includes("sea"));
   assert.equal(result.paymentReceipt, null);
   assert.match(result.commercialScope, /not exclusive rights/);
+});
+
+
+test("one seller can add qualified editions without inventing new payment machinery", async () => {
+  const next = qualifyShortTextPack({...original, packId:"second-corpus", edition:"october-2026"});
+  const shelf = createQualifiedShortTextShelf({packs:[pack,next]});
+  assert.equal(shelf.catalog().length, 2);
+  const query = {packId:"second-corpus", edition:"october-2026", packDigest:next.digest, tag:"weather"};
+  const admission = await shelf.admit(query);
+  assert.equal(admission.eligibleCount, 2);
+  const drawn = await shelf.draw(query, {drawWord:() => 1});
+  assert.equal(drawn.packDigest, next.digest);
+  assert.equal(drawn.entryId, "third");
+  await assert.rejects(shelf.admit({...query, packDigest:pack.digest}), /currently admitted exact edition/);
+  await assert.rejects(shelf.admit({...query, price:"0"}), /select one listed/);
+  await assert.rejects(shelf.admit({...query, tag:"missing"}), /no qualified entries/);
+  assert.throws(() => createQualifiedShortTextShelf({packs:[pack,pack]}), /duplicate corpus edition/);
+});
+
+test("third-party paid editions require current rights at both admission and execution", async () => {
+  const source={name:"Fixture licensed collection",url:"https://example.org/fortunes"};
+  const rights={basis:"item-by-item-license-review",reviewedBy:"test-reviewer",
+    reviewedOn:"2026-10-22",sourceLicenseEvidence:"https://example.org/rights",
+    commercialDelivery:true,redistribution:true};
+  const items=original.entries.map(entry=>({...entry,attribution:"fixture author",
+    rights:{commercialDelivery:true,redistribution:true,evidenceUrl:"https://example.org/rights/entry"}}));
+  const external=qualifyShortTextPack({...original,packId:"licensed-source",sourceKind:"third-party",source,rights,entries:items});
+  assert.throws(() => createQualifiedShortTextShelf({packs:[external]}), /reauthorization/);
+  const phases=[];
+  const shelf=createQualifiedShortTextShelf({packs:[external],authorizeUse: async ({stage})=>{
+    phases.push(stage);
+    return stage==="before-payment";
+  }});
+  const req={packId:external.packId,edition:external.edition,packDigest:external.digest};
+  await shelf.admit(req);
+  await assert.rejects(shelf.draw(req),/current source rights authority refused/);
+  assert.deepEqual(phases,["before-payment","after-settlement"]);
 });
