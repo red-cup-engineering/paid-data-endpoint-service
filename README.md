@@ -22,3 +22,28 @@ The paid-read adapter `./src/federal-register-paid-read.mjs` now connects an exa
 ## Original Newswire commercial query boundary
 
 The `./paid-newswire-query` export composes the **existing Newswire's** qualified release snapshot and bounded topic/source/time query with this package's original durable x402 `read-data` actor. It requires seller-owned immutable snapshot read/verification, newsroom query schema and execution, source-commercial-rights review, buyer/merchant authorization, and real x402 merchant pricing/facilitator and persistent receipts. Each request pins an exact SHA-256 snapshot, rejects unauthorized/stale/substituted editions before the 402 challenge, and checks source rights and principal authorization again after settlement. No duplicate feed renderer, marketplace, payment ledger, wallet, editorial approval or public-data exclusivity claim is introduced. [Read original seller contract](docs/NEWSWIRE-PAID-QUERY.md). Ten focused standalone Node tests passed; actual native workspace and deployed paid end-user receiving remain owed.
+
+
+## Qualified short-text merchandise: original fortunes first
+
+The new `./qualified-short-text-inventory` export is a **general product
+source**, not another payment provider. It admits content-addressed packs with
+source-class-specific commercial rights; parses the traditional Unix
+percent-separated `fortune` format without assuming distribution rights; and
+samples uniformly from exactly one approved edition and optional tag.
+Third-party entries need individually evidenced rights, while unknown and
+expired rights refuse.
+
+The first source-owned consumer is `./fortune-product`: fifty newly composed
+Unix-style fortunes, sold only through a future ordinary x402 Market compute
+binding (`drawRandomFortune` after the existing payment boundary and
+`admitRandomFortuneQuery` before it). Reuse the canonical merchant's
+facilitator, wallet authority, receipt and process-window cost meter. Neither
+this source nor its manifest reports a deployed market route, a signed
+payment, a sold fortune or earned cash. Read
+[the rights, source and market admission contract](docs/FORTUNE-LICENSED-TEXT-SELLING.md)
+and run `node --test test/qualified-short-text-inventory.test.mjs`.
+
+This same corpus/selection law supports future licensed proverbs, idioms,
+chengyu and glossary snippets without one-off payment stacks or an unjustified
+blanket license on traditional collections.
