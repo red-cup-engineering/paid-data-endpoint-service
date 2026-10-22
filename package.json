@@ -33,5 +33,10 @@
     "viem": "2.55.8",
     "@red-cup-engineering/computer-web-platform": "workspace:*",
     "@red-cup-engineering/datom-services-section": "workspace:*"
+  },
+  "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
   }
 }
