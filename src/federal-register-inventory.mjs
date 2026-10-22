@@ -9,6 +9,7 @@
  * quote a payment rail, settle money, or independently accept a purchase.
  */
 import { createHash } from "node:crypto";
+import { isDeepStrictEqual } from "node:util";
 
 const ORIGIN = "https://www.federalregister.gov";
 const ENDPOINT = `${ORIGIN}/api/v1/documents.json`;
@@ -186,17 +187,67 @@ function filtersFrom(value) {
   return result;
 }
 
+/**
+ * Verify one original or derived inventory lot at a trust boundary. This
+ * establishes structural and SHA-256 consistency, not an external signature
+ * by the Office of the Federal Register nor independent proof of collection.
+ * The original source bytes and observed HTTP response remain separate facts.
+ */
+export function verifyFederalRegisterInventoryLot(lot) {
+  if (lot === null || typeof lot !== "object" || Array.isArray(lot) ||
+      lot.schemaVersion !== "561.public-data-inventory.v1" ||
+      !["federal-register-published-documents", "derived-federal-register-documents"].includes(lot.kind) ||
+      !Array.isArray(lot.records) || lot.records.length > MAX_RESULTS) {
+    throw new TypeError("a bounded original or derived inventory lot is required");
+  }
+  const source = lot.source;
+  if (!source || source.publisher !== "Office of the Federal Register" ||
+      !isDeepStrictEqual(source.rights, FEDERAL_REGISTER_REUSE)) {
+    throw new TypeError("inventory source and original reuse notice must match the declared publisher");
+  }
+  apiURL(source.apiUrl);
+  timestamp(lot.observedAt);
+  const normalized = lot.records.map((record) => {
+    if (!Array.isArray(record?.agency_names)) throw new TypeError("record agency_names must be an array");
+    return federalRegisterDocument({ ...record, agencies: record.agency_names });
+  });
+  if (!isDeepStrictEqual(normalized, lot.records)) {
+    throw new TypeError("inventory records are not canonical official-document projections");
+  }
+  const ordered = [...normalized].sort((a, b) => a.document_number.localeCompare(b.document_number));
+  if (!isDeepStrictEqual(normalized, ordered) ||
+      new Set(normalized.map((r) => r.document_number)).size !== normalized.length) {
+    throw new TypeError("inventory records must be sorted and unique");
+  }
+  let expectedDigest;
+  if (lot.kind === "federal-register-published-documents") {
+    expectedDigest = inventoryDigest(lot.records);
+  } else {
+    if (typeof lot.parentDigest !== "string" || !/^sha256:[0-9a-f]{64}$/u.test(lot.parentDigest) ||
+        lot.transformation?.kind !== "filter" ||
+        !isDeepStrictEqual(lot.transformation.filters, filtersFrom(lot.transformation.filters))) {
+      throw new TypeError("derived inventory requires a valid parent digest and filter transformation");
+    }
+    boundedText(lot.transformation.actorId, "reseller actor", 300);
+    boundedText(lot.transformation.service, "reseller service", 400);
+    expectedDigest = inventoryDigest({ parent: lot.parentDigest, transform: lot.transformation, records: lot.records });
+  }
+  if (lot.digest !== expectedDigest) throw new TypeError("inventory digest does not verify");
+  if (lot.lotId !== `urn:561:public-inventory:fr:${expectedDigest.slice(7)}` ||
+      lot.recordCount !== lot.records.length) {
+    throw new TypeError("inventory manifest does not identify the supplied records");
+  }
+  if (lot.sales?.state !== "no-sale-recorded" || lot.sales.quote !== null ||
+      lot.sales.payment !== null || lot.sales.endUserAcceptance !== null) {
+    throw new TypeError("inventory source must not manufacture sales or settlement receipts");
+  }
+  return lot;
+}
+
 /** Create a reseller's genuinely differentiated set, without assuming a sale. */
 export function deriveFederalRegisterInventory(lot, { filters, actorId, service } = {}) {
-  if (!lot || !Array.isArray(lot.records) || !lot.digest || !lot.source?.rights ||
-      (lot.kind !== "federal-register-published-documents" && lot.kind !== "derived-federal-register-documents")) {
-    throw new TypeError("a supported source lot is required");
-  }
-  const expectedDigest = lot.kind === "federal-register-published-documents"
-    ? inventoryDigest(lot.records)
-    : inventoryDigest({ parent: lot.parentDigest, transform: lot.transformation, records: lot.records });
-  if (lot.digest !== expectedDigest) throw new TypeError("parent inventory digest does not verify");
-  apiURL(lot.source.apiUrl);
+  try { verifyFederalRegisterInventoryLot(lot); }
+  catch (error) { throw new TypeError(`parent inventory digest does not verify: ${error.message}`, { cause: error }); }
   const selected = filtersFrom(filters);
   if (selected.commentsCloseBy && selected.commentsCloseOnOrAfter &&
       selected.commentsCloseOnOrAfter > selected.commentsCloseBy) {
