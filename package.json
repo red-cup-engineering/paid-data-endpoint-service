@@ -15,7 +15,9 @@
     "./federal-register-paid-read": "./src/federal-register-paid-read.mjs",
     "./international-data-inventory": "./src/international-data-inventory.mjs",
     "./international-paid-read": "./src/international-paid-read.mjs",
-    "./paid-newswire-query": "./src/paid-newswire-query.mjs"
+    "./paid-newswire-query": "./src/paid-newswire-query.mjs",
+    "./qualified-short-text-inventory": "./src/qualified-short-text-inventory.mjs",
+    "./fortune-product": "./src/fortune-product.mjs"
   },
   "bin": {
     "serve-alpha-chain-data-market": "./src/alpha-chain-service.mjs",
@@ -24,7 +26,7 @@
     "acquire-international-data": "src/international-data-inventory-cli.mjs"
   },
   "scripts": {
-    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs && node --check src/federal-register-inventory.mjs && node --check src/federal-register-inventory-cli.mjs && node --check test/federal-register-inventory.test.mjs && node --check src/federal-register-paid-read.mjs && node --check test/federal-register-paid-read.test.mjs && node --check src/international-data-inventory.mjs && node --check src/international-data-inventory-cli.mjs && node --check test/international-data-inventory.test.mjs && node --check src/international-paid-read.mjs && node --check test/international-paid-read.test.mjs && node --check src/paid-newswire-query.mjs && node --check test/paid-newswire-query.test.mjs",
+    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs && node --check src/federal-register-inventory.mjs && node --check src/federal-register-inventory-cli.mjs && node --check test/federal-register-inventory.test.mjs && node --check src/federal-register-paid-read.mjs && node --check test/federal-register-paid-read.test.mjs && node --check src/international-data-inventory.mjs && node --check src/international-data-inventory-cli.mjs && node --check test/international-data-inventory.test.mjs && node --check src/international-paid-read.mjs && node --check test/international-paid-read.test.mjs && node --check src/paid-newswire-query.mjs && node --check test/paid-newswire-query.test.mjs && node --check src/qualified-short-text-inventory.mjs && node --check src/fortune-product.mjs && node --check test/qualified-short-text-inventory.test.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "engines": {
