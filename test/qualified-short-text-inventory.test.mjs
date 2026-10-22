@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import {
   parseUnixFortuneData, qualifyShortTextPack, verifyQualifiedShortTextPack,
   qualifiedTextDigest, admitShortTextSelection, selectQualifiedShortText,
@@ -159,4 +160,11 @@ test("third-party paid editions require current rights at both admission and exe
   await shelf.admit(req);
   await assert.rejects(shelf.draw(req),/current source rights authority refused/);
   assert.deepEqual(phases,["before-payment","after-settlement"]);
+});
+
+
+test("shipped 50-entry Unix textfile and JSON corpus are byte-text identical", () => {
+  const raw = readFileSync(new URL("../data/fortunes/561-original-october-2026.fortune", import.meta.url), "utf8");
+  const corpus = JSON.parse(readFileSync(new URL("../data/fortunes/561-original-october-2026.json", import.meta.url), "utf8"));
+  assert.deepEqual(parseUnixFortuneData(raw), corpus.entries.map(entry => entry.text));
 });
