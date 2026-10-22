@@ -55,7 +55,7 @@ export function fortuneProductManifest() {
     source: qualifiedPack.source.name,
     provenance: qualifiedPack.source.provenance,
     rightsBasis: qualifiedPack.rights.basis,
-    externalPaymentReceived: false,
-    deploymentConfirmed: false,
+    paymentEvidence: null, // Only the original market can attest to settlement.
+    deploymentEvidence: null, // Source inclusion cannot attest to runtime.
   });
 }
