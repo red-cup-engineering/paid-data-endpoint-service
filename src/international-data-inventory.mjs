@@ -43,6 +43,22 @@ export const INTERNATIONAL_SOURCES = Object.freeze({
       obligations: Object.freeze(['attribution', 'cite specific product and version', 'document preliminary or final processing and missing values', 'record raster bytes and actual geographic subset']),
     }),
   }),
+  'sse-market-data': Object.freeze({
+    id: 'sse-market-data', family: 'licensed-exchange-data', country: 'CN',
+    title: 'Shanghai Stock Exchange market data',
+    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
+      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
+      termsUrl: 'https://english.sse.com.cn/markets/dataservice/products/',
+      note: 'SSE permits real-time market-data redistribution only by qualified vendors; overseas arrangements are licensed through CIIS. No resale right is inferred from a public price page.' }),
+  }),
+  'szse-market-data': Object.freeze({
+    id: 'szse-market-data', family: 'licensed-exchange-data', country: 'CN',
+    title: 'Shenzhen Stock Exchange market data',
+    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
+      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
+      termsUrl: 'https://investor.szse.cn/English/services/dataServices/index.html',
+      note: 'SZSE identifies SSIC as the exclusive manager and distributor of its market information; commercial rights require an original vendor contract.' }),
+  }),
   'china-nbs-website': Object.freeze({
     id: 'china-nbs-website', family: 'restricted-website', country: 'CN',
     title: 'National Bureau of Statistics of China website data',
