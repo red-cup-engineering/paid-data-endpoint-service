@@ -21,6 +21,8 @@ test('admission accepts only specifically licensed datasets, expires rights, nev
  assert.equal(qualifyInternationalSource('chirps3-africa-rainfall', { asOf }).family, 'climate-hazards-archive');
  assert.throws(() => qualifyInternationalSource('china-nbs-website', { asOf }), /not been qualified/);
  assert.throws(() => qualifyInternationalSource('tahmo-stations', { asOf }), /not been qualified/);
+ assert.throws(() => qualifyInternationalSource('sse-market-data', { asOf }), /not been qualified/);
+ assert.throws(() => qualifyInternationalSource('szse-market-data', { asOf }), /not been qualified/);
  assert.throws(() => qualifyInternationalSource('some-new-source', { asOf }), /unlisted/);
  assert.throws(() => qualifyInternationalSource('wdi-cn-inflation', { asOf: '2027-02-01' }), /expired/);
  assert.throws(() => qualifyInternationalSource('wdi-cn-inflation', { asOf: '2025-01-01' }), /future/);
