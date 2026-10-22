@@ -209,8 +209,10 @@ export function selectQualifiedShortText(lot, query = {}, { drawWord } = {}) {
     entryId: selected.id, entryDigest: qualifiedTextDigest(selected),
     text: selected.text, tags: [...selected.tags],
     sourceName: lot.source.name, sourceKind: lot.sourceKind,
+    sourceUrl: lot.source.url ?? null,
     attribution: selected.attribution ?? "Original 561 Group service corpus",
     rightsBasis: lot.rights.basis,
+    rightsEvidenceUrl: selected.rights?.evidenceUrl ?? lot.rights.sourceLicenseEvidence ?? null,
     selectionMethod: "uniform-csprng-rejection-sampling",
   });
 }
