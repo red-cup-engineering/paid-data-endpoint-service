@@ -73,10 +73,28 @@ Keep source accession separate from commercial merchandise.
    executes. A `tag` filter is the only public selection knob. There is
    no buyer-controlled seed, index, price, license waiver or raw pack upload.
 
-As a product matures, a separate metadata registry may point multiple
-originally owned corpora to the same sampler. Distinct upstream rights,
-source costs and supplier scopes remain separately typed, not aggregated
-into one false all-permissive license.
+The **implemented** `createQualifiedShortTextShelf({packs, authorizeUse})`
+is a finite, revision-pinned in-memory registry of up to 128 distinct
+qualified corpus editions. One source-qualified shelf can supply many
+different corpus products without duplicating x402 or adding one API server
+per dataset. Buyers must specify the exact `packId`, `edition` and
+`packDigest` already listed by the seller; request-time supplied texts,
+seeds, indexes or rights are refused. The first Fortune product binds these
+internally to its one original pack and exposes only the safe `tag` filter.
+
+Third-party packs additionally require the selling host's injected live
+`authorizeUse` callback, checked independently at `before-payment` and
+`after-settlement`; lack of that host policy always refuses, including when
+the pack's old rights record looked permissive. Authorization is bounded to
+one source/edition, not a global x402 or workspace privilege. Every paid
+sample carries `sourceUrl` and `rightsEvidenceUrl` when present alongside
+attribution; avoid stripping license obligations at the buyer interface.
+
+Distinct upstream rights, source costs and supplier scopes remain separately
+typed, not aggregated into one false all-permissive license. The shelf
+currently holds qualified JSON lots in process memory; source acquisition,
+persistent corpus storage, durable payment receipts and live rights-policy
+attestation are duties of their existing original source/merchant hosts.
 
 ## Existing seller integration contract (not activated)
 
