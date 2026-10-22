@@ -8,7 +8,7 @@
  */
 import { createHash, randomBytes } from "node:crypto";
 
-const TOKEN = /^[a-z][a-z0-9-]{1,63}$/u;
+const TOKEN = /^[a-z0-9][a-z0-9-]{1,63}$/u;
 const SHA = /^sha256:[0-9a-f]{64}$/u;
 const MAX_INPUT_BYTES = 1024 * 1024;
 const MAX_ENTRY_BYTES = 2048;
