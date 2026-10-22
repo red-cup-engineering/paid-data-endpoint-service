@@ -6,26 +6,35 @@
 import originalPack from "../data/fortunes/561-original-october-2026.json" with { type: "json" };
 import {
   qualifyShortTextPack, admitShortTextSelection,
-  selectQualifiedShortText,
+  createQualifiedShortTextShelf,
 } from "./qualified-short-text-inventory.mjs";
 
 const qualifiedPack = qualifyShortTextPack(originalPack);
+const shelf = createQualifiedShortTextShelf({ packs: [qualifiedPack] });
+const sourceRequest = (tag) => ({
+  packId: qualifiedPack.packId,
+  edition: qualifiedPack.edition,
+  packDigest: qualifiedPack.digest,
+  ...(tag === null ? {} : { tag }),
+});
 
 /** Cheap, side-effect-free pre-402 request admission by the original seller. */
-export function admitRandomFortuneQuery(query = {}) {
-  const admitted = admitShortTextSelection(query, qualifiedPack);
+export async function admitRandomFortuneQuery(query = {}) {
+  const selected = admitShortTextSelection(query, qualifiedPack);
+  const admitted = await shelf.admit(sourceRequest(selected.tag), "before-payment");
   return Object.freeze({
     admitted: true, packId: qualifiedPack.packId,
     edition: qualifiedPack.edition,
     packDigest: qualifiedPack.digest,
-    eligibleCount: admitted.eligible.length,
+    eligibleCount: admitted.eligibleCount,
     tag: admitted.tag,
   });
 }
 
 /** One bounded market compute invocation after ordinary x402 settlement. */
-export function drawRandomFortune(query = {}) {
-  const sample = selectQualifiedShortText(qualifiedPack, query);
+export async function drawRandomFortune(query = {}) {
+  const selected = admitShortTextSelection(query, qualifiedPack);
+  const sample = await shelf.draw(sourceRequest(selected.tag));
   return Object.freeze({
     ...sample,
     interpretation: "A playful aphorism, not a prediction or factual oracle.",
