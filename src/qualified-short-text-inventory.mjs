@@ -214,3 +214,62 @@ export function selectQualifiedShortText(lot, query = {}, { drawWord } = {}) {
     selectionMethod: "uniform-csprng-rejection-sampling",
   });
 }
+
+
+/**
+ * Finite, edition-pinned reusable merchandise shelf. Each producer owns its
+ * corpus and qualified lot; the original merchant owns pricing and checkout.
+ * The buyer cannot upload a pack, pick an entry, change rights, or select an
+ * unstated edition after the same request has been admitted for sale.
+ */
+export function createQualifiedShortTextShelf({ packs, authorizeUse } = {}) {
+  if (!Array.isArray(packs) || packs.length === 0 || packs.length > 128)
+    throw new TypeError("short-text shelf requires 1–128 qualified packs");
+  if (authorizeUse !== undefined && typeof authorizeUse !== "function")
+    throw new TypeError("authorizeUse must be an independently supplied rights-policy function");
+  const byIdentity = new Map();
+  for (const supplied of packs) {
+    verifyQualifiedShortTextPack(supplied);
+    // Own an independently frozen snapshot rather than holding a mutable
+    // external reference that a catalog publisher can rewrite after admission.
+    const immutable = qualifyShortTextPack(supplied);
+    const identity = immutable.packId + "@" + immutable.edition;
+    if (byIdentity.has(identity)) throw new Error("duplicate corpus edition in shelf");
+    if (immutable.sourceKind === "third-party" && !authorizeUse)
+      throw new Error("third-party corpus requires live seller rights reauthorization");
+    byIdentity.set(identity, immutable);
+  }
+  const catalog = () => Object.freeze([...byIdentity.values()].map(p => Object.freeze({
+    packId: p.packId, edition: p.edition, packDigest: p.digest,
+    entryCount: p.entryCount, source: p.source.name, rightsBasis: p.rights.basis,
+  })));
+  async function admit(request, stage = "before-payment") {
+    const q = requireObject(request, "pack selection");
+    if (!["before-payment", "after-settlement"].includes(stage))
+      throw new TypeError("unsupported rights verification stage");
+    const keys = Object.keys(q);
+    if (keys.length < 3 || keys.some(k => !["packId", "edition", "packDigest", "tag"].includes(k)))
+      throw new TypeError("select one listed packId, edition and SHA-256 digest, optionally tag");
+    const key = token(q.packId, "packId") + "@" + token(q.edition, "edition");
+    const pack = byIdentity.get(key);
+    if (!pack || q.packDigest !== pack.digest)
+      throw new Error("requested corpus is not a currently admitted exact edition");
+    const eligible = admitShortTextSelection(q.tag === undefined ? {} : {tag: q.tag}, pack);
+    if (authorizeUse && await authorizeUse({
+      packId: pack.packId, edition: pack.edition, packDigest: pack.digest,
+      sourceKind: pack.sourceKind, rights: structuredClone(pack.rights),
+      stage,
+    }) !== true) throw new Error("current source rights authority refused commercial selection");
+    return Object.freeze({
+      packId: pack.packId, edition: pack.edition, packDigest: pack.digest,
+      tag: eligible.tag, eligibleCount: eligible.eligible.length,
+    });
+  }
+  async function draw(request, options = {}) {
+    const accepted = await admit(request, "after-settlement");
+    const pack = byIdentity.get(accepted.packId + "@" + accepted.edition);
+    return selectQualifiedShortText(pack,
+      accepted.tag === null ? {} : {tag: accepted.tag}, options);
+  }
+  return Object.freeze({catalog, admit, draw});
+}
