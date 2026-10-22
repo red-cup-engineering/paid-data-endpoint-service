@@ -78,3 +78,32 @@ Before asserting a viable paid SKU, separately observe and record (1) legally re
 ## Tests
 
 `node --test test/federal-register-inventory.test.mjs` verifies deterministic digests, rights/source disclosures, parent-to-reseller lineage, deadline filtering, duplicate and tampered record rejection, unsafe source refusal, bounded API queries and non-JSON/failed HTTP responses. Its document rows are **synthetic test fixtures**, not an actual October 2026 Federal Register pull, current source warranty or purchased inventory.
+
+## Exact-digest paid reads through the original x402 actor
+
+The library now exports `createFederalRegisterPaidReadActor` and `createFederalRegisterPaidReadHandlers` from `@red-cup-engineering/paid-data-endpoint-service/federal-register-paid-read`. This is a source-owned **integration adapter**, not a second payment stack. It chooses the original `createPaidDataEndpointActor(operation: 'read-data')` and the original x402 exact-EVM Express boundary, which own durable invocation identity, settlement verification, idempotent receipts and refusal. It provides the application-specific admission and fulfillment behavior.
+
+The seller's authorized deployment must supply:
+- a qualified **sellerOffer**, source-versioned price terms with chain/asset/payee, and an independently approved facilitator or facilitator client;
+- `lotStore.read({ digest })` over immutable durably stored exact lot versions; returned JSON is copied and validated before use;
+- `append(record)` and recovered intent/terminal `Map` values from the original durable invocation journal, retaining settlement evidence across restarts;
+- the competent original actor's authorization, networking policy, customer access rights and native storefront publication.
+
+Example *shape*, not a live offer:
+
+```js
+import { createFederalRegisterPaidReadActor } from "@red-cup-engineering/paid-data-endpoint-service/federal-register-paid-read";
+const actor = await createFederalRegisterPaidReadActor({
+  lotStore,             // actual immutable store; rejects absent or mismatched digests
+  sellerOffer,          // authenticated merchant-authored terms
+  priceTerms,           // original network, atomic amount, token and payee
+  append,               // original durable journal append
+  recoveredRecords,     // original persisted intent and terminal maps
+  facilitatorClient,    // independently selected and authorized x402 facilitator
+});
+actor.install(app); // existing Express app; no separate storefront or wallet
+```
+
+The paid method is `POST /x402/federal-register-inventory/invoke` with **exactly** `{"lotDigest":"sha256:..."}` in the JSON body. The public contract is `GET /x402/federal-register-inventory/offer`, and the original actor owns `GET /x402/federal-register-inventory/result/:id`. Before the challenge, admission verifies the exact requested digest, canonical Federal Register records, provenance notice, immutable availability and seller-configured freshness (default 24 hours). After an actual settlement, execution rechecks the same content before the original receipt records delivery. A stale, absent, mutated or substituted lot is refused, not silently replaced. A customer may always obtain the original government facts directly for free.
+
+**Current receiving boundary:** ten focused local tests cover pure source merchandising, request/digest isolation, freshness, tampering, reseller lineage and boundary-injection wiring. Test doubles do **not** prove settlement or deployment. The full monorepo/workspace test suite, source-lot persistence, real merchant authority, live facilitator, serving process, real 402 challenge, actual paid settlement and independent end-user acceptance remain unverified. A successfully fetched fixture is not a completed purchase. Follow the existing Coesite Bazaar and 561 Group internal-economy original Work rather than generating internal fake paid activity.
