@@ -48,3 +48,18 @@ Reuse shared source rights review, canonical lot hashing, stable agency identifi
 ## Honest receiving check
 
 Source adapter tests cover the rights allowlist, NBS/TAHMO refusals, expiry, valid official endpoints, complete World Bank page requirement, numeric/null values, stable digest, tamper rejection, unsuccessful upstream HTTP, oversized response refusal and CHIRPS3 manifest remaining marked unacquired. They use constructed fixtures, not proof of a currently live World Bank or rainfall response. Real acceptance requires licensed source agreement/version, dated exact acquisition, a meaningful buyer effect, a deployed seller, an independent payment/acceptance receipt and measured unit economics.
+
+## Paid-read composition with the original seller
+
+`src/international-paid-read.mjs` exposes `createInternationalPaidReadActor`, composed from the existing `createPaidDataEndpointActor(operation: 'read-data')` and existing x402 exact-EVM payment boundary. The authorized seller supplies a durable content-addressed lot store, current signed merchant terms, payee/network/asset, facilitator, durable append and recovered invocation records. The public POST request accepts **only** an exact `sha256:` lot digest. The adapter checks source-qualifying rights **against the seller's observed current date**, availability, immutable content and configured freshness before the payment gate; after actual settlement the original actor calls fulfillment, which reads and checks the same digest again. It returns a delivery and rights/attribution alongside—but separately from—the original x402 settlement receipt. The seller chooses a true source-valid offer; this wrapper does not grant any seller new payment authority.
+
+A `CHIRPS v3` unacquired raster candidate is never accepted by this World Bank paid-read adapter. A full raster ingestion will require a data-type-specific measured transform and its own original seller offer. No payout, HTTP 402, real purchase, station permission or external transaction is implied by the local eleven tests.
+
+```js
+import { createInternationalPaidReadActor } from '@red-cup-engineering/paid-data-endpoint-service/international-paid-read';
+const actor = await createInternationalPaidReadActor({
+  lotStore, // read({digest}) returns a saved exact verified China indicator lot
+  sellerOffer, priceTerms, append, recoveredRecords, facilitatorClient,
+});
+actor.install(app); // install on the seller's existing authorized Express service
+```
