@@ -15,7 +15,11 @@ agent-generated editorial material without another protocol or seller gateway.
 
 `./fortune-product` is the first installed original product:
 50 newly drafted, Unix-style aphorisms in
-`data/fortunes/561-original-october-2026.json`. The material was prepared
+`data/fortunes/561-original-october-2026.json`, also shipped as the genuine
+traditional percent-delimited plain-text file
+`data/fortunes/561-original-october-2026.fortune` for ordinary Unix `fortune`/`strfile`
+consumers. The focused test requires all fifty exact texts to agree across
+representations. The material was prepared
 under the Leader's October 22 request to create original fortunes where
 external commercial clearance is not demonstrated. Its source rights claim
 does not assert exclusive copyright in AI-assisted text; it does not grant
@@ -75,7 +79,9 @@ Keep source accession separate from commercial merchandise.
 
 The **implemented** `createQualifiedShortTextShelf({packs, authorizeUse})`
 is a finite, revision-pinned in-memory registry of up to 128 distinct
-qualified corpus editions. One source-qualified shelf can supply many
+qualified corpus editions, at most 20,000 entries and 4 MiB total text.
+It prepares tag indexes once and selects from immutable prequalified editions,
+not by rehashing and scanning all quotations for each $0.01 invocation. One source-qualified shelf can supply many
 different corpus products without duplicating x402 or adding one API server
 per dataset. Buyers must specify the exact `packId`, `edition` and
 `packDigest` already listed by the seller; request-time supplied texts,
