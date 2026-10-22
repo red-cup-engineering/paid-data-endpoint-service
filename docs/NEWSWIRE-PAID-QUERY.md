@@ -48,3 +48,16 @@ Ten local Node 22.16 tests pass. They inspect source pinning, malformed and pric
 Still owed: original full workspace CI at required Node >=22.18, original Newswire release-custody installer, source-authority/rights receiving, live seller configuration, true HTTP 402, approved buyer-signed x402 settlement, original terminal receipt and independent useful customer acceptance. No live sale or revenue is claimed.
 
 Original work: https://github.com/red-cup-engineering/computer-content-engineering-services-section/issues/22 and /issues/20; Rete Agentium https://github.com/emsenn/rete-agentium-filum/issues/2; Coesite multi-provider commerce https://github.com/coesite-operations/capability-market-services-section/issues/5 .
+
+## Resource, customer-trust, and economic admission (2026-10-22 repair)
+
+The adapter now rejects the following independently of the injected verifier's acceptance:
+
+- A released snapshot containing denied, unpublished, duplicate or unidentifiable subjects, a non-HTTPS publisher wire, or source identifiers with conflicting active content;
+- An original version larger than the seller's selected `maxSnapshotItems` (default 10,000), `maxSnapshotBytes` (default 8 MiB) or `maxResponseBytes` (default 1 MiB), with explicit nonzero bounded configuration. Size limits apply before untrusted source cloning and after querying; they are upper bounds, **not claimed physical compute measurements**. Very large archives require an original indexed storage/query service, not widening these numbers without evidence;
+- Non-RFC3339 snapshot/rights timestamps or original rights evidence that is not a credential-free HTTPS URL; expired permission still stops *postsettlement* fulfillment;
+- Query output containing subjects outside the exact verified released snapshot, inconsistent `totalMatched`/`returnedCount`/`truncated` claims, or a non-null fabricated `settlement` / `buyerAcceptance` embedded in an ordinary data query result.
+
+The original seller still must authenticate the source store's complete content hash, legal rights and buyer principal; these guards are necessary defense-in-depth, **not proof of any of those facts**. The adapter never chooses an actual payee, deploys a merchant, issues automatic refunds or records external earnings. Any post-payment refusal remains a real original seller aftercare obligation and cannot count as accepted delivery.
+
+The exact source-only suite `node --test test/paid-newswire-query.test.mjs` is covered by `.github/workflows/newswire-paid-query.yml` on Node 22.18. A PR/Action created without a successfully run job does not satisfy the native suite gate; live source and signed merchant receiving remain separate.
