@@ -10,14 +10,16 @@
   "exports": {
     ".": "./src/paid-data-endpoint.mjs",
     "./content-addressed-directory": "./src/content-addressed-directory.mjs",
-    "./alpha-chain-service": "./src/alpha-chain-service.mjs"
+    "./alpha-chain-service": "./src/alpha-chain-service.mjs",
+    "./federal-register-inventory": "./src/federal-register-inventory.mjs"
   },
   "bin": {
     "serve-alpha-chain-data-market": "./src/alpha-chain-service.mjs",
-    "purchase-alpha-chain-data": "./src/purchase-alpha-chain-data.mjs"
+    "purchase-alpha-chain-data": "./src/purchase-alpha-chain-data.mjs",
+    "produce-federal-register-inventory": "./src/federal-register-inventory-cli.mjs"
   },
   "scripts": {
-    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs",
+    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs && node --check src/federal-register-inventory.mjs && node --check src/federal-register-inventory-cli.mjs && node --check test/federal-register-inventory.test.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "engines": {
