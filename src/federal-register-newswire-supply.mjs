@@ -70,6 +70,8 @@ export async function prepareFederalRegisterNewswireCandidates({lot, root, byteS
   return Object.freeze({
     kind:"561.newswire.source-candidate-set.v1",
     source:"https://www.federalregister.gov",
+    originalSourceRequestUrl:lot.source.apiUrl,
+    originalResponseBytes:lot.source.acquisition.responseBytes,
     rawResponseDigest:evidence.originalResponseDigest,
     rawResponseUri:namedInformationUri(evidence.originalResponseDigest),
     normalizedLotDigest:lot.digest,
@@ -98,4 +100,99 @@ export async function acquireFederalRegisterNewswireCandidates({
     ...(maxBytes===undefined?{}:{maxBytes}),
   });
   return prepareFederalRegisterNewswireCandidates({lot,root,byteStore});
+}
+
+// One bounded original official API window, acquired ONCE per page. It does
+// not invent a cross-page source or claim that a partial observed index is
+// complete. Distinct page bodies remain separately immutable in original
+// content-addressed custody; derived events reuse the same source identities.
+export async function acquireFederalRegisterNewswireWindow({
+  search, root, byteStore, fetchImpl, observedAt, maxBytes,
+  perPage = 100, maxPages = 5,
+}={}) {
+  if (!search || typeof search !== "object" || Array.isArray(search)) {
+    throw new TypeError("original bounded Federal Register window requires exact search criteria");
+  }
+  if (!Number.isSafeInteger(perPage) || perPage < 1 || perPage > 100 ||
+      !Number.isSafeInteger(maxPages) || maxPages < 1 || maxPages > 20) {
+    throw new RangeError("source window needs 1-100 results/page and 1-20 pages");
+  }
+  const start = search.page ?? 1;
+  if (!Number.isSafeInteger(start) || start < 1 || (start + maxPages - 1) * perPage > 2000) {
+    throw new RangeError("official Federal Register supports only its first 2000 search matches");
+  }
+  const clock = observedAt ?? new Date().toISOString();
+  const batches = [];
+  const bySubject = new Map();
+  const contested = new Set();
+  let bytes = 0;
+  let reportedTotal = null;
+  let conflictingCoverage = false;
+  let providerComplete = false;
+  for (let page = start; page < start + maxPages; page++) {
+    const received = await acquireFederalRegisterNewswireCandidates({
+      search:{...search,perPage,page},root,byteStore,
+      ...(fetchImpl===undefined?{}:{fetchImpl}),
+      observedAt:clock,
+      ...(maxBytes===undefined?{}:{maxBytes}),
+    });
+    bytes += received.originalResponseBytes;
+    if (reportedTotal === null) reportedTotal = received.coverage.reportedTotal;
+    else if (received.coverage.reportedTotal !== reportedTotal) conflictingCoverage = true;
+    batches.push(Object.freeze({
+      page, count:received.sourceCount,
+      requestUrl:received.originalSourceRequestUrl,
+      originalResponseBytes:received.originalResponseBytes,
+      rawResponseDigest:received.rawResponseDigest,
+      normalizedLotDigest:received.normalizedLotDigest,
+      reportedTotal:received.coverage.reportedTotal,
+      providerPageComplete:received.coverage.pageComplete,
+    }));
+    for (const candidate of received.candidates) {
+      const record = candidate.potential.find(cell=>cell.predicate==="data-payload")?.object;
+      if (!record?.sourceEditionDigest || !record.sourceDocumentUrl) {
+        throw new TypeError("original data candidate lost its witnessed source revision");
+      }
+      const previous = bySubject.get(candidate.subject);
+      if (previous === undefined) bySubject.set(candidate.subject,candidate);
+      else {
+        const old = previous.potential.find(cell=>cell.predicate==="data-payload")?.object;
+        if (old?.sourceEditionDigest !== record.sourceEditionDigest ||
+            old?.sourceDocumentUrl !== record.sourceDocumentUrl) {
+          contested.add(candidate.subject);
+        }
+      }
+    }
+    if (received.coverage.pageComplete === true) { providerComplete = true; break; }
+  }
+  // Never silently select a "latest" incompatible record just because the
+  // provider changed while paginating. Preserve observed page receipts and
+  // refuse contested candidates from downstream newsroom admission.
+  for (const subject of contested) bySubject.delete(subject);
+  const receivedItems = [...bySubject.values()].sort((a,b)=>a.subject.localeCompare(b.subject));
+  const complete = providerComplete && !conflictingCoverage && contested.size === 0;
+  return Object.freeze({
+    kind:"561.newswire.source-candidate-window.v1",
+    source:"https://www.federalregister.gov",
+    observedAt:clock,
+    editorialStatus:"not-approved",
+    candidates:Object.freeze(receivedItems),
+    sourceCount:receivedItems.length,
+    sourcePages:Object.freeze(batches),
+    coverage:Object.freeze({
+      providerReportedTotal:reportedTotal,
+      complete,
+      partial:!complete,
+      conflictingCoverage,
+      contestedSourceSubjects:Object.freeze([...contested].sort()),
+      pagesRead:batches.length,
+      returnedRecords:receivedItems.length,
+    }),
+    observedCosts:Object.freeze({
+      networkRequests:batches.length,
+      decodedResponseBytes:bytes,
+      immutableSourceResponses:batches.length,
+      agentInferenceCalls:0,
+    }),
+  });
 }
