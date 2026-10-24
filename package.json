@@ -13,6 +13,7 @@
     "./alpha-chain-service": "./src/alpha-chain-service.mjs",
     "./federal-register-inventory": "./src/federal-register-inventory.mjs",
     "./federal-register-source-witness": "./src/federal-register-source-witness.mjs",
+    "./federal-register-newswire-supply": "./src/federal-register-newswire-supply.mjs",
     "./federal-register-paid-read": "./src/federal-register-paid-read.mjs",
     "./international-data-inventory": "./src/international-data-inventory.mjs",
     "./international-paid-read": "./src/international-paid-read.mjs",
@@ -27,7 +28,7 @@
     "acquire-international-data": "src/international-data-inventory-cli.mjs"
   },
   "scripts": {
-    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs && node --check src/federal-register-inventory.mjs && node --check src/federal-register-inventory-cli.mjs && node --check test/federal-register-inventory.test.mjs && node --check src/federal-register-paid-read.mjs && node --check test/federal-register-paid-read.test.mjs && node --check src/international-data-inventory.mjs && node --check src/international-data-inventory-cli.mjs && node --check test/international-data-inventory.test.mjs && node --check src/international-paid-read.mjs && node --check test/international-paid-read.test.mjs && node --check src/paid-newswire-query.mjs && node --check test/paid-newswire-query.test.mjs && node --check src/newswire-release-store.mjs && node --check src/newswire-commerce.mjs && node --check src/federal-register-source-witness.mjs",
+    "check": "node --check src/paid-data-endpoint.mjs && node --check src/content-addressed-directory.mjs && node --check src/alpha-chain-service.mjs && node --check src/purchase-alpha-chain-data.mjs && node --check test/paid-data-endpoint.test.mjs && node --check test/alpha-chain-service.test.mjs && node --check src/federal-register-inventory.mjs && node --check src/federal-register-inventory-cli.mjs && node --check test/federal-register-inventory.test.mjs && node --check src/federal-register-paid-read.mjs && node --check test/federal-register-paid-read.test.mjs && node --check src/international-data-inventory.mjs && node --check src/international-data-inventory-cli.mjs && node --check test/international-data-inventory.test.mjs && node --check src/international-paid-read.mjs && node --check test/international-paid-read.test.mjs && node --check src/paid-newswire-query.mjs && node --check test/paid-newswire-query.test.mjs && node --check src/newswire-release-store.mjs && node --check src/newswire-commerce.mjs && node --check src/federal-register-source-witness.mjs && node --check src/federal-register-newswire-supply.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "engines": {
