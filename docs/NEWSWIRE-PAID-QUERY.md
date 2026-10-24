@@ -70,7 +70,7 @@ This branch closes two missing implementation seams in the **original** service 
 
 ```sh
 node src/federal-register-inventory-cli.mjs \
-  --since 2026-10-24 --until 2026-10-24 --per-page 50 \
+  --since 2026-10-17 --until 2026-10-24 --per-page 100 --max-pages 5 \
   --custody-root /var/lib/561/newswire/original-source-bytes \
   --output wire-candidates
 ```
@@ -105,3 +105,11 @@ const wire = createNewswireService(instanceConfig, {
 The seller's snapshot freshness is a statement about reverified custody, **not** a fake claim that historical stories were updated. A disconnected/uninstalled seller's advertisement must remain withheld, including Shop, our Bazaar, Coinbase Bazaar and 402 Index. Activate discovery **only after** the exact original merchant route challenges and fulfills a real source-qualified buyer. The already merged x402 adapter handles the original signed charge, consent, idempotent ledger, refunds/aftercare and receipt; this feature does not invent any of them.
 
 **Required real receiving:** official response byte read → witnessed inventory → independently approved Newsroom release → public data JSON + original multi-topic identity/PROV-O → verified immutable release digest → original authorized merchant real 402 → external signed settlement and useful customer receipt → original Market/Shop and compatible external Bazaar discovery. Observe actual source bytes, retries, storage, processing time and paid buyer savings, not synthetic SKU counts.
+
+### Native live-source receiving — 2026-10-24
+
+The [original source workflow run #40136372489](https://github.com/red-cup-engineering/paid-data-endpoint-service/actions/runs/40136372489) fetched an actual October 17–24 Federal Register query with **469/469 distinct source records** through five official API requests. It retained five original decoded HTTP body objects (728,157 bytes total, each SHA-256 reread), and produced 469 unapproved data-bulletin candidate records with source identities, RFC 6920 named-information edition IDs, per-source evidence and source dates. Source-reported `total_pages=5` and exhausted last-page cursor now agree with `count=469`; coverage is **complete for that exact dated/source-filtered query**. The [six-file artifact](https://github.com/red-cup-engineering/paid-data-endpoint-service/actions/runs/40136372489/artifacts/12576564915) retains all original decoded page bodies plus the output candidate set for independent receiving. No agent inference was invoked.
+
+This genuine acquisition identified and repaired **two original normalization errors**, rather than substituting curated fixtures: some official results contain unnamed agency entries (which now remain visible as incomplete attribution), and genuine correction documents use publisher identifiers like `C1-2026-20311` (which now retain distinct source IDs instead of refusing the entire page). The official API also omits `next_page_url` on its last page, requiring verification against its real `total_pages` and requested page before claiming complete coverage. Original response bytes are now written to custody **before** normalization, retaining reproducible evidence even if a future source edition reveals another irregularity.
+
+This is a **real working source-acquisition and candidate-packet producer**, not a claim that all 469 records became accepted 561 Newswire publications, x402 paid products or Shop/Bazaar offers. Original Newsroom release and original merchant delivery remain independently required.
