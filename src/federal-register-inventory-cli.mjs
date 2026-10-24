@@ -2,15 +2,15 @@
 
 import { acquireFederalRegisterInventory, deriveFederalRegisterInventory } from "./federal-register-inventory.mjs";
 import { acquireWitnessedFederalRegisterInventory, verifyWitnessedFederalRegisterInventory } from "./federal-register-source-witness.mjs";
-import { prepareFederalRegisterNewswireCandidates } from "./federal-register-newswire-supply.mjs";
+import { prepareFederalRegisterNewswireCandidates, acquireFederalRegisterNewswireWindow } from "./federal-register-newswire-supply.mjs";
 
 function usage() {
-  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT] [--custody-root DIRECTORY] [--output inventory|wire-candidates]\n";
+  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT] [--custody-root DIRECTORY] [--output inventory|wire-candidates] [--max-pages 1..20]\n";
 }
 
 async function main(argv = process.argv.slice(2)) {
   if (argv.includes("--help")) { process.stdout.write(usage()); return; }
-  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service", "--custody-root", "--output"]);
+  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service", "--custody-root", "--output", "--max-pages"]);
   const options = {};
   for (let index = 0; index < argv.length; index += 2) {
     const key = argv[index];
@@ -33,6 +33,19 @@ async function main(argv = process.argv.slice(2)) {
   const output = options["--output"] ?? "inventory";
   if (!["inventory","wire-candidates"].includes(output)) throw new TypeError("unsupported original data output: " + output);
   if (output === "wire-candidates" && !root) throw new TypeError("Newswire candidates require original --custody-root HTTP-byte evidence");
+  const maxPages = Number(options["--max-pages"] ?? 1);
+  if (!Number.isSafeInteger(maxPages) || maxPages < 1 || maxPages > 20) throw new RangeError("--max-pages must be 1..20");
+  if (maxPages > 1) {
+    if (output !== "wire-candidates" || !root ||
+        options["--comment-close-by"] || options["--comment-close-from"] || options["--actor"] || options["--service"]) {
+      throw new TypeError("multiple source pages require --custody-root and --output wire-candidates without reseller filters");
+    }
+    const received = await acquireFederalRegisterNewswireWindow({
+      search, root, maxPages, perPage:options["--per-page"] ? Number(options["--per-page"]) : 100,
+    });
+    process.stdout.write(`${JSON.stringify(received, null, 2)}\n`);
+    return;
+  }
   const lot = root
     ? await acquireWitnessedFederalRegisterInventory({search,root})
     : await acquireFederalRegisterInventory({search});
