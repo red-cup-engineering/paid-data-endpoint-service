@@ -1,0 +1,1472 @@
+{
+  "kind": "561.newswire.federal-register-comment-deadlines.v1",
+  "observedAt": "2026-10-24T23:02:47.685Z",
+  "utcCivilDate": "2026-10-24",
+  "horizonDays": 30,
+  "sourceCoverage": {
+    "providerReportedTotal": 469,
+    "complete": true,
+    "partial": false,
+    "conflictingCoverage": false,
+    "contestedSourceSubjects": [],
+    "pagesRead": 5,
+    "returnedRecords": 469,
+    "decisionFields": {
+      "fieldProfile": "regulatory-decision",
+      "dateFieldsRequested": true,
+      "commentCloseDates": 180,
+      "effectiveDates": 63,
+      "docketLinkedRecords": 324,
+      "cfrLinkedRecords": 78,
+      "correctionLinks": 4,
+      "eligibleSampleCount": 469,
+      "sourceOfAuthority": "source-api-returned-fields; original official PDF/legal verification may still be required"
+    }
+  },
+  "recordCount": 100,
+  "dateMeaning": "Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
+  "records": [
+    {
+      "subject": "federal-register:2026-21238",
+      "documentNumber": "2026-21238",
+      "title": "Competitive Postal Products",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21238/competitive-postal-products",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-10-26",
+      "daysAfterUtcDate": 2,
+      "agencies": [
+        "Postal Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;m1Zismp62UhCrrIK2hFMNcF1S_nY6Y-G9e902nd_Fms",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21280",
+      "documentNumber": "2026-21280",
+      "title": "Wireless Telecommunications Bureau Seeks Comment on Proposed Rebate Categories and Amounts for Radio Altimeter Retrofits To Support the Upper C-band Transition",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21280/wireless-telecommunications-bureau-seeks-comment-on-proposed-rebate-categories-and-amounts-for-radio",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-10-26",
+      "daysAfterUtcDate": 2,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;XUOqL_ifBDIpgAqNvYSEae1k_Xw-_18fM4k3viXZvIo",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21501",
+      "documentNumber": "2026-21501",
+      "title": "New Postal Products",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21501/new-postal-products",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-10-26",
+      "daysAfterUtcDate": 2,
+      "agencies": [
+        "Postal Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;aF7Sj8lqc7RyFeLLquPtnDtTvBfI8vgXP3gWoNXt2r0",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21620",
+      "documentNumber": "2026-21620",
+      "title": "New Postal Products",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21620/new-postal-products",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-10-27",
+      "daysAfterUtcDate": 3,
+      "agencies": [
+        "Postal Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;cvgBNT5KM5H5kwfIsyuT8JT4aIYRx4PkUBuR7ouChr4",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21307",
+      "documentNumber": "2026-21307",
+      "title": "Hazardous Materials: Notice of Applications for Modification to Special Permits",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21307/hazardous-materials-notice-of-applications-for-modification-to-special-permits",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-03",
+      "daysAfterUtcDate": 10,
+      "agencies": [
+        "Pipeline and Hazardous Materials Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;gSoIB18GnOez33tcRkQU6_8xuVjMuWnMd8rJj6oy3Zs",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21522",
+      "documentNumber": "2026-21522",
+      "title": "Magnuson-Stevens Act Provisions; General Provisions for Domestic Fisheries; Atlantic Coastal Fisheries Cooperative Management Act Provisions; Application for Exempted Fishing Permits",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21522/magnuson-stevens-act-provisions-general-provisions-for-domestic-fisheries-atlantic-coastal-fisheries",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-05",
+      "daysAfterUtcDate": 12,
+      "agencies": [
+        "Commerce Department",
+        "National Oceanic and Atmospheric Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;NIGraTY_u_RPVfFwtB45y84s5bxTLpgXf-YLVwsIQJc",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21699",
+      "documentNumber": "2026-21699",
+      "title": "Revision of National Environmental Policy Act Implementing Procedures; Extension of Comment Period",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21699/revision-of-national-environmental-policy-act-implementing-procedures-extension-of-comment-period",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-09",
+      "daysAfterUtcDate": 16,
+      "agencies": [
+        "Postal Service"
+      ],
+      "sourceEdition": "ni:///sha-256;I9UkzxPYRtrt8YAjOUU8KLJgt6ncQJLe6Ce5NmWGn8g",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21635",
+      "documentNumber": "2026-21635",
+      "title": "Denton County Transportation Authority's Request To Amend Its Positive Train Control Safety Plan and Positive Train Control System",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21635/denton-county-transportation-authoritys-request-to-amend-its-positive-train-control-safety-plan-and",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-12",
+      "daysAfterUtcDate": 19,
+      "agencies": [
+        "Federal Railroad Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;VyP7-X8FY1sHm9eed7wg0gAYfhXSJuX7eRjChPuF13g",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21260",
+      "documentNumber": "2026-21260",
+      "title": "Television Broadcasting Services Des Moines, Iowa",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21260/television-broadcasting-services-des-moines-iowa",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;a4ZSxHIaYaLXOt-bN2YzgVi_-ARAwPTfalKofx60R68",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21262",
+      "documentNumber": "2026-21262",
+      "title": "Agency Information Collection Activities: Submission for OMB Review; Comment Request",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21262/agency-information-collection-activities-submission-for-omb-review-comment-request",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "National Archives and Records Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;-yp5VEPVrXNmy8pIAbdgPl_BSgPF-X13ieo-TT5UdOw",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21264",
+      "documentNumber": "2026-21264",
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget for Review and Approval; Request for Comment; Older Novice Driver Study",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21264/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-for",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "National Highway Traffic Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;StBc-vuoK48Z5CVGZ97rq5lqS1GiWYPmc77axPqY__k",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21287",
+      "documentNumber": "2026-21287",
+      "title": "Air Quality Plan; Arizona; Pinal County Air Quality Control District; West Pinal County PM10 Nonattainment Area; Fugitive Dust Rules",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21287/air-quality-plan-arizona-pinal-county-air-quality-control-district-west-pinal-county-pm10",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;ahw7RnJW6gHCoqN5QOIIsHI-H_gy60vzlFaNnjouvmY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21288",
+      "documentNumber": "2026-21288",
+      "title": "Approval and Promulgation of Implementation Plans-Pinal County (Part); West Pinal, AZ PM10 Nonattainment Area; Moderate Area, Serious Area, and Section 189(d) Plan for Attainment of the 24-Hour PM10 Standard",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21288/approval-and-promulgation-of-implementation-plans-pinal-county-part-west-pinal-az-pm10-nonattainment",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;66Jd0L6uqHmAb1Hw_SdV7KiOl5OU9-LTBV2bLdn3hmY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21289",
+      "documentNumber": "2026-21289",
+      "title": "Air Quality Plan; Arizona; Agricultural Best Management Practices Rules for the West Pinal County PM10 Nonattainment Area",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21289/air-quality-plan-arizona-agricultural-best-management-practices-rules-for-the-west-pinal-county-pm10",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;2kwbjN6eIi5CBOH0fKycGq5IvXjI4Xak_Su7F624pnw",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21301",
+      "documentNumber": "2026-21301",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21301/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;WBFBkWJUHZTIqAKn7smbYr4RsdOwn5oupU9QTHT8f9Q",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21305",
+      "documentNumber": "2026-21305",
+      "title": "Safety Zone; FRL Inaugural Invitational eFoil Exhibition Race, Miami Marine Stadium Basin, Miami, FL",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21305/safety-zone-frl-inaugural-invitational-efoil-exhibition-race-miami-marine-stadium-basin-miami-fl",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Coast Guard",
+        "Homeland Security Department"
+      ],
+      "sourceEdition": "ni:///sha-256;0JygGNXPFlXgzsjHs9mAo3gBlUzPbvPP_Cy6DUBLcJY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21306",
+      "documentNumber": "2026-21306",
+      "title": "Hazardous Materials: Notice of Applications for New Special Permits",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21306/hazardous-materials-notice-of-applications-for-new-special-permits",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Pipeline and Hazardous Materials Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;Cau6tHCcDLv4g2KzIIwKPMW5qT0p2vkVdshbO2K4aQE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21308",
+      "documentNumber": "2026-21308",
+      "title": "Hazardous Materials: Notice of Actions on Special Permits",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21308/hazardous-materials-notice-of-actions-on-special-permits",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Pipeline and Hazardous Materials Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;cZojQTD4StCc4hxKfTaoYIZTD6Pgmgg3gk0w5iC6pbI",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21310",
+      "documentNumber": "2026-21310",
+      "title": "Customs Requirements and Payment Procedures for Certain Customs Charges",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21310/customs-requirements-and-payment-procedures-for-certain-customs-charges",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Postal Service"
+      ],
+      "sourceEdition": "ni:///sha-256;qn2bSquUDxfk_3WX0yfXQcQx90UCj93umEvJTZaqyfo",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=5&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21314",
+      "documentNumber": "2026-21314",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21314/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;O_9sE6NouVeFL46Je10p6h3Tl7Qk21EiuN3_TZSD6DQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21315",
+      "documentNumber": "2026-21315",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21315/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;0_3QLlN2_vORBheS6KSJ8YK7zTe12GnAbQOu7c7DUUc",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21318",
+      "documentNumber": "2026-21318",
+      "title": "Information Collection Being Submitted for Review and Approval to Office of Management and Budget",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21318/information-collection-being-submitted-for-review-and-approval-to-office-of-management-and-budget",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;wREF_ShaEFhgReFSKm9NqPQbrlpdV4TM6aTq_XW8Ui4",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21322",
+      "documentNumber": "2026-21322",
+      "title": "Agency Information Collection Activity Under OMB Review: Income and Asset Statement in Support of Claim for Pension or Parents' Dependency and Indemnity Compensation (D.I.C.)",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21322/agency-information-collection-activity-under-omb-review-income-and-asset-statement-in-support-of",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;EPsCXy_ejsICJz9-AMAg7HcKz8Jx9UCQK4UIw0TLqxY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21323",
+      "documentNumber": "2026-21323",
+      "title": "Information Collection Being Submitted for Review and Approval to Office of Management and Budget",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21323/information-collection-being-submitted-for-review-and-approval-to-office-of-management-and-budget",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;utss2YWPC9auJy5pWHWp6r9nocHNtjz41cyndK5Iy1Y",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21347",
+      "documentNumber": "2026-21347",
+      "title": "Modernizing the Commission's National Environmental Policy Act Rules",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21347/modernizing-the-commissions-national-environmental-policy-act-rules",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;lutz_eyuNLJJS2-wFzPQKITxPJ8ylfB0N6UG8xtPgkQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21352",
+      "documentNumber": "2026-21352",
+      "title": "Privacy Act System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21352/privacy-act-system-of-records",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;2XPQsLMhjsxJbMkWrE91OJ1TKDk0tZLiKNjXTNNmw-o",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21353",
+      "documentNumber": "2026-21353",
+      "title": "Importer of Controlled Substances Application: Halo Pharmaceutical Inc.",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21353/importer-of-controlled-substances-application-halo-pharmaceutical-inc",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;yIJGRW2dR9BDPtgSOVzNwl4kEX0YXBjUFkjMcv9kdMI",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21354",
+      "documentNumber": "2026-21354",
+      "title": "Importer of Controlled Substances Application: DMS Pharmaceutical Group",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21354/importer-of-controlled-substances-application-dms-pharmaceutical-group",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;kea6gW_hqgkp8VcCxbr1XReLMtnxdfy9Jp8t5FiL904",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21355",
+      "documentNumber": "2026-21355",
+      "title": "Importer of Controlled Substances Application: Groff Health Inc.",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21355/importer-of-controlled-substances-application-groff-health-inc",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;7yfcQ5H-txXzQCR8OET1BBEd03KxmeSixLQbi5_Czv0",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21358",
+      "documentNumber": "2026-21358",
+      "title": "Importer of Controlled Substances Application: National Center for Natural Products Research",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21358/importer-of-controlled-substances-application-national-center-for-natural-products-research",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;la0J4BXK6C7uWDLAEGVyRgz2kHu3W2p6GHRA0SiElKY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21367",
+      "documentNumber": "2026-21367",
+      "title": "Importer of Controlled Substances Application: Groff NA Hemplex LLC",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21367/importer-of-controlled-substances-application-groff-na-hemplex-llc",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;ZQnVecF7o17OI6oZkTtIJ19J0P25udsIBZpvmQa8PuA",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21370",
+      "documentNumber": "2026-21370",
+      "title": "Importer of Controlled Substances Application: Organic Standards Solutions International, LLC",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21370/importer-of-controlled-substances-application-organic-standards-solutions-international-llc",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Drug Enforcement Administration",
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;Bn-DQ_K62DMG1i0DFDwdZXz5qHDZSCWA__WYlQwfLzM",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21373",
+      "documentNumber": "2026-21373",
+      "title": "Agency Information Collection Activities; Submission for OMB Review; Comment Request; Section 45J Credit for Production of Electricity From Advanced Nuclear Power Facilities",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21373/agency-information-collection-activities-submission-for-omb-review-comment-request-section-45j",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;QuaIybnEAKSgqJBJzKA-ux9X_b6nD7WAnBS0a5MXKQU",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21376",
+      "documentNumber": "2026-21376",
+      "title": "Further Definition of “Swap” To Exclude Casino-Style Gambling Products",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21376/further-definition-of-swap-to-exclude-casino-style-gambling-products",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Commodity Futures Trading Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;aiU1d5bd313Bx8XeExNr8bEganrbJKpiIh5N7rCPG1g",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21377",
+      "documentNumber": "2026-21377",
+      "title": "Further Definition of “Swap”-Inclusions",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21377/further-definition-of-swap-inclusions",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Commodity Futures Trading Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;2AevSD5URzsu41pRqqQMC4Dl9cnYIADxH0p8kn7CRXo",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21381",
+      "documentNumber": "2026-21381",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21381/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;aneMwvBHd_H_R15vOSKp3H7_YMTQEyfQ5zn7o1_JjLE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21383",
+      "documentNumber": "2026-21383",
+      "title": "New Source Performance Standards and National Emission Standards for Hazardous Air Pollutants; Delegation of Authority to Northwest Clean Air Agency, Washington State",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/19/2026-21383/new-source-performance-standards-and-national-emission-standards-for-hazardous-air-pollutants",
+      "publicationDate": "2026-10-19",
+      "commentsCloseOn": "2026-11-18",
+      "daysAfterUtcDate": 25,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;qfn_5T0qMdMdJw2vO8C2jN-7aHqawgopuVtoXDIPs44",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21385",
+      "documentNumber": "2026-21385",
+      "title": "Agency Information Collection Activities: Submission to OMB for Review and Approval; Public Comment Request; Health Center Program Forms-OMB No. 0915-0285-Revision",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21385/agency-information-collection-activities-submission-to-omb-for-review-and-approval-public-comment",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Health and Human Services Department",
+        "Health Resources and Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;ImLUSIOqrj0Dcl9CClQVkj_yNm8PKe36gS-fre_aNuQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21390",
+      "documentNumber": "2026-21390",
+      "title": "Parts and Accessories Necessary for Safe Operation; Application for an Exemption From Grote Industries, LLC",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21390/parts-and-accessories-necessary-for-safe-operation-application-for-an-exemption-from-grote",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Federal Motor Carrier Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;DstcIAZGAp5Kjvxo2lF-H7QaRyo2BscssuD04EtBH14",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21397",
+      "documentNumber": "2026-21397",
+      "title": "Joint Application Package From the State of Utah to the Surface Transportation Project Delivery Program and Proposed Memorandum of Understanding (MOU) Assigning Environmental Responsibilities to the State",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21397/joint-application-package-from-the-state-of-utah-to-the-surface-transportation-project-delivery",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Federal Railroad Administration",
+        "Federal Transit Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;UuanH6vucXZRiKpRzanvX13OzRuwDuSnJN4fTYRJBC8",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21400",
+      "documentNumber": "2026-21400",
+      "title": "Agency Information Collection Activities; Submission for OMB Review; Comment Request; Application for Extension of Time To Furnish Recipient Statements",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21400/agency-information-collection-activities-submission-for-omb-review-comment-request-application-for",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;ivCuGjIm-VOR18Bq69QGLlyAXxg98f6m9ztCml7F5qQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=4&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21418",
+      "documentNumber": "2026-21418",
+      "title": "Draft Revised Management Plans for the ACE Basin, Elkhorn Slough, and Weeks Bay National Estuarine Research Reserves; Notice of Proposed Boundary Changes",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21418/draft-revised-management-plans-for-the-ace-basin-elkhorn-slough-and-weeks-bay-national-estuarine",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Commerce Department",
+        "National Oceanic and Atmospheric Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;10_w0iiDYJd9xbkhdtvkmb0tzpFKK1Kcf9Xts3a44WY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21419",
+      "documentNumber": "2026-21419",
+      "title": "Takes of Marine Mammals Incidental To Specified Activities; Taking Marine Mammals Incidental to the U.S. Navy's TRF Wharf Interface Repairs Project at U.S. Naval Submarine Base Kings Bay, Georgia",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21419/takes-of-marine-mammals-incidental-to-specified-activities-taking-marine-mammals-incidental-to-the",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Commerce Department",
+        "National Oceanic and Atmospheric Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;ghLfAHh-od8Nvg0DMjzWFqAOvgTqxEiG3FDl4aJAMyk",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21424",
+      "documentNumber": "2026-21424",
+      "title": "Application for Authorization To Export Electric Energy; Clear Power LLC",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21424/application-for-authorization-to-export-electric-energy-clear-power-llc",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Energy Department"
+      ],
+      "sourceEdition": "ni:///sha-256;sPKvc-Q9zx7DhgbxiCTH_Y3peYVyZ3j_sl3bWfP0J5A",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21425",
+      "documentNumber": "2026-21425",
+      "title": "Texas LNG Brownsville LLC; Request for Extension of Export Commencement Deadline",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21425/texas-lng-brownsville-llc-request-for-extension-of-export-commencement-deadline",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Energy Department"
+      ],
+      "sourceEdition": "ni:///sha-256;nJtiDs4vXWRdG-8wMTmQ_4_myEIFngwrwKCwPSE3dtE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21454",
+      "documentNumber": "2026-21454",
+      "title": "Agency Information Collection Activity: Application for Assumption Approval and/or Release From Personal Liability to the Government on a Home Loan",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21454/agency-information-collection-activity-application-for-assumption-approval-andor-release-from",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;nMsO-aL-U0g82yUuQxnD4hUcH9YpS6Wze9saEWS440M",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21455",
+      "documentNumber": "2026-21455",
+      "title": "Agency Information Collection Activities; Submission for OMB Review; Comment Request; New Markets Tax Credit Program (NMTC Program) Allocation and Qualified Equity Investment Tracking System (AQEI)",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21455/agency-information-collection-activities-submission-for-omb-review-comment-request-new-markets-tax",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;IezExC7gxIrEl_dYqbZ2dQ-IULOzQmRlLJ_elVwuWig",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21465",
+      "documentNumber": "2026-21465",
+      "title": "Submission for OMB Review; Comment Request",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/20/2026-21465/submission-for-omb-review-comment-request",
+      "publicationDate": "2026-10-20",
+      "commentsCloseOn": "2026-11-19",
+      "daysAfterUtcDate": 26,
+      "agencies": [
+        "Defense Department"
+      ],
+      "sourceEdition": "ni:///sha-256;xf65YH4B8H-aF_FLetu3Fbt0_QefACSd5Cn6-_wRI4g",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21483",
+      "documentNumber": "2026-21483",
+      "title": "Agency Information Collection Activity Under OMB Review: Generic Clearance for the Collection of Qualitative Feedback on Agency Service Delivery (VBA, VHA, NCA)",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21483/agency-information-collection-activity-under-omb-review-generic-clearance-for-the-collection-of",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;Y6xVaSS-EIGnu4ARDauQT8gxH3KhEtzi4ZU6CagW7js",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21486",
+      "documentNumber": "2026-21486",
+      "title": "Agency Information Collection Activities: Proposed Collection; Public Comment Request; Information Collection Request Title: SAMHSA Data Security Requirements for Accessing Confidential Data (OMB No. 0930-0396)",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21486/agency-information-collection-activities-proposed-collection-public-comment-request-information",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Health and Human Services Department",
+        "Substance Abuse and Mental Health Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;wYnKUepq5UHiY_O5E_06rzLTD6g_7eKBmNDgxB2Rlng",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21491",
+      "documentNumber": "2026-21491",
+      "title": "Privacy Act of 1974; Matching Program",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21491/privacy-act-of-1974-matching-program",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Centers for Medicare & Medicaid Services",
+        "Health and Human Services Department"
+      ],
+      "sourceEdition": "ni:///sha-256;8Xn20XlGZU_4-PdLN34wKR7RRoCxndjJVhDrFpYLT74",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21492",
+      "documentNumber": "2026-21492",
+      "title": "Agency Information Collection Activities Under OMB Review",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21492/agency-information-collection-activities-under-omb-review",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Commodity Futures Trading Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;T7cQv4d9Al6cxq10WSLjuSPaEuH4-q27sUrdWxzVnkE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21496",
+      "documentNumber": "2026-21496",
+      "title": "Agency Information Collection Activities: Submission for OMB Review; Comment Request; General Admissions Applications (Long and Short) and Stipend Forms",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21496/agency-information-collection-activities-submission-for-omb-review-comment-request-general",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Federal Emergency Management Agency",
+        "Homeland Security Department"
+      ],
+      "sourceEdition": "ni:///sha-256;17TgMTxWc7Kum3fhSw1w7gOlxc5RCIYMU3qoZnl7RsQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21497",
+      "documentNumber": "2026-21497",
+      "title": "Agency Information Collection Activities: Submission for OMB Review, Comment Request; Application for Community Disaster Loan (CDL) Program",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21497/agency-information-collection-activities-submission-for-omb-review-comment-request-application-for",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Federal Emergency Management Agency",
+        "Homeland Security Department"
+      ],
+      "sourceEdition": "ni:///sha-256;sWoldf1WqlUTpNxLPLTy-O2PHV6H4n9NZ4-Mcna2ekU",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21500",
+      "documentNumber": "2026-21500",
+      "title": "Agency Information Collection Activities; Proposed eCollection eComments Requested; Extension of a Previously Approved Collection; Title-Lawful Access Data Collection (LADC)",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21500/agency-information-collection-activities-proposed-ecollection-ecomments-requested-extension-of-a",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Justice Department"
+      ],
+      "sourceEdition": "ni:///sha-256;phWOv8mGulG-8uq62K7g9xEx2eYAETzYTrdN5dlW-wU",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21507",
+      "documentNumber": "2026-21507",
+      "title": "Fisheries of the Exclusive Economic Zone Off Alaska; Modify Groundfish Season Timing in the Bering Sea and Aleutian Islands and Gulf of Alaska Groundfish Fisheries",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21507/fisheries-of-the-exclusive-economic-zone-off-alaska-modify-groundfish-season-timing-in-the-bering",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Commerce Department",
+        "National Oceanic and Atmospheric Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;M2ZyvHLvG8OCyhXo5KuAKbBvRJkYYuUYzUQEjYXuTmE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21510",
+      "documentNumber": "2026-21510",
+      "title": "Petition for Rulemaking of Jason Plotzker",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21510/petition-for-rulemaking-of-jason-plotzker",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Federal Trade Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;Es38hm2FPCO7_JwxFH1ct-C9Vu3yQbgJrvXFxGK4WWY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21511",
+      "documentNumber": "2026-21511",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21511/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Consumer Financial Protection Bureau"
+      ],
+      "sourceEdition": "ni:///sha-256;UGOAaftq02nfYEsQWczt4WgWWsJIqKdKRYIuEZreQWk",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=3&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21518",
+      "documentNumber": "2026-21518",
+      "title": "Agency Information Collection Activities: Submission to OMB for Review and Approval; Public Comment Request; Maternal and Child Health Bureau Performance Measures for Discretionary Grant Information System, OMB No. 0915-0298-Revision",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21518/agency-information-collection-activities-submission-to-omb-for-review-and-approval-public-comment",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Health and Human Services Department",
+        "Health Resources and Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;xifBj8QP-jaQe_KyGAruweW6xZ9phbYpjbtZt1ZC4NI",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21519",
+      "documentNumber": "2026-21519",
+      "title": "Agency Information Collection Activities: Submission to OMB for Review and Approval; Public Comment Request; Information Collection Request Title: Title V Maternal and Child Health Services Block Grant to States Program: Guidance and Forms for the Title V Application/Annual Report, OMB No. 0915-0172-Revision",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/21/2026-21519/agency-information-collection-activities-submission-to-omb-for-review-and-approval-public-comment",
+      "publicationDate": "2026-10-21",
+      "commentsCloseOn": "2026-11-20",
+      "daysAfterUtcDate": 27,
+      "agencies": [
+        "Health and Human Services Department",
+        "Health Resources and Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;2dmqFyahLk0Faa4FKbo_EoXrtKqqNFWn-NjbeYotKmA",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21585",
+      "documentNumber": "2026-21585",
+      "title": "Procurement List; Proposed Deletions",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21585/procurement-list-proposed-deletions",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-21",
+      "daysAfterUtcDate": 28,
+      "agencies": [
+        "Committee for Purchase From People Who Are Blind or Severely Disabled"
+      ],
+      "sourceEdition": "ni:///sha-256;UkHNUndTgD8Py2-eH3LN8eM8TygTdiqLfG22TVeu7bE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21730",
+      "documentNumber": "2026-21730",
+      "title": "Part 572; Anthropomorphic Test Devices; Test Device for Human Occupant Restraint 50th Percentile Adult Male Dummy (THOR-50M); Extension of Comment Period",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21730/part-572-anthropomorphic-test-devices-test-device-for-human-occupant-restraint-50th-percentile-adult",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-21",
+      "daysAfterUtcDate": 28,
+      "agencies": [
+        "National Highway Traffic Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;tuCRk92LyKjfOicyGfB6jx_rXhmknLs8o45JgdH1RVs",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21579",
+      "documentNumber": "2026-21579",
+      "title": "Agency Information Collection Activities Under OMB Review",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21579/agency-information-collection-activities-under-omb-review",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Commodity Futures Trading Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;jTY_QPvmiT4BE8cwkvJkFcfUGOSMn9SLBKNNjiFVdBY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21581",
+      "documentNumber": "2026-21581",
+      "title": "Agency Information Collection Activities Under OMB Review",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21581/agency-information-collection-activities-under-omb-review",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Commodity Futures Trading Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;i61Fa6pYSqvHv5U7XnvkgxcjlkYTSBg178JWInJbwYU",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21589",
+      "documentNumber": "2026-21589",
+      "title": "Submission for OMB Review; Living Quarters Eligibility Questionnaire; GSA Form 5039",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21589/submission-for-omb-review-living-quarters-eligibility-questionnaire-gsa-form-5039",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "General Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;iiHgMDV0QA6KUX4ziwkwR8qh1rLZb32bzS_TAxrgpAQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21591",
+      "documentNumber": "2026-21591",
+      "title": "Agency Information Collection Activity Under OMB Review: Requirements for Recognition as a VA Accredited Organization",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21591/agency-information-collection-activity-under-omb-review-requirements-for-recognition-as-a-va",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;mxXc5Z_m-OtGcCYndJBpx7BaSHHEOLu1cIi59-W0RE4",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21602",
+      "documentNumber": "2026-21602",
+      "title": "Public Water System Supervision Program Revision for the State of Arkansas",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21602/public-water-system-supervision-program-revision-for-the-state-of-arkansas",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;gs7B99fjcvsY5Kwsh1XBJvMH_aEfQrr7wotIl3_uTe4",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21603",
+      "documentNumber": "2026-21603",
+      "title": "Nevada: Codification and Incorporation by Reference of Approved Underground Storage Tank Program",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21603/nevada-codification-and-incorporation-by-reference-of-approved-underground-storage-tank-program",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;7CYZnJ85wUvVa99eky7fn5YAqSY2ysFnKLqDz3c9p20",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21604",
+      "documentNumber": "2026-21604",
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget for Review and Approval; Oil Spill Financial Responsibility for Offshore Facilities",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21604/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-for",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Interior Department",
+        "Ocean Energy Management Bureau"
+      ],
+      "sourceEdition": "ni:///sha-256;CRCVRsRcZb0OY0fbeFBWWXaiJT5sh7JXpUjyHuXo7Bw",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21608",
+      "documentNumber": "2026-21608",
+      "title": "Drawbridge Operation Regulation; Manitowoc River, Manitowoc, WI",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21608/drawbridge-operation-regulation-manitowoc-river-manitowoc-wi",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Coast Guard",
+        "Homeland Security Department"
+      ],
+      "sourceEdition": "ni:///sha-256;KrM9F-r8fUuO4OK6Rds-NQvXK0QOS83ughL0F3s7gQU",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21609",
+      "documentNumber": "2026-21609",
+      "title": "Proposed Consent Decree, Clean Air Act Citizen Suit",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21609/proposed-consent-decree-clean-air-act-citizen-suit",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Environmental Protection Agency"
+      ],
+      "sourceEdition": "ni:///sha-256;8A7HU37X23GbyOj_FaIR2-teCe25rsjBALG2fhOmtVQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=2&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21616",
+      "documentNumber": "2026-21616",
+      "title": "Marine Mammals; File No. 29925",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21616/marine-mammals-file-no-29925",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Commerce Department",
+        "National Oceanic and Atmospheric Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;iv0Tqxke4r3LIIHj0UpOUAPxZeFUMqBzLa3CTJwP4Gk",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21619",
+      "documentNumber": "2026-21619",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21619/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Federal Communications Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;jwdEvJijZ4eA1mcaDYADBKjs7YYQGUl1vYA2CdvAZXY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21623",
+      "documentNumber": "2026-21623",
+      "title": "Draft NUREG: Report on Waste Burial Charges: Changes in Decommissioning Waste Disposal Costs at Low-Level Waste Burial Facilities",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21623/draft-nureg-report-on-waste-burial-charges-changes-in-decommissioning-waste-disposal-costs-at",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Nuclear Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;8FFEMHuMGpfFQDzfJntv7rEaMLa4GbzlqiSUoVxfai0",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21627",
+      "documentNumber": "2026-21627",
+      "title": "Agency Information Collection Activity Under OMB Review: Statement of Person Claiming To Have Stood in Relation of Parent",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/22/2026-21627/agency-information-collection-activity-under-omb-review-statement-of-person-claiming-to-have-stood",
+      "publicationDate": "2026-10-22",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;-qizttvueytUobBKOPuI47H90MW3gkc2Yq7fY7FztNE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21631",
+      "documentNumber": "2026-21631",
+      "title": "Information Collection: Domestic Licensing of Source Material",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21631/information-collection-domestic-licensing-of-source-material",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Nuclear Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;8tlogRKi4Qy2parbmtwwQjDMO4p_nZd853qeVwXWy4k",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21634",
+      "documentNumber": "2026-21634",
+      "title": "General Applicability Public Interest Waiver to Indian Tribes Proposed Extension of Manufactured Products Waiver",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21634/general-applicability-public-interest-waiver-to-indian-tribes-proposed-extension-of-manufactured",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Interior Department"
+      ],
+      "sourceEdition": "ni:///sha-256;JAp0LLAufRmk4991W3Y5lO5hTnkH3ml0J8jpJZClSsY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21638",
+      "documentNumber": "2026-21638",
+      "title": "Request Notice: Use of Foreign-Built Small Passenger Vessel in United States Coastwise Trade, M/V GT PRINCESS",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21638/request-notice-use-of-foreign-built-small-passenger-vessel-in-united-states-coastwise-trade-mv-gt",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Maritime Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;0Y2lrwt2fyNyAsFeCmoLhVNUiRkhGAVZshAsU7glql0",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21639",
+      "documentNumber": "2026-21639",
+      "title": "Reporting and Recordkeeping Requirements Under Office of Management and Budget Review",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21639/reporting-and-recordkeeping-requirements-under-office-of-management-and-budget-review",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Small Business Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;L0s4HS5rwO1cGhBo-zOQhJR8QApQAR8yfwwV-dBXwik",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21641",
+      "documentNumber": "2026-21641",
+      "title": "Request Notice: Use of Foreign-Built Small Passenger Vessel in United States Coastwise Trade, S/V STARCHASER II",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21641/request-notice-use-of-foreign-built-small-passenger-vessel-in-united-states-coastwise-trade-sv",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Maritime Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;VLLq_UUbz4KWB1ieypqhWxBma6u4Qw8wvyCf52C-OV0",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21642",
+      "documentNumber": "2026-21642",
+      "title": "Request Notice: Use of Foreign-built Small Passenger Vessel in United States Coastwise Trade, M/V LUMINOSITY",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21642/request-notice-use-of-foreign-built-small-passenger-vessel-in-united-states-coastwise-trade-mv",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Maritime Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;7L4vuV1ppmOwxl85ufXdbWkIKc-ybXqR5sbFKYQ3Jtc",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21646",
+      "documentNumber": "2026-21646",
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget for Review and Approval; Comment Request; .gov Registrar",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21646/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-for",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Homeland Security Department"
+      ],
+      "sourceEdition": "ni:///sha-256;weiBy1EJpLjXDFzBMNV82PPF5Wa66cTr3QShyrjXK5c",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21647",
+      "documentNumber": "2026-21647",
+      "title": "Agency Information Collection Activities; Renewal of a New Information Collection Request: Request for Revocation of Authority Granted",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21647/agency-information-collection-activities-renewal-of-a-new-information-collection-request-request-for",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Federal Motor Carrier Safety Administration",
+        "Transportation Department"
+      ],
+      "sourceEdition": "ni:///sha-256;rDe5HwOz2HXrOJTh31v1-yfLgRD1g7Z0slVEFARSR4M",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21657",
+      "documentNumber": "2026-21657",
+      "title": "List of Rules To Be Reviewed Pursuant to the Regulatory Flexibility Act",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21657/list-of-rules-to-be-reviewed-pursuant-to-the-regulatory-flexibility-act",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Securities and Exchange Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;X73CyBX0R0DMMl43rcEslF1dU_pgjYH__hXUix1LJUE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21659",
+      "documentNumber": "2026-21659",
+      "title": "Publicis and LiveRamp; Analysis of Proposed Agreement Containing Consent Order To Aid Public Comment",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21659/publicis-and-liveramp-analysis-of-proposed-agreement-containing-consent-order-to-aid-public-comment",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Federal Trade Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;woI5fkSm2gX5VB0V4pamTpDZ9XHoeHGU3gzO05s47gQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21667",
+      "documentNumber": "2026-21667",
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget for Review and Approval; Comment Request; Approved State Ability to Benefit Process",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21667/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-for",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Education Department"
+      ],
+      "sourceEdition": "ni:///sha-256;c7yxAOXSwJ5QKcrHIstJ4_oX4JBn96PJUcwtExmUuMo",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21668",
+      "documentNumber": "2026-21668",
+      "title": "Exempt Plant Definition Request for Information",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21668/exempt-plant-definition-request-for-information",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Agricultural Marketing Service",
+        "Agriculture Department"
+      ],
+      "sourceEdition": "ni:///sha-256;HWiAJBXiNI_rNu9gPT28XePs8kYrzCU7wrmrY-u_cmw",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21673",
+      "documentNumber": "2026-21673",
+      "title": "Agency Information Collection Activities: Submission to OMB for Review and Approval; Public Comment Request: National Practitioner Data Bank for Adverse Information on Physicians and Other Health Care Practitioners-45 CFR Part 60 Regulations and Forms, OMB No. 0906-0081-Revision",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21673/agency-information-collection-activities-submission-to-omb-for-review-and-approval-public-comment",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Health and Human Services Department",
+        "Health Resources and Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;m2EWqcx40n6GOPcygwjUZDVAuXZPJ8C36yE477URHHE",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21674",
+      "documentNumber": "2026-21674",
+      "title": "Agency Information Collection Activities: Submission to OMB for Review and Approval; Public Comment Request: Advanced Nursing Education Program Specific Form OMB No. 0906-0089-Revision",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21674/agency-information-collection-activities-submission-to-omb-for-review-and-approval-public-comment",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Health and Human Services Department",
+        "Health Resources and Services Administration"
+      ],
+      "sourceEdition": "ni:///sha-256;8UVdcTx4zyDNKAZ3XJxGeL45srC1r-DcnDhluYcMsk8",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21675",
+      "documentNumber": "2026-21675",
+      "title": "21st Century ROAD to Housing Act Prohibition on Large Institutional Investor Purchases of Single-Family Homes",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21675/21st-century-road-to-housing-act-prohibition-on-large-institutional-investor-purchases-of",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;UsjdD08l0m96hTSUHIlPM3BK4pySltXM7E4IP9xad90",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21682",
+      "documentNumber": "2026-21682",
+      "title": "Agency Information Collection Activities: SEVP Generic Clearance for the Collection of Qualitative Feedback on Agency Service Delivery, Form 73-043 “Field Representative Feedback Form”",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21682/agency-information-collection-activities-sevp-generic-clearance-for-the-collection-of-qualitative",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Homeland Security Department",
+        "U.S. Immigration and Customs Enforcement"
+      ],
+      "sourceEdition": "ni:///sha-256;cZiZ-l4Y57nDYKS-ZpzQKsN8RMqK2LoRGiQB47t5QLw",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21683",
+      "documentNumber": "2026-21683",
+      "title": "Agency Information Collection Activities: Extension of a Currently Approved Collection: Electronic Bonds Online (eBonds) Access",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21683/agency-information-collection-activities-extension-of-a-currently-approved-collection-electronic",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Homeland Security Department",
+        "U.S. Immigration and Customs Enforcement"
+      ],
+      "sourceEdition": "ni:///sha-256;NSoeKZwYTjAIeIUP7roqWedELaIdRFe7uhs1OqetO8o",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21690",
+      "documentNumber": "2026-21690",
+      "title": "Irradiated Fuel Reprocessing Plants",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21690/irradiated-fuel-reprocessing-plants",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Nuclear Regulatory Commission"
+      ],
+      "sourceEdition": "ni:///sha-256;rb0KDLN7PdsWN3xb0NNHSMQhVI5A8J2l6p3b39KgjoQ",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21697",
+      "documentNumber": "2026-21697",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21697/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;UD3jsDJ6BEmWPSSYjyu7_ndSqkRb1eozplbvmkVlf7I",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21700",
+      "documentNumber": "2026-21700",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21700/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;JSyUHJEliRm56rfkDZ5K9Lll1PAZHo4d9W4DralUIN8",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21702",
+      "documentNumber": "2026-21702",
+      "title": "Privacy Act of 1974; System of Records",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21702/privacy-act-of-1974-system-of-records",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Veterans Affairs Department"
+      ],
+      "sourceEdition": "ni:///sha-256;mOEAx5wwNZ9rveEWIrUoaddSsnJPsDcXqiOmvQWj6U8",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21704",
+      "documentNumber": "2026-21704",
+      "title": "Agency Information Collection Activities: Proposed Information Collection; Submission for OMB Review; Applications for Licensing or Registration To Issue Payment Stablecoins Under the GENIUS Act",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21704/agency-information-collection-activities-proposed-information-collection-submission-for-omb-review",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Comptroller of the Currency",
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;xvwlwHUnPz1GBE-BcL8IS4aLeSlZQOqwvxYZjh7o3cI",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21705",
+      "documentNumber": "2026-21705",
+      "title": "Agency Information Collection Activities: Proposed Information Collection; Submission for OMB Review; Reporting Forms and Instructions for Permitted Payment Stablecoin Issuers Subject to the Jurisdiction of the Office of the Comptroller of the Currency",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21705/agency-information-collection-activities-proposed-information-collection-submission-for-omb-review",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Comptroller of the Currency",
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;4eHb9Sx8DYlImQ4KthzonC9dOwZjEgWelw-3bmVgutY",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21712",
+      "documentNumber": "2026-21712",
+      "title": "Agency Information Collection Activities; Submission for Office of Management and Budget Review; Comment Request; Accreditation Scheme for Conformity Assessment Program",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21712/agency-information-collection-activities-submission-for-office-of-management-and-budget-review",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Food and Drug Administration",
+        "Health and Human Services Department"
+      ],
+      "sourceEdition": "ni:///sha-256;XOqgjILNR4PXPsalPxB6TBFWNagLerGRhvidtDmUi48",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    },
+    {
+      "subject": "federal-register:2026-21715",
+      "documentNumber": "2026-21715",
+      "title": "Agency Information Collection Activities; Submission for OMB Review; Comment Request; U.S. Information Returns and Related Forms, Schedules, Attachments, and Published Guidance",
+      "documentUrl": "https://www.federalregister.gov/documents/2026/10/23/2026-21715/agency-information-collection-activities-submission-for-omb-review-comment-request-us-information",
+      "publicationDate": "2026-10-23",
+      "commentsCloseOn": "2026-11-23",
+      "daysAfterUtcDate": 30,
+      "agencies": [
+        "Treasury Department"
+      ],
+      "sourceEdition": "ni:///sha-256;a8ReQxNMlm_SnW_5Dc5qOMv-h-0QxZU7gQMGOi2cELs",
+      "source": "https://www.federalregister.gov/api/v1/documents.json?conditions%5Bpublication_date%5D%5Bgte%5D=2026-10-17&conditions%5Bpublication_date%5D%5Blte%5D=2026-10-24&per_page=100&page=1&order=newest&fields%5B%5D=document_number&fields%5B%5D=title&fields%5B%5D=type&fields%5B%5D=abstract&fields%5B%5D=html_url&fields%5B%5D=publication_date&fields%5B%5D=agencies&fields%5B%5D=comments_close_on&fields%5B%5D=effective_on&fields%5B%5D=action&fields%5B%5D=citation&fields%5B%5D=regulation_id_numbers&fields%5B%5D=cfr_references&fields%5B%5D=docket_ids&fields%5B%5D=correction_of&fields%5B%5D=corrections"
+    }
+  ]
+}
