@@ -11,6 +11,13 @@ on:
       - "src/federal-register-inventory.mjs"
       - "src/federal-register-source-witness.mjs"
       - "src/federal-register-newswire-supply.mjs"
+  pull_request:
+    paths:
+      - ".github/workflows/publish-federal-register-source-editions.yml"
+      - "scripts/publish-federal-register-source-editions.mjs"
+      - "src/federal-register-inventory.mjs"
+      - "src/federal-register-source-witness.mjs"
+      - "src/federal-register-newswire-supply.mjs"
   schedule:
     - cron: "23 */3 * * *"
   workflow_dispatch:
