@@ -84,6 +84,34 @@ Operate the following decisions, rather than manufacturing many listings:
 
 Immediate business-defining receiving lot: take one of the **32 real proposed rules** from the observed window that has a source-returned comment date; independently establish official source link/deadline and a customer's relevant watch predicate; receive the editorial packet and one actual purchaser's bounded deadline-aware result. If we cannot do that, a larger SKU catalog is not the current economic bottleneck.
 
+## First decision packet now technically shaped by actual external evidence
+
+The official API's basic search omitted comment and effective date fields entirely, making the preceding seven-day source purchase candidate little more than a title list. We extended the **existing Federal Register original acquisition** with a `regulatory-decision` source field profile. A genuine [source receiving run on 2026-10-24](https://github.com/red-cup-engineering/paid-data-endpoint-service/actions/runs/40140335583) preserved all **469/469** provider-reported records and now captures **180 source-reported comment-close dates**, **63 effective dates**, **324 docket-linked records**, **78 CFR-linked records** and **four correction links**. The HTTP body total for that exact selected-field response was **673,066 bytes**, and source fields are kept in normalized edition identity and structured Newswire candidate packets. A null source-returned deadline is distinct from a deadline field **not requested** by the API query.
+
+Within that observed source set, **100 records** carried a source-returned closing date between 2026-10-24 and 2026-11-24; of **32 proposed rules**, **30** carried a closing date and **15** fell into that same thirty-one-day inclusive date window. These are measurable candidates for a policy agent's watch, *not* legal advice, a claim that all 100 are still accepting comments, or a buyer's evidenced willingness to pay. The application must independently review any source/official-edition distinction before accepting a customer-specific legal deadline.
+
+The original Newswire's existing `queryPublicNewswire` has now been extended, **without a Federal Register-only paid query engine**, for at most four bounded **RFC 6901 structured-data conditions**, where date-only comparisons use exact source-returned civil dates. It supports snapshot-stable bounded `offset` pagination and optional `withData` (at most eight returned data objects at a time), alongside existing source/topic/time, provenance and editorial admission. Thus the expensive-to-agent task **"which accepted, witnessed proposed-rule packets in my subscribed topic have comment deadlines in this window?"** is one deterministic indexed/snapshot query rather than repeatedly reading hundreds of abstracts, improvising date extraction and losing provenance. A future indexed storage implementation may be justified by measured 10k-item scans, not assumed necessary now.
+
+An illustrative buyer request, valid against an **independently received original public Newswire snapshot** once it exists, is:
+
+```json
+{
+  "kinds": ["data-bulletin"],
+  "topics": ["federal-register"],
+  "where": [
+    {"pointer": "/type", "op": "equals", "value": "Proposed Rule"},
+    {"pointer": "/commentsCloseOn", "op": "date-on-or-after", "value": "2026-10-24"},
+    {"pointer": "/commentsCloseOn", "op": "date-on-or-before", "value": "2026-11-24"}
+  ],
+  "limit": 8,
+  "offset": 0,
+  "withData": true,
+  "withProvenance": true
+}
+```
+
+That input is a **source-operation example, not a quoted or buyable product**. The selected outside buyer still needs original merchant authorization, confirmed source rights, and an installed original paid result with actual settlement. `nextOffset` gives the exact same pinned-release continuation; a result's `totalMatched` and `hasMore` prevent pretending a truncated page is a complete watch. Neither query nor marketplace discovery may advertise a legal deadline guarantee or a real price without the original seller's independent authority.
+
 ## Explicitly unresolved
 
 There is a proven real official-source acquisition pipeline and a seller composition in draft code. There is **no verified live approved data-bulletin publication, install of the original seller, paid outside customer, external settlement, subscription, or established contribution margin** from this work. Do not assert professional-grade regulatory advice or financial viability before those facts exist.
