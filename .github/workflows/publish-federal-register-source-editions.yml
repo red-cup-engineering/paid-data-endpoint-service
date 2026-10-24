@@ -22,8 +22,6 @@ jobs:
   acquire-project-and-publish:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
-    env:
-      NEWSWIRE_SOURCE_CUSTODY_ROOT: ${{ runner.temp }}/original-federal-register-http
     steps:
       - name: Select original verified source-owning Engineering repository
         uses: actions/checkout@v4
@@ -33,6 +31,8 @@ jobs:
         with:
           node-version: "22.18.0"
       - name: Receive official source, prepare real event packets and deadlines
+        env:
+          NEWSWIRE_SOURCE_CUSTODY_ROOT: ${{ runner.temp }}/original-federal-register-http
         run: |
           set -euo pipefail
           node --check scripts/publish-federal-register-source-editions.mjs
