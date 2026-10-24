@@ -75,14 +75,20 @@ export function publicNewswireReleaseView(wire) {
       if (bytes.byteLength > 64 * 1024) throw new RangeError(label + " exceeds Newswire data packet byte budget");
       data = JSON.parse(bytes.toString("utf8"));
     }
+    if (item.kind !== "data-bulletin" && item.kind !== "news-article") {
+      throw new TypeError(label + " must have a genuine published item kind");
+    }
+    if (typeof item.summary !== "string" || item.summary.length > 30000) {
+      throw new TypeError(label + " contains absent or oversized source description; custody does not truncate it");
+    }
     return Object.freeze({
       subject,
       url: url(item.url, label + " public page"),
       headline: boundedText(item.headline, label + " headline"),
-      summary: typeof item.summary === "string" ? item.summary.slice(0, 30000) : "",
+      summary: item.summary,
       keywords: [...new Set(item.keywords)],
       isPublic: true,
-      kind: item.kind === "data-bulletin" ? "data-bulletin" : "news-article",
+      kind: item.kind,
       ...(data === undefined ? {} : {data}),
       ...(item.published === undefined ? {} : {published: instant(item.published, label + " published")}),
       ...(item.updated === undefined ? {} : {updated: instant(item.updated, label + " updated")}),
