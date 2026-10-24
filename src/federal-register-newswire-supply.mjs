@@ -4,6 +4,13 @@ import {
   verifyWitnessedFederalRegisterInventory,
 } from "./federal-register-source-witness.mjs";
 
+const namedInformationUri = digest => {
+  if (typeof digest !== "string" || !/^sha256:[a-f0-9]{64}$/u.test(digest)) {
+    throw new TypeError("original source edition requires a full SHA-256 digest");
+  }
+  return "ni:///sha-256;" + Buffer.from(digest.slice(7), "hex").toString("base64url");
+};
+
 // Source-owned observation -> Newsroom claim-set candidates. No model,
 // summary hallucination, second event store, automatic desk clearance, or
 // counterfeit Federal Register authorship. The original Newsroom must receive
@@ -17,6 +24,7 @@ const candidate = (record, lot) => {
     kind:"federal-register-document-observation",
     sourceItemId:stableId,
     sourceEditionDigest,
+    sourceEditionUri:namedInformationUri(sourceEditionDigest),
     sourceDocumentUrl:documentUri.href,
     documentNumber:record.document_number,
     title:record.title,
@@ -28,6 +36,7 @@ const candidate = (record, lot) => {
     commentsCloseOn:record.comments_close_on,
     originalApiUrl:lot.source.apiUrl,
     originalResponseDigest:acquisition.responseDigest,
+    originalResponseUri:namedInformationUri(acquisition.responseDigest),
     observedAt:lot.observedAt,
     inventoryDigest:lot.digest,
     reportedPageComplete:lot.source.pageComplete,
@@ -62,7 +71,9 @@ export async function prepareFederalRegisterNewswireCandidates({lot, root, byteS
     kind:"561.newswire.source-candidate-set.v1",
     source:"https://www.federalregister.gov",
     rawResponseDigest:evidence.originalResponseDigest,
+    rawResponseUri:namedInformationUri(evidence.originalResponseDigest),
     normalizedLotDigest:lot.digest,
+    normalizedLotUri:namedInformationUri(lot.digest),
     observedAt:lot.observedAt,
     sourceCount:lot.recordCount,
     coverage: Object.freeze({
