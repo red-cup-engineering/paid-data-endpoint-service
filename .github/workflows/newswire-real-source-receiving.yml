@@ -32,7 +32,7 @@ jobs:
           FROM="$(date -u -d '7 days ago' +%F)"
           UNTIL="$(date -u +%F)"
           node src/federal-register-inventory-cli.mjs \
-            --since "$FROM" --until "$UNTIL" --per-page 100 --max-pages 5 \
+            --since "$FROM" --until "$UNTIL" --per-page 100 --max-pages 5 --profile regulatory-decision \
             --custody-root "$RUNNER_TEMP/original-source-bytes" \
             --output wire-candidates > "$RUNNER_TEMP/newswire-source-candidates.json"
       - name: Receive actual provider evidence and candidate packet counts
