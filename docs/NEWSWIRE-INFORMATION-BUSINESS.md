@@ -35,6 +35,14 @@ References:
 
 **Third wedge — enterprise watch, replay and review.** A customer authorizes bounded watch predicates, time window, alert delivery, failure policy and budget. The service sells meaningful **new/changed/withdrawn** observations relative to that customer's acknowledged cursor, including negative evidence, not an unqualified email digest. Charge for actually delivered task-relevant updates or an openly contracted subscription. Do not activate until a genuine paying repeat customer wants this and the original durable consumer cursor/rights contract is received.
 
+## The throughput decision: governed automation, not per-row editorial labor
+
+A 469-event observed source window cannot economically require 469 separate model-generated articles or discretionary human desk approvals. **Original source testimony, normalized data, and our own interpretation are different kinds of claims**. An independently authorized *source-class policy* should allow the original Newsroom to mechanically receive a data-only attribution packet when the exact source, allowed fields, raw byte custody, immutable source edition, schema, provenance, license/terms edition and no disputed/withdrawn source state are qualified. Such a packet says **"this original publisher reported this field on this observed edition"**, not that 561 verified the underlying regulation or grants legal authority to act. The independent publisher/rights office still owns the policy and revocation; the source-fetching actor cannot self-approve or quietly expand categories. Refusals and contestation remain visible, not dropped.
+
+Separately, an **interpreted news report** or high-stakes statement that a document legally applies to a customer requires additional competent evidence, cross-source checking and independent editorial receiving. Never auto-upgrade a structured source observation to a warranted legal conclusion because a source API supplies a date.
+
+Accept automated data-bulletin batches by qualified original rule at the same standard of source evidence; do not ask a general-purpose LLM to "review" 469 metadata objects one by one. Measure the percent auto-admitted, held, retracted, wrongly merged or needing exception review and the actual work/expense per qualified edition. If the original Newsroom cannot receive source-qualified data lots without invented article-writing labor, that **is a structural commercial bottleneck**, not a reason to fabricate cheap storefront SKUs.
+
 ## Offer ladder and pricing *hypotheses* — not published prices
 
 | Candidate | What buyer actually gets | Hypothesis to test, not an offer | Required source/receiving |
