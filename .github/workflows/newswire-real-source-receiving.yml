@@ -76,3 +76,12 @@ jobs:
             ${{ runner.temp }}/original-source-bytes/
           if-no-files-found: error
           retention-days: 7
+
+      - name: Preserve original provider bytes on parser refusal
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-government-source-refusal-evidence
+          path: ${{ runner.temp }}/original-source-bytes/
+          if-no-files-found: warn
+          retention-days: 2
