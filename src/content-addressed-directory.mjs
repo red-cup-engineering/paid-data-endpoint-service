@@ -1,7 +1,11 @@
 import { mkdir, open, readFile, link, unlink } from "node:fs/promises";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { resolve, sep } from "node:path";
-import { sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
+
+// Native Node SHA-256 is the exact same standard digest used by the original
+// public-data inventory producer. Source custody must work for an official
+// no-key data fetch without bootstrapping private workspace dependencies.
+const sha256Hex = value => createHash("sha256").update(value).digest("hex");
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 
