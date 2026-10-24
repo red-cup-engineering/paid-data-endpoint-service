@@ -83,13 +83,18 @@ export async function acquireWitnessedFederalRegisterInventory({
   }
   const bytes = await boundedResponseBytes(response, maxBytes);
   const originalDigest = sha256(bytes);
-  let parsed;
-  try { parsed = JSON.parse(bytes.toString("utf8")); }
-  catch { throw new TypeError("official source returned invalid JSON"); }
-  const lot = federalRegisterInventoryLot({response:parsed,sourceUrl,observedAt:at});
+  // Custody precedes any source-specific parser: real malformed publisher data
+  // is still evidence that must survive a failed normalization attempt.
   const receipt = await store.write({body:bytes,mediaType:"application/json"});
   if (receipt.sha256 !== originalDigest.slice(7) || receipt.byteLength !== bytes.byteLength) {
     throw new Error("immutable source custody did not receive exact original HTTP bytes");
+  }
+  let lot;
+  try {
+    const parsed = JSON.parse(bytes.toString("utf8"));
+    lot = federalRegisterInventoryLot({response:parsed,sourceUrl,observedAt:at});
+  } catch (error) {
+    throw new TypeError("original Federal Register source normalization refused; retained decoded HTTP response body " + originalDigest + ": " + String(error?.message ?? error), {cause:error});
   }
   const acquisition = {
     requestedUrl: sourceUrl,
