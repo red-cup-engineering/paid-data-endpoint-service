@@ -71,8 +71,8 @@ jobs:
             deadlineSourceCoverage:deadlines.sourceCoverage.complete,
             deadlineSourceWindow:deadlines.sourceQuery,
             sourceObservedDeadlineUnits:deadlines.recordCount,
-            sourceDecodedBytes:published.costs.decodedResponseBytes,
-            sourceNetworkCalls:published.costs.networkRequests,
+            sourceDecodedBytes:published.costs.decodedResponseBytes+deadlines.sourceAcquisitionCosts.decodedResponseBytes,
+            sourceNetworkCalls:published.costs.networkRequests+deadlines.sourceAcquisitionCosts.networkRequests,
             editorialApproval:false,merchantSettlement:false,realBuyerReceived:false,
           }));
           NODE
