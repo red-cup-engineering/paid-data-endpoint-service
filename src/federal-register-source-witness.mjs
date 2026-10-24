@@ -3,7 +3,7 @@ import { isDeepStrictEqual } from "node:util";
 import { createContentAddressedDirectory } from "./content-addressed-directory.mjs";
 import {
   federalRegisterSearchURL, federalRegisterInventoryLot,
-  verifyFederalRegisterInventoryLot,
+  verifyFederalRegisterInventoryLot, deriveFederalRegisterInventory,
 } from "./federal-register-inventory.mjs";
 
 const MAX_BYTES = 4 * 1024 * 1024;
@@ -134,14 +134,23 @@ export async function verifyWitnessedFederalRegisterInventory({lot, root, byteSt
     sourceUrl:witness.requestedUrl,
     observedAt:witness.observedAt,
   });
-  if (original.digest !== lot.digest || !isDeepStrictEqual(original.records, lot.records) ||
+  const projected = lot.kind === "derived-federal-register-documents"
+    ? deriveFederalRegisterInventory(original, {
+        filters:lot.transformation.filters,
+        actorId:lot.transformation.actorId,
+        service:lot.transformation.service,
+      })
+    : original;
+  if ((lot.kind === "derived-federal-register-documents" && lot.parentDigest !== original.digest) ||
+      projected.digest !== lot.digest || !isDeepStrictEqual(projected.records, lot.records) ||
       original.source.totalResultsReported !== lot.source.totalResultsReported ||
       original.source.pageComplete !== lot.source.pageComplete) {
     throw new Error("source inventory does not follow from custodied official HTTP bytes");
   }
   return Object.freeze({
-    verified:true,normalizedDigest:original.digest,
-    originalResponseDigest:witness.responseDigest,recordCount:original.recordCount,
+    verified:true,normalizedDigest:projected.digest,
+    parentDigest:original.digest,
+    originalResponseDigest:witness.responseDigest,recordCount:projected.recordCount,
     rights:original.source.rights,
   });
 }
