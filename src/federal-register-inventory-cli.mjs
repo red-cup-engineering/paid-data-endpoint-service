@@ -5,12 +5,12 @@ import { acquireWitnessedFederalRegisterInventory, verifyWitnessedFederalRegiste
 import { prepareFederalRegisterNewswireCandidates, acquireFederalRegisterNewswireWindow } from "./federal-register-newswire-supply.mjs";
 
 function usage() {
-  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT] [--custody-root DIRECTORY] [--output inventory|wire-candidates] [--max-pages 1..20]\n";
+  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT] [--custody-root DIRECTORY] [--output inventory|wire-candidates] [--max-pages 1..20] [--profile regulatory-decision]\n";
 }
 
 async function main(argv = process.argv.slice(2)) {
   if (argv.includes("--help")) { process.stdout.write(usage()); return; }
-  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service", "--custody-root", "--output", "--max-pages"]);
+  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service", "--custody-root", "--output", "--max-pages", "--profile"]);
   const options = {};
   for (let index = 0; index < argv.length; index += 2) {
     const key = argv[index];
@@ -25,6 +25,7 @@ async function main(argv = process.argv.slice(2)) {
     ...(options["--term"] ? { term: options["--term"] } : {}),
     ...(options["--agency"] ? { agency: options["--agency"] } : {}),
     ...(options["--per-page"] ? { perPage: Number(options["--per-page"]) } : {}),
+    ...(options["--profile"] ? { profile: options["--profile"] } : {}),
   };
   // The ordinary acquisition remains for non-commercial exploratory use.
   // --custody-root performs the real provider HTTP-byte retention and makes
