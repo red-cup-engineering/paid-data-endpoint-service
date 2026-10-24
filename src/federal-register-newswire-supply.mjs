@@ -32,6 +32,11 @@ const candidate = (record, lot) => {
     sourceDatePrecision:"civil-day",
     type:record.type,
     agencyNames:record.agency_names,
+    ...(record.agency_names_missing ? {
+      agencyNamesMissing:record.agency_names_missing,
+      agenciesReported:record.agencies_reported,
+      agencyAttributionCoverage:"partial",
+    } : {}),
     abstract:record.abstract,
     commentsCloseOn:record.comments_close_on,
     originalApiUrl:lot.source.apiUrl,
