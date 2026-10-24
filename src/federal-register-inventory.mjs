@@ -127,9 +127,22 @@ function federalRegisterDocument(raw) {
   }
   const agencies = raw.agencies ?? [];
   if (!Array.isArray(agencies) || agencies.length > 40) throw new TypeError("agencies must be a bounded array");
-  const agency_names = [...new Set(agencies.map((a) =>
-    typeof a === "string" ? boundedText(a, "agency name", 250) : boundedText(a?.name, "agency name", 250),
-  ))].sort((a, b) => a.localeCompare(b));
+  const sourceAgencyNames = agencies.map(a => typeof a === "string" ? a : a?.name);
+  const missingAgencyNames = sourceAgencyNames.filter(name => typeof name !== "string" || !name.trim()).length;
+  const agency_names = [...new Set(sourceAgencyNames
+    .filter(name => typeof name === "string" && name.trim())
+    .map(name => boundedText(name, "agency name", 250)))].sort((a,b)=>a.localeCompare(b));
+  // Some genuine Federal Register results include a null/unnamed agency row.
+  // Keep every known issuer and report how many upstream entries lacked names;
+  // do not invent an organization name or refuse the entire official page.
+  const declaredMissing = raw.agency_names_missing ?? missingAgencyNames;
+  const declaredReported = raw.agencies_reported ?? agencies.length;
+  if (!Number.isSafeInteger(declaredMissing) || declaredMissing < 0 ||
+      !Number.isSafeInteger(declaredReported) || declaredReported < 0 ||
+      declaredReported > 40 || declaredMissing > declaredReported ||
+      agency_names.length + declaredMissing > declaredReported) {
+    throw new TypeError("original source agency-name coverage is inconsistent");
+  }
   return {
     document_number,
     title: boundedText(raw.title, "title", 8000),
@@ -137,6 +150,7 @@ function federalRegisterDocument(raw) {
     publication_date: date(raw.publication_date, "publication_date"),
     comments_close_on: raw.comments_close_on ? date(raw.comments_close_on, "comments_close_on") : null,
     agency_names,
+    ...(declaredMissing ? {agency_names_missing:declaredMissing, agencies_reported:declaredReported} : {}),
     abstract: optionalText(raw.abstract, "abstract", 30_000),
     html_url,
   };
