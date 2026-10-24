@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "561.agricultural-source.v1",
+  "id": "noaa-nws-forecast-reuse",
+  "publisher": {
+    "name": "National Weather Service, NOAA",
+    "url": "https://www.weather.gov/"
+  },
+  "dataset": {
+    "title": "Existing NWS observations and forecasts useful to agriculture",
+    "description": "Metadata connection to existing Red Cup Forecasting weather acquisition; not a new scraper, guaranteed agricultural product, or a claim that a particular measured edition was received.",
+    "theme": "https://www.wikidata.org/wiki/Q11663",
+    "spatialCoverage": "coverage defined by each original provider observation",
+    "temporalCoverage": "source- and forecast-dependent",
+    "measurementUnit": "per-observation, provenance-qualified units"
+  },
+  "access": {
+    "kind": "existing-provider",
+    "endpoint": "https://api.weather.gov/",
+    "documentation": "https://www.weather.gov/documentation/services-web-api",
+    "requiresProviderKey": false,
+    "maxRecordsPerQuery": 0
+  },
+  "rights": {
+    "reviewedOn": "2026-10-24",
+    "reviewDueOn": "2026-11-24",
+    "evidenceUrl": "https://www.weather.gov/disclaimer",
+    "publicUse": "conditional-public-domain-exceptions",
+    "commercialRedistribution": "not-yet-qualified",
+    "sublicensing": "not-yet-qualified",
+    "attribution": "NWS / NOAA with correct product/time/version; no federal endorsement.",
+    "provenanceRequirements": "Reuse original Forecasting source custody, source revision and station/forecast evidence; review any third-party observations and restrictions."
+  },
+  "upstream": {
+    "repository": "red-cup-engineering/forecasting",
+    "branch": "main",
+    "service": "existing weather provider"
+  },
+  "status": "source-candidate-not-published"
+}
