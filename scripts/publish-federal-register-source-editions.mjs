@@ -137,7 +137,7 @@ function dayDelta(deadline, today) {
   if (!Number.isFinite(a) || !Number.isFinite(b)) throw new TypeError("official comment deadline must be a civil calendar date");
   return Math.round((a - b) / DAY);
 }
-function commentDeadlines(documents, today, observedAt, coverage) {
+function commentDeadlines(documents, today, observedAt, coverage, query, pages, costs, previous) {
   const items = documents.filter(item =>
     item.commentDeadlineFieldRequested && typeof item.commentsCloseOn === "string")
     .map(item => ({
@@ -145,13 +145,34 @@ function commentDeadlines(documents, today, observedAt, coverage) {
       documentUrl:item.documentUrl,publicationDate:item.publicationDate,
       commentsCloseOn:item.commentsCloseOn,daysAfterUtcDate:dayDelta(item.commentsCloseOn, today),
       agencies:item.agencies,sourceEdition:item.revision,source:item.source.originalApiUrl,
+      originalResponseDigest:item.source.originalResponseDigest,
+      originalResponseUri:item.source.originalResponseUri,
     }))
     .filter(item => item.daysAfterUtcDate >= 0 && item.daysAfterUtcDate <= 30)
     .sort((a,b) => a.daysAfterUtcDate - b.daysAfterUtcDate || a.documentNumber.localeCompare(b.documentNumber));
+  const prior = new Map((previous?.records ?? []).map(x => [x.subject,x]));
+  const changed = items.filter(x => {
+    const earlier = prior.get(x.subject);
+    return !earlier || earlier.sourceEdition !== x.sourceEdition ||
+      earlier.commentsCloseOn !== x.commentsCloseOn;
+  }).map(x => ({
+    subject:x.subject,sourceEdition:x.sourceEdition,
+    previousEdition:prior.get(x.subject)?.sourceEdition ?? null,
+    commentsCloseOn:x.commentsCloseOn,
+    previousReportedClose:prior.get(x.subject)?.commentsCloseOn ?? null,
+    observedAt,
+    kind:prior.has(x.subject) ? "source-edition-changed-in-query" : "first-observed-in-current-query",
+  }));
   return {
     kind:"561.newswire.federal-register-comment-deadlines.v1",
     observedAt,utcCivilDate:today,horizonDays:30,
+    sourceQuery:query,sourcePages:pages,
+    sourceAcquisitionCosts:costs,
     sourceCoverage:coverage,recordCount:items.length,
+    changedSourceEditions:changed,
+    changedSourceEditionCount:changed.length,
+    previousQueryItemsNotPresent:prior.size-items.filter(x=>prior.has(x.subject)).length,
+    disappearanceMeaning:"Comment dates expire, move out of the date window or change with corrected notices; missing from this query alone is NOT legal withdrawal.",
     dateMeaning:"Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
     records:items,
   };
@@ -217,6 +238,16 @@ export async function publishFederalRegisterSourceEditions({
     search:{since,until,profile:"regulatory-decision"},
     root:sourceRoot,observedAt,perPage:100,maxPages:5,
   });
+  // Not the same job: a comment period may be open for 30 days even when
+  // its original Notice was published months before this seven-day feed.
+  // Query the publisher's actual comment-date index, preserving a separate
+  // exact source window, byte custody, provider coverage and NI lineage.
+  const closeBy = dateOnly(nowDate + 30 * DAY);
+  const deadlineSourceQuery = {commentCloseFrom:until,commentCloseBy:closeBy,profile:"regulatory-decision"};
+  const deadlineWindow = await acquireFederalRegisterNewswireWindow({
+    search:deadlineSourceQuery,
+    root:sourceRoot,observedAt,perPage:100,maxPages:20,
+  });
   if (sourceWindow.sourceCount < 1)
     throw new Error("original government source returned no admissible records; keep last accepted edition");
   const documents = sourceWindow.candidates.map(candidate => sourcePacket(candidate,sourceWindow))
@@ -245,7 +276,13 @@ export async function publishFederalRegisterSourceEditions({
   const seen = new Set(oldEvents.map(event=>event.id));
   const accepted = events.filter(event=>!seen.has(event.id));
   const history = [...oldEvents,...accepted].slice(-MAX_EVENT_HISTORY);
-  const deadlines = commentDeadlines(documents,until,observedAt,sourceWindow.coverage);
+  const deadlineDocuments = deadlineWindow.candidates.map(candidate => sourcePacket(candidate,deadlineWindow));
+  if (new Set(deadlineDocuments.map(x=>x.subject)).size!==deadlineDocuments.length)
+    throw new TypeError("government comment-window source repeated a stable subject");
+  const priorDeadlines=await previousJson(DEADLINES);
+  const deadlines = commentDeadlines(deadlineDocuments,until,observedAt,
+    deadlineWindow.coverage,deadlineSourceQuery,deadlineWindow.sourcePages,
+    deadlineWindow.observedCosts,priorDeadlines);
   await mkdir(OUT,{recursive:true});
   await atomicText(LATEST,encoded);
   await atomicText(CHANGES,JSON.stringify(delta,null,2)+"\n");
@@ -257,9 +294,13 @@ export async function publishFederalRegisterSourceEditions({
     acquired:sourceWindow.sourceCount,
     coverageComplete:sourceWindow.coverage.complete,
     sourcePages:sourceWindow.sourcePages.length,
-    sourceBytes:sourceWindow.observedCosts.decodedResponseBytes,
-    sourceNetworkCalls:sourceWindow.observedCosts.networkRequests,
+    sourceBytes:sourceWindow.observedCosts.decodedResponseBytes + deadlineWindow.observedCosts.decodedResponseBytes,
+    sourceNetworkCalls:sourceWindow.observedCosts.networkRequests + deadlineWindow.observedCosts.networkRequests,
+    deadlineSourcePages:deadlineWindow.sourcePages.length,
+    deadlineOriginalMatchedDocuments:deadlineDocuments.length,
+    deadlineSourceCoverageComplete:deadlineWindow.coverage.complete,
     effectiveDeadlineRecords:deadlines.recordCount,
+    newlyObservedOrChangedDeadlineEditions:deadlines.changedSourceEditionCount,
     changedEvents:delta.newOrChangedCount,
     newRetainedEvents:accepted.length,
     editorialStatus:snapshot.editorialStatus,
