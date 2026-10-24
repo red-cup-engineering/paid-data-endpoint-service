@@ -19,6 +19,14 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/u;
 // into the original document number or refuse the entire publisher page.
 const DOCUMENT_RE = /^(?:C[1-9][0-9]{0,2}-)?\d{4}-\d{4,7}$/u;
 const MAX_RESULTS = 100;
+// Request an official, task-ready regulatory result without scraping HTML.
+// Ordinary source acquisition stays on its cheap previous default projection.
+export const REGULATORY_DECISION_FIELDS = Object.freeze([
+  "document_number", "title", "type", "abstract", "html_url",
+  "publication_date", "agencies", "comments_close_on", "effective_on",
+  "action", "citation", "regulation_id_numbers", "cfr_references",
+  "docket_ids", "correction_of", "corrections",
+]);
 
 export const FEDERAL_REGISTER_REUSE = Object.freeze({
   status: "republication-permitted",
@@ -82,7 +90,10 @@ function apiURL(value) {
 }
 
 /** Construct ONLY the official documents API URL. No arbitrary external URLs. */
-export function federalRegisterSearchURL({ since, until, term, agency, perPage = 50, page = 1 } = {}) {
+export function federalRegisterSearchURL({ since, until, term, agency, perPage = 50, page = 1, profile } = {}) {
+  if (profile !== undefined && profile !== "regulatory-decision") {
+    throw new TypeError("Federal Register source profile must be regulatory-decision or absent");
+  }
   date(since, "since");
   if (until !== undefined) {
     date(until, "until");
@@ -108,6 +119,11 @@ export function federalRegisterSearchURL({ since, until, term, agency, perPage =
   url.searchParams.set("per_page", String(perPage));
   url.searchParams.set("page", String(page));
   url.searchParams.set("order", "newest");
+  if (profile === "regulatory-decision") {
+    // Without explicit fields the source's search response omits even known
+    // document deadlines; absence then means NOT REQUESTED, not no deadline.
+    for (const field of REGULATORY_DECISION_FIELDS) url.searchParams.append("fields[]", field);
+  }
   return url.toString();
 }
 
