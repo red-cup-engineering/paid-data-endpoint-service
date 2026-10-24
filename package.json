@@ -32,14 +32,14 @@
   },
   "dependencies": {
     "@red-cup-engineering/cryptographic-computer-data-engineering-services-section": "workspace:*",
-    "@red-cup-engineering/http-engineering-services-section": "workspace:*",
-    "@red-cup-engineering/x402-engineering-services-section": "workspace:*",
+    "@red-cup-engineering/http-services-section": "workspace:*",
+    "@red-cup-engineering/x402-services-section": "workspace:*",
     "@x402/core": "2.19.0",
     "@x402/evm": "2.19.0",
     "ethers": "6.17.0",
     "viem": "2.55.8",
     "@red-cup-engineering/computer-web-platform": "workspace:*",
-    "@red-cup-engineering/datom-engineering-services-section": "workspace:*"
+    "@red-cup-engineering/datom-services-section": "workspace:*"
   },
   "license": "MIT",
   "funding": {
