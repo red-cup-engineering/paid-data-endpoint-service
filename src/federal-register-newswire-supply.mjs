@@ -39,6 +39,18 @@ const candidate = (record, lot) => {
     } : {}),
     abstract:record.abstract,
     commentsCloseOn:record.comments_close_on,
+    sourceFieldsProfile:lot.source.fieldsProfile,
+    // A null deadline is only interpreted as source-reported absence when
+    // the endpoint explicitly requested its deadline field.
+    commentDeadlineFieldRequested:lot.source.requestedFieldNames.includes("comments_close_on"),
+    ...(record.effective_on === undefined ? {} : {effectiveOn:record.effective_on}),
+    ...(record.action === undefined ? {} : {sourceAction:record.action}),
+    ...(record.citation === undefined ? {} : {federalRegisterCitation:record.citation}),
+    ...(record.docket_ids === undefined ? {} : {docketIds:record.docket_ids}),
+    ...(record.regulation_id_numbers === undefined ? {} : {regulationIdNumbers:record.regulation_id_numbers}),
+    ...(record.cfr_references === undefined ? {} : {cfrReferences:record.cfr_references}),
+    ...(record.correction_of === undefined ? {} : {correctionOf:record.correction_of}),
+    ...(record.corrections === undefined ? {} : {corrections:record.corrections}),
     originalApiUrl:lot.source.apiUrl,
     originalResponseDigest:acquisition.responseDigest,
     originalResponseUri:namedInformationUri(acquisition.responseDigest),
@@ -86,6 +98,8 @@ export async function prepareFederalRegisterNewswireCandidates({lot, root, byteS
     coverage: Object.freeze({
       reportedTotal:lot.source.totalResultsReported,
       pageComplete:lot.source.pageComplete,
+      fieldsProfile:lot.source.fieldsProfile,
+      originalRequestedFields:lot.source.requestedFieldNames,
     }),
     editorialStatus:"not-approved",
     candidates:Object.freeze(candidates),
@@ -152,6 +166,7 @@ export async function acquireFederalRegisterNewswireWindow({
       normalizedLotDigest:received.normalizedLotDigest,
       reportedTotal:received.coverage.reportedTotal,
       providerPageComplete:received.coverage.pageComplete,
+      fieldsProfile:received.coverage.fieldsProfile,
     }));
     for (const candidate of received.candidates) {
       const record = candidate.potential.find(cell=>cell.predicate==="data-payload")?.object;
@@ -176,6 +191,22 @@ export async function acquireFederalRegisterNewswireWindow({
   for (const subject of contested) bySubject.delete(subject);
   const receivedItems = [...bySubject.values()].sort((a,b)=>a.subject.localeCompare(b.subject));
   const complete = providerComplete && !conflictingCoverage && contested.size === 0;
+  const actualData = receivedItems.map(entry => entry.potential.find(c => c.predicate === "data-payload")?.object).filter(Boolean);
+  const richProfile = batches.length > 0 && batches.every(page => page.fieldsProfile === "regulatory-decision");
+  // Buyers need to know the denominator and whether official date fields
+  // were ever requested. These are observed source facts, not adjudicated
+  // future calendar deadlines or guaranteed regulatory applicability.
+  const decisionCoverage = Object.freeze({
+    fieldProfile:richProfile ? "regulatory-decision" : "not-complete",
+    dateFieldsRequested:richProfile,
+    commentCloseDates: richProfile ? actualData.filter(r => r.commentsCloseOn !== null).length : null,
+    effectiveDates:richProfile ? actualData.filter(r => r.effectiveOn != null).length : null,
+    docketLinkedRecords:richProfile ? actualData.filter(r => r.docketIds?.length > 0).length : null,
+    cfrLinkedRecords:richProfile ? actualData.filter(r => r.cfrReferences?.length > 0).length : null,
+    correctionLinks:richProfile ? actualData.filter(r => r.correctionOf).length : null,
+    eligibleSampleCount:actualData.length,
+    sourceOfAuthority:"source-api-returned-fields; original official PDF/legal verification may still be required",
+  });
   return Object.freeze({
     kind:"561.newswire.source-candidate-window.v1",
     source:"https://www.federalregister.gov",
@@ -192,6 +223,7 @@ export async function acquireFederalRegisterNewswireWindow({
       contestedSourceSubjects:Object.freeze([...contested].sort()),
       pagesRead:batches.length,
       returnedRecords:receivedItems.length,
+      decisionFields:decisionCoverage,
     }),
     observedCosts:Object.freeze({
       networkRequests:batches.length,
