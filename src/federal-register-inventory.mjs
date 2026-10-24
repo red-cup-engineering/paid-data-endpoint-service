@@ -171,6 +171,15 @@ export function federalRegisterInventoryLot({ response, sourceUrl, observedAt } 
   const keys = records.map((item) => item.document_number);
   if (new Set(keys).size !== keys.length) throw new TypeError("source repeats a document number");
   const digest = inventoryDigest(records);
+  const pageNumber = Number(url.searchParams.get("page") ?? 1);
+  const totalPagesReported = Number.isSafeInteger(response.total_pages) && response.total_pages >= 1
+    ? response.total_pages : null;
+  // Real Federal Register v1 removes next_page_url entirely at the last
+  // page, rather than supplying next_page_url:null. Its reported total_pages
+  // and our exact requested page prove the finite cursor is exhausted.
+  const pageComplete = response.next_page_url === null ? true :
+    typeof response.next_page_url === "string" ? false :
+    (totalPagesReported !== null && pageNumber >= totalPagesReported ? true : null);
   return {
     schemaVersion: "561.public-data-inventory.v1",
     kind: "federal-register-published-documents",
@@ -181,7 +190,9 @@ export function federalRegisterInventoryLot({ response, sourceUrl, observedAt } 
       apiUrl: url.toString(),
       publisher: "Office of the Federal Register",
       totalResultsReported: Number.isInteger(response.count) && response.count >= 0 ? response.count : null,
-      pageComplete: response.next_page_url === null ? true : (typeof response.next_page_url === "string" ? false : null),
+      pageNumber,
+      totalPagesReported,
+      pageComplete,
       observationLevel: "source-response-processed-by-seller; no independent cryptographic attestation",
       rights: FEDERAL_REGISTER_REUSE,
     },
