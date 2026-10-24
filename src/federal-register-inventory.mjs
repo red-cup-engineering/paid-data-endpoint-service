@@ -127,6 +127,34 @@ export function federalRegisterSearchURL({ since, until, term, agency, perPage =
   return url.toString();
 }
 
+function officialDocumentUri(value, name) {
+  if (value === null) return null;
+  const raw = boundedText(value, name, 2048);
+  const selected = new URL(raw);
+  if (selected.origin !== ORIGIN || !/^\/api\/v1\/documents\/[A-Za-z0-9-]+$/u.test(selected.pathname) ||
+      selected.username || selected.password || selected.search || selected.hash) {
+    throw new TypeError(name + " needs an official original document reference");
+  }
+  return selected.href;
+}
+function stringSet(values, name, limit = 32) {
+  if (!Array.isArray(values) || values.length > limit) throw new TypeError(name + " must be bounded source strings");
+  return [...new Set(values.map(value => boundedText(value, name, 400)))];
+}
+function cfrReferences(values) {
+  if (!Array.isArray(values) || values.length > 64) throw new TypeError("cfr_references must be bounded");
+  return values.map(ref => {
+    if (!ref || typeof ref !== "object" || Array.isArray(ref) ||
+        !Number.isSafeInteger(ref.title) || ref.title < 1 || ref.title > 50 ||
+        (ref.part !== null && (typeof ref.part !== "string" || ref.part.length > 100)) ||
+        (ref.chapter !== null && (typeof ref.chapter !== "string" || ref.chapter.length > 100)) ||
+        (ref.citation_url !== null && (typeof ref.citation_url !== "string" || ref.citation_url.length > 2048))) {
+      throw new TypeError("cfr_references must contain valid CFR title, part and chapter");
+    }
+    return {chapter:ref.chapter, citation_url:ref.citation_url, part:ref.part, title:ref.title};
+  });
+}
+
 function federalRegisterDocument(raw) {
   if (raw === null || typeof raw !== "object" || Array.isArray(raw) ||
       !DOCUMENT_RE.test(raw.document_number ?? "")) {
@@ -168,6 +196,14 @@ function federalRegisterDocument(raw) {
     type: boundedText(raw.type, "type", 80),
     publication_date: date(raw.publication_date, "publication_date"),
     comments_close_on: raw.comments_close_on ? date(raw.comments_close_on, "comments_close_on") : null,
+    ...(Object.hasOwn(raw, "effective_on") ? {effective_on: raw.effective_on ? date(raw.effective_on, "effective_on") : null} : {}),
+    ...(Object.hasOwn(raw, "action") ? {action: raw.action === null ? null : boundedText(raw.action, "action", 5000)} : {}),
+    ...(Object.hasOwn(raw, "citation") ? {citation: raw.citation === null ? null : boundedText(raw.citation, "citation", 256)} : {}),
+    ...(Object.hasOwn(raw, "docket_ids") ? {docket_ids: stringSet(raw.docket_ids, "docket_ids", 32)} : {}),
+    ...(Object.hasOwn(raw, "regulation_id_numbers") ? {regulation_id_numbers: stringSet(raw.regulation_id_numbers, "regulation_id_numbers", 32)} : {}),
+    ...(Object.hasOwn(raw, "cfr_references") ? {cfr_references: cfrReferences(raw.cfr_references)} : {}),
+    ...(Object.hasOwn(raw, "correction_of") ? {correction_of: officialDocumentUri(raw.correction_of, "correction_of")} : {}),
+    ...(Object.hasOwn(raw, "corrections") ? {corrections: raw.corrections.map((uri) => officialDocumentUri(uri, "corrections"))} : {}),
     agency_names,
     ...(declaredMissing ? {agency_names_missing:declaredMissing, agencies_reported:declaredReported} : {}),
     abstract: optionalText(raw.abstract, "abstract", 30_000),
@@ -209,6 +245,8 @@ export function federalRegisterInventoryLot({ response, sourceUrl, observedAt } 
       pageNumber,
       totalPagesReported,
       pageComplete,
+      fieldsProfile: url.searchParams.getAll("fields[]").length ? "regulatory-decision" : "basic",
+      requestedFieldNames: url.searchParams.getAll("fields[]"),
       observationLevel: "source-response-processed-by-seller; no independent cryptographic attestation",
       rights: FEDERAL_REGISTER_REUSE,
     },
