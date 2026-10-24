@@ -64,6 +64,17 @@ export function publicNewswireReleaseView(wire) {
         item.keywords.some(k => typeof k !== "string" || !k || k.length > 2048)) {
       throw new TypeError(label + " has unbounded topics");
     }
+    let data;
+    if (item.data !== undefined) {
+      if (item.kind !== "data-bulletin" || item.data === null || typeof item.data !== "object") {
+        throw new TypeError(label + " structured source value must belong to an accepted data bulletin");
+      }
+      let bytes;
+      try { bytes = Buffer.from(JSON.stringify(item.data), "utf8"); }
+      catch { throw new TypeError(label + " original published data is not JSON"); }
+      if (bytes.byteLength > 64 * 1024) throw new RangeError(label + " exceeds Newswire data packet byte budget");
+      data = JSON.parse(bytes.toString("utf8"));
+    }
     return Object.freeze({
       subject,
       url: url(item.url, label + " public page"),
@@ -72,6 +83,7 @@ export function publicNewswireReleaseView(wire) {
       keywords: [...new Set(item.keywords)],
       isPublic: true,
       kind: item.kind === "data-bulletin" ? "data-bulletin" : "news-article",
+      ...(data === undefined ? {} : {data}),
       ...(item.published === undefined ? {} : {published: instant(item.published, label + " published")}),
       ...(item.updated === undefined ? {} : {updated: instant(item.updated, label + " updated")}),
       provenance,
