@@ -1,0 +1,106 @@
+name: Publish real Federal Register Newswire source editions
+on:
+  push:
+    branches:
+      - main
+      - feat/federal-register-source-editions-public-20261024
+    paths:
+      - ".github/workflows/publish-federal-register-source-editions.yml"
+      - "scripts/publish-federal-register-source-editions.mjs"
+      - "src/federal-register-inventory.mjs"
+      - "src/federal-register-source-witness.mjs"
+      - "src/federal-register-newswire-supply.mjs"
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: original-federal-register-newswire-source-editions
+  cancel-in-progress: false
+jobs:
+  acquire-project-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      NEWSWIRE_SOURCE_CUSTODY_ROOT: ${{ runner.temp }}/original-federal-register-http
+    steps:
+      - name: Select original verified source-owning Engineering repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.18.0"
+      - name: Receive official source, prepare real event packets and deadlines
+        run: |
+          set -euo pipefail
+          node --check scripts/publish-federal-register-source-editions.mjs
+          node --check src/federal-register-newswire-supply.mjs
+          mkdir -p "$NEWSWIRE_SOURCE_CUSTODY_ROOT"
+          node scripts/publish-federal-register-source-editions.mjs > "$RUNNER_TEMP/federal-register-source-published.json"
+          cat "$RUNNER_TEMP/federal-register-source-published.json"
+          node --input-type=module <<'NODE'
+          import {readFileSync} from "node:fs";
+          const root="data/records/newswire/federal-register/";
+          const published=JSON.parse(readFileSync(root+"latest.json","utf8"));
+          const deadlines=JSON.parse(readFileSync(root+"comment-deadlines.json","utf8"));
+          const changes=JSON.parse(readFileSync(root+"changes.json","utf8"));
+          const events=readFileSync(root+"events.jsonl","utf8").split("\n").filter(Boolean).map(JSON.parse);
+          if(published.kind!=="561.newswire.federal-register-source-observation.v1" ||
+             published.documentCount<1 || published.documents.length!==published.documentCount ||
+             published.editorialStatus!=="not-approved" || published.merchantSettlement!==null ||
+             !published.sourcePages.every(p=>/^sha256:[a-f0-9]{64}$/.test(p.rawResponseDigest)) ||
+             !published.documents.every(d=>d.revision.startsWith("ni:///sha-256;") &&
+               d.source.originalResponseDigest.startsWith("sha256:")) ||
+             !Array.isArray(events) || !events.every(e=>e.specversion==="1.0" && e.source==="https://www.federalregister.gov") ||
+             deadlines.kind!=="561.newswire.federal-register-comment-deadlines.v1" ||
+             changes.kind!=="561.newswire.source-edition-changes.v1")
+            throw new Error("real source product's original receiving boundary refused");
+          console.log(JSON.stringify({
+            event:"source-qualified-public-product-received",documents:published.documentCount,
+            commentDeadlines:deadlines.recordCount,editionsChanged:changes.newOrChangedCount,
+            officialSourcePages:published.sourcePages.length,completeWindow:published.coverage.complete,
+            sourceDecodedBytes:published.costs.decodedResponseBytes,
+            sourceNetworkCalls:published.costs.networkRequests,
+            editorialApproval:false,merchantSettlement:false,realBuyerReceived:false,
+          }));
+          NODE
+      - name: Publish same-original public JSON, CloudEvents and source catalogue
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git config user.name '561 Group Newswire source receiver'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            data/records/newswire/federal-register/latest.json \
+            data/records/newswire/federal-register/changes.json \
+            data/records/newswire/federal-register/events.jsonl \
+            data/records/newswire/federal-register/comment-deadlines.json \
+            data/records/newswire/federal-register/catalog.jsonld
+          if git diff --cached --quiet; then
+            echo "Original public edition already matches selected source"
+          else
+            git commit -m 'Refresh actual original Federal Register Newswire data and source-event editions'
+            git push origin HEAD:main
+          fi
+          git ls-remote origin refs/heads/main
+          echo 'Original source changes accepted; paid Newswire approval and outside settlement remain separate.'
+      - name: Preserve original source bytes and independent machine output
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-federal-register-newswire-source-editions
+          path: |
+            ${{ runner.temp }}/federal-register-source-published.json
+            ${{ runner.temp }}/original-federal-register-http/
+            data/records/newswire/federal-register/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Keep source evidence when the requested public service refused
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-newswire-source-refusal-evidence
+          path: ${{ runner.temp }}/original-federal-register-http/
+          if-no-files-found: warn
+          retention-days: 2
