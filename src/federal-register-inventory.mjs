@@ -208,7 +208,34 @@ function federalRegisterDocument(raw) {
     ...(declaredMissing ? {agency_names_missing:declaredMissing, agencies_reported:declaredReported} : {}),
     abstract: optionalText(raw.abstract, "abstract", 30_000),
     html_url,
+    // These source-asserted fields are required to sell *decisions* about
+    // deadlines, effective dates, dockets and CFR targets rather than excerpts.
+    // Presence remains different from omission and from source-supplied null.
+    ...(Object.hasOwn(raw, "effective_on") ? {effective_on:raw.effective_on ? date(raw.effective_on,"effective_on") : null} : {}),
+    ...(Object.hasOwn(raw, "action") ? {action:optionalText(raw.action,"action",1500)} : {}),
+    ...(Object.hasOwn(raw, "citation") ? {citation:optionalText(raw.citation,"citation",300)} : {}),
+    ...(Object.hasOwn(raw, "docket_ids") ? {docket_ids:reportedArray(raw.docket_ids,"docket_ids")} : {}),
+    ...(Object.hasOwn(raw, "regulation_id_numbers") ? {regulation_id_numbers:reportedArray(raw.regulation_id_numbers,"regulation_id_numbers")} : {}),
+    ...(Object.hasOwn(raw, "cfr_references") ? {cfr_references:reportedArray(raw.cfr_references,"cfr_references")} : {}),
   };
+}
+
+/** Keep exact official buyer decision fields without silently reducing them to
+ * headlines. Never infer a missing date from abstract prose. */
+function reportedArray(value, name, limit = 60) {
+  if (value == null) return [];
+  if (!Array.isArray(value) || value.length > limit) throw new TypeError(name + " must be a bounded source array");
+  return value.map((entry, index) => {
+    if (typeof entry === "string") return boundedText(entry, name + "[" + index + "]", 512);
+    if (entry === null || typeof entry !== "object" || Array.isArray(entry))
+      throw new TypeError(name + " entries must be source strings or source objects");
+    const bytes = JSON.stringify(entry);
+    if (typeof bytes !== "string" || Buffer.byteLength(bytes) > 2048)
+      throw new RangeError(name + " source entry exceeds bounded JSON bytes");
+    const clone = JSON.parse(bytes);
+    if (Object.keys(clone).length > 24) throw new RangeError(name + " source entry exceeds bounded keys");
+    return clone;
+  });
 }
 
 /** Produce a content-addressed source lot without claiming payment or sale. */
