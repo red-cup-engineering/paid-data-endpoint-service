@@ -1,0 +1,421 @@
+{
+  "packId": "561-original-fortunes",
+  "edition": "october-2026",
+  "sourceKind": "seller-original",
+  "source": {
+    "name": "561 Group original Unix-style fortunes",
+    "provenance": "Original short texts drafted for the 561 Group on 2026-10-22; no historical Unix quotation reproduced",
+    "publisher": "561 Group / Causeway Services"
+  },
+  "rights": {
+    "basis": "seller-originated-text",
+    "sellerAuthorized": true,
+    "commercialDelivery": true,
+    "redistribution": true,
+    "scope": "This newly drafted corpus only; no claim over traditional third-party quotes",
+    "copyrightNotice": "AI-assisted originals; no claim of exclusive copyright in unprotectable material",
+    "editorialReceiving": "Human and enterprise production acceptance outstanding"
+  },
+  "entries": [
+    {
+      "id": "fortune-001",
+      "text": "The shell does not judge your command. It merely introduces you to the consequences.",
+      "tags": [
+        "computing",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-002",
+      "text": "A daemon is a promise that outlived the logout.",
+      "tags": [
+        "computing",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-003",
+      "text": "Never ask a clock whether the future is late.",
+      "tags": [
+        "time",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-004",
+      "text": "The most expensive bug is the one you have learned to call tradition.",
+      "tags": [
+        "computing",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-005",
+      "text": "A forecast is a polite argument with tomorrow.",
+      "tags": [
+        "weather",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-006",
+      "text": "If the log is empty, do not congratulate the logger.",
+      "tags": [
+        "computing",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-007",
+      "text": "The fastest shortcut is often the path you already maintain.",
+      "tags": [
+        "work",
+        "computing"
+      ]
+    },
+    {
+      "id": "fortune-008",
+      "text": "A public API is a front door; its error messages are the welcome mat.",
+      "tags": [
+        "computing",
+        "civic"
+      ]
+    },
+    {
+      "id": "fortune-009",
+      "text": "Some clouds are rented by the hour. All clouds are borrowed from the weather.",
+      "tags": [
+        "weather",
+        "economics"
+      ]
+    },
+    {
+      "id": "fortune-010",
+      "text": "Do not confuse the map's tidy edges with the territory's patience.",
+      "tags": [
+        "worlds",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-011",
+      "text": "An unpriced cost will eventually invoice someone.",
+      "tags": [
+        "economics",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-012",
+      "text": "A receipt says something happened. It does not say the right thing happened.",
+      "tags": [
+        "economics",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-013",
+      "text": "A good cache remembers the answer. A better one remembers when it became wrong.",
+      "tags": [
+        "computing",
+        "time"
+      ]
+    },
+    {
+      "id": "fortune-014",
+      "text": "The committee has reached consensus that the tide should consult the agenda.",
+      "tags": [
+        "civic",
+        "sea"
+      ]
+    },
+    {
+      "id": "fortune-015",
+      "text": "When the bridge asks for a toll, inspect both shores.",
+      "tags": [
+        "economics",
+        "civic"
+      ]
+    },
+    {
+      "id": "fortune-016",
+      "text": "A tiny machine can carry a very large misunderstanding.",
+      "tags": [
+        "computing",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-017",
+      "text": "Some seeds travel by wind; some ideas travel by fixing someone else's typo.",
+      "tags": [
+        "worlds",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-018",
+      "text": "Do not measure a garden solely by the number of labels on its stakes.",
+      "tags": [
+        "worlds",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-019",
+      "text": "There are two kinds of mystery: missing data and very confident metadata.",
+      "tags": [
+        "evidence",
+        "computing"
+      ]
+    },
+    {
+      "id": "fortune-020",
+      "text": "A good question opens a door. A better question checks whether the room exists.",
+      "tags": [
+        "wisdom",
+        "worlds"
+      ]
+    },
+    {
+      "id": "fortune-021",
+      "text": "The network is not down. It is rehearsing its independence.",
+      "tags": [
+        "computing",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-022",
+      "text": "A well-named variable is a small act of mercy toward tomorrow.",
+      "tags": [
+        "computing",
+        "time"
+      ]
+    },
+    {
+      "id": "fortune-023",
+      "text": "If you sell a result, include the path back to its evidence.",
+      "tags": [
+        "economics",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-024",
+      "text": "A law without a refusal case is a suggestion wearing a uniform.",
+      "tags": [
+        "civic",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-025",
+      "text": "The machine dreams in interrupts; the operator dreams in maintenance windows.",
+      "tags": [
+        "computing",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-026",
+      "text": "A word can change its coat without changing its neighbors.",
+      "tags": [
+        "language",
+        "worlds"
+      ]
+    },
+    {
+      "id": "fortune-027",
+      "text": "The sea keeps no ledger, but it never forgets the shore.",
+      "tags": [
+        "sea",
+        "worlds"
+      ]
+    },
+    {
+      "id": "fortune-028",
+      "text": "Keep the receipt. Even luck appreciates provenance.",
+      "tags": [
+        "fortune",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-029",
+      "text": "Every oracle should publish its error bars, especially the cheerful ones.",
+      "tags": [
+        "fortune",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-030",
+      "text": "A coin has two faces and an entire economy around its edge.",
+      "tags": [
+        "economics",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-031",
+      "text": "Your most loyal process may be a runaway loop.",
+      "tags": [
+        "computing",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-032",
+      "text": "The garden's oldest path began as somebody's convenient mistake.",
+      "tags": [
+        "worlds",
+        "time"
+      ]
+    },
+    {
+      "id": "fortune-033",
+      "text": "An index is a promise that the thing can still be found.",
+      "tags": [
+        "language",
+        "computing"
+      ]
+    },
+    {
+      "id": "fortune-034",
+      "text": "One more layer of abstraction will not waterproof the roof.",
+      "tags": [
+        "computing",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-035",
+      "text": "Sometimes the best answer is a smaller, better instrument.",
+      "tags": [
+        "work",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-036",
+      "text": "Even a glass sponge has boundaries; that is how water learns to move through it.",
+      "tags": [
+        "sea",
+        "worlds"
+      ]
+    },
+    {
+      "id": "fortune-037",
+      "text": "The right to speak is not the obligation to agree.",
+      "tags": [
+        "civic",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "fortune-038",
+      "text": "When a claim settles, ask what new roads it has made possible.",
+      "tags": [
+        "evidence",
+        "worlds"
+      ]
+    },
+    {
+      "id": "fortune-039",
+      "text": "No one can spend an estimate, but everyone can inherit its bill.",
+      "tags": [
+        "economics",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-040",
+      "text": "The second draft is where the nouns begin negotiating.",
+      "tags": [
+        "language",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-041",
+      "text": "A service is not a service until somebody receives it.",
+      "tags": [
+        "economics",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-042",
+      "text": "The future was delivered without a tracking number. File a polite complaint.",
+      "tags": [
+        "time",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-043",
+      "text": "The weather does not read our calendars, though it often edits them.",
+      "tags": [
+        "weather",
+        "time"
+      ]
+    },
+    {
+      "id": "fortune-044",
+      "text": "If every road leads to your gateway, you may have built a roundabout.",
+      "tags": [
+        "computing",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-045",
+      "text": "A beautiful diagram cannot settle an unpaid invoice.",
+      "tags": [
+        "economics",
+        "work"
+      ]
+    },
+    {
+      "id": "fortune-046",
+      "text": "The universe has several excellent random-number generators and no customer support.",
+      "tags": [
+        "fortune",
+        "humor"
+      ]
+    },
+    {
+      "id": "fortune-047",
+      "text": "A good glossary tells you where the word has already lived.",
+      "tags": [
+        "language",
+        "time"
+      ]
+    },
+    {
+      "id": "fortune-048",
+      "text": "A quiet server can still be speaking through its receipts.",
+      "tags": [
+        "computing",
+        "evidence"
+      ]
+    },
+    {
+      "id": "fortune-049",
+      "text": "What looks like an edge in one map may be the center of another.",
+      "tags": [
+        "worlds",
+        "civic"
+      ]
+    },
+    {
+      "id": "fortune-050",
+      "text": "The perfect plan is wonderfully efficient at avoiding contact with reality.",
+      "tags": [
+        "work",
+        "humor"
+      ]
+    }
+  ]
+}
