@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 import { acquireFederalRegisterInventory, deriveFederalRegisterInventory } from "./federal-register-inventory.mjs";
+import { acquireWitnessedFederalRegisterInventory, verifyWitnessedFederalRegisterInventory } from "./federal-register-source-witness.mjs";
 
 function usage() {
-  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT]\n";
+  return "Usage: node src/federal-register-inventory-cli.mjs --since YYYY-MM-DD [--until YYYY-MM-DD] [--term TEXT] [--agency SLUG] [--per-page 1..100] [--comment-close-by YYYY-MM-DD --comment-close-from YYYY-MM-DD --actor ID --service TEXT] [--custody-root DIRECTORY]\n";
 }
 
 async function main(argv = process.argv.slice(2)) {
   if (argv.includes("--help")) { process.stdout.write(usage()); return; }
-  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service"]);
+  const allowed = new Set(["--since", "--until", "--term", "--agency", "--per-page", "--comment-close-by", "--comment-close-from", "--actor", "--service", "--custody-root"]);
   const options = {};
   for (let index = 0; index < argv.length; index += 2) {
     const key = argv[index];
@@ -24,14 +25,22 @@ async function main(argv = process.argv.slice(2)) {
     ...(options["--agency"] ? { agency: options["--agency"] } : {}),
     ...(options["--per-page"] ? { perPage: Number(options["--per-page"]) } : {}),
   };
-  const lot = await acquireFederalRegisterInventory({ search });
+  // The ordinary acquisition remains for non-commercial exploratory use.
+  // --custody-root performs the real provider HTTP-byte retention and makes
+  // this run independently replayable before any downstream paid offer.
+  const root = options["--custody-root"];
+  const lot = root
+    ? await acquireWitnessedFederalRegisterInventory({search,root})
+    : await acquireFederalRegisterInventory({search});
   const derive = options["--comment-close-by"] !== undefined || options["--comment-close-from"] !== undefined || options["--actor"] !== undefined || options["--service"] !== undefined;
   if (derive && (!options["--comment-close-by"] || !options["--actor"] || !options["--service"])) {
     throw new TypeError("a reseller filter requires --comment-close-by, --actor and --service together");
   }
+  if (derive && !root) throw new TypeError("qualified reselling requires --custody-root and independently verifiable provider bytes");
   const published = derive
     ? deriveFederalRegisterInventory(lot, { filters: { commentsCloseBy: options["--comment-close-by"], ...(options["--comment-close-from"] ? { commentsCloseOnOrAfter: options["--comment-close-from"] } : {}) }, actorId: options["--actor"], service: options["--service"] })
     : lot;
+  if (root) await verifyWitnessedFederalRegisterInventory({lot:published,root});
   process.stdout.write(`${JSON.stringify(published, null, 2)}\n`);
 }
 
