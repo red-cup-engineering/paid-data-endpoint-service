@@ -32,15 +32,26 @@ function boundedText(value, label, max = 8192) {
 // Every item must already be Newsroom-released: this boundary refuses drafts.
 export function publicNewswireReleaseView(wire) {
   if (!object(wire) || !object(wire.masthead) || !Array.isArray(wire.public) ||
-      wire.public.length === 0 || wire.public.length > MAX_ITEMS) {
-    throw new TypeError("a nonempty original Newsroom-released Newswire is required");
+      wire.public.length > MAX_ITEMS) {
+    throw new TypeError("an original bounded Newsroom-released Newswire is required");
+  }
+  // Free publication and commercial inventory are distinct. An accepted public
+  // page without qualified source lineage remains freely served by Newswire,
+  // but does NOT enter the seller's snapshot. Never reject the whole publisher
+  // merely because a different lawful public article has no paid rights.
+  if (wire.public.some(item => !object(item) || item.isPublic !== true)) {
+    throw new TypeError("original published source list contains an unreleased item");
+  }
+  const saleCandidates = wire.public.filter(item => item.provenance !== undefined);
+  if (saleCandidates.length === 0) {
+    throw new TypeError("the original Newswire has no source-qualified released data to offer");
   }
   const wireUri = url(wire.masthead.siteUrl, "publisher wire");
   const seen = new Set();
-  const pub = wire.public.map((item, i) => {
+  const pub = saleCandidates.map((item, i) => {
     const label = "release item " + i;
-    if (!object(item) || item.isPublic !== true || !object(item.provenance)) {
-      throw new TypeError(label + " is not accepted source-qualified publication");
+    if (!object(item.provenance)) {
+      throw new TypeError(label + " has no admitted provenance object");
     }
     const subject = boundedText(item.subject, label + ".subject", 1024);
     if (seen.has(subject)) throw new TypeError("original release repeats a canonical subject");
