@@ -1,6 +1,11 @@
-import { mkdir, open, readFile } from "node:fs/promises";
+import { mkdir, open, readFile, link, unlink } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
 import { resolve, sep } from "node:path";
-import { sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
+
+// Native Node SHA-256 is the exact same standard digest used by the original
+// public-data inventory producer. Source custody must work for an official
+// no-key data fetch without bootstrapping private workspace dependencies.
+const sha256Hex = value => createHash("sha256").update(value).digest("hex");
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 
@@ -30,16 +35,30 @@ export function createContentAddressedDirectory({ root } = {}) {
     const content = bytes(body);
     const sha256 = sha256Hex(content);
     await mkdir(storageRoot, { recursive: true, mode: 0o700 });
+    // A crash in a direct open(wx)+writeFile can strand incomplete bytes at
+    // the FINAL digest path; later arrivals can neither replace nor use it.
+    // Stage privately under this directory, flush, then atomically hard-link
+    // to the create-only final address. No reader sees partial final bytes.
+    const temporary = resolve(storageRoot, ".stage-" + randomUUID());
     let handle;
     try {
-      handle = await open(pathFor(sha256), "wx", 0o600);
+      handle = await open(temporary, "wx", 0o600);
       await handle.writeFile(content);
-    } catch (error) {
-      if (error?.code !== "EEXIST") throw error;
-      const existing = await readFile(pathFor(sha256));
-      if (sha256Hex(existing) !== sha256) throw new Error("existing content-addressed object failed verification");
+      await handle.sync();
+      await handle.close();
+      handle = undefined;
+      try {
+        await link(temporary, pathFor(sha256));
+      } catch (error) {
+        if (error?.code !== "EEXIST") throw error;
+        const existing = await readFile(pathFor(sha256));
+        if (sha256Hex(existing) !== sha256) throw new Error("existing content-addressed object failed verification");
+      }
     } finally {
       await handle?.close();
+      await unlink(temporary).catch(error => {
+        if (error?.code !== "ENOENT") throw error;
+      });
     }
     return Object.freeze({ sha256, byteLength: content.byteLength, mediaType });
   }

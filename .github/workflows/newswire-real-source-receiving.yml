@@ -1,0 +1,87 @@
+name: Receive real public-source bytes as Newswire event candidates
+on:
+  pull_request:
+    paths:
+      - "src/federal-register-inventory.mjs"
+      - "src/federal-register-source-witness.mjs"
+      - "src/federal-register-newswire-supply.mjs"
+      - "src/federal-register-inventory-cli.mjs"
+      - "src/content-addressed-directory.mjs"
+      - ".github/workflows/newswire-real-source-receiving.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  receive-original-government-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: "22.18.0"
+      - name: Acquire actual official response and preserve source bytes in immutable custody
+        run: |
+          node --check src/federal-register-source-witness.mjs
+          node --check src/federal-register-newswire-supply.mjs
+          node --check src/federal-register-inventory-cli.mjs
+          node --check src/content-addressed-directory.mjs
+          mkdir -p "$RUNNER_TEMP/original-source-bytes"
+          FROM="$(date -u -d '7 days ago' +%F)"
+          UNTIL="$(date -u +%F)"
+          node src/federal-register-inventory-cli.mjs \
+            --since "$FROM" --until "$UNTIL" --per-page 100 --max-pages 5 --profile regulatory-decision \
+            --custody-root "$RUNNER_TEMP/original-source-bytes" \
+            --output wire-candidates > "$RUNNER_TEMP/newswire-source-candidates.json"
+      - name: Receive actual provider evidence and candidate packet counts
+        env:
+          WIRE_JSON: ${{ runner.temp }}/newswire-source-candidates.json
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync, readdirSync} from "node:fs";
+          import {strict as assert} from "node:assert";
+          const d = JSON.parse(readFileSync(process.env.WIRE_JSON, "utf8"));
+          assert.equal(d.kind, "561.newswire.source-candidate-window.v1");
+          assert.equal(d.editorialStatus, "not-approved");
+          assert.ok(d.sourceCount > 0 && d.sourceCount <= 500, "genuine source must have records");
+          assert.ok(d.sourcePages.length > 0 && d.sourcePages.length <= 5);
+          assert.equal(d.candidates.length, d.sourceCount);
+          assert.ok(d.sourcePages.every(p => /^sha256:[a-f0-9]{64}$/.test(p.rawResponseDigest)));
+          assert.ok(d.candidates.every(c => c.potential.some(p => p.predicate === "data-payload")));
+          const names = readdirSync(process.env.RUNNER_TEMP + "/original-source-bytes");
+          assert.ok(d.sourcePages.every(p => names.includes(p.rawResponseDigest.slice(7))), "every original page body retained");
+          assert.equal(d.observedCosts.networkRequests, d.sourcePages.length);
+          assert.equal(d.observedCosts.decodedResponseBytes,
+            d.sourcePages.reduce((n,p)=>n+p.originalResponseBytes,0));
+          console.log(JSON.stringify({
+            source:"https://www.federalregister.gov",
+            at:d.observedAt, sourceCount:d.sourceCount,
+            sourcePages:d.sourcePages.map(p=>({page:p.page,rawDigest:p.rawResponseDigest,bytes:p.originalResponseBytes})),
+            storedObjects:names.length,
+            observedCosts:d.observedCosts,
+            firstDocument:d.candidates[0].subject,
+            firstDocumentUrl:d.candidates[0].potential.find(p=>p.predicate==="data-payload").object.sourceDocumentUrl,
+            coverage:d.coverage,
+            acceptedByNewswire:false, paidSale:false,
+          },null,2));
+          NODE
+      - name: Preserve actual observed bytes and candidate packet for independent receiver
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-government-source-newswire-candidates
+          path: |
+            ${{ runner.temp }}/newswire-source-candidates.json
+            ${{ runner.temp }}/original-source-bytes/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Preserve original provider bytes on parser refusal
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-government-source-refusal-evidence
+          path: ${{ runner.temp }}/original-source-bytes/
+          if-no-files-found: warn
+          retention-days: 2
