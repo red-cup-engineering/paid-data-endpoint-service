@@ -14,7 +14,10 @@ import { isDeepStrictEqual } from "node:util";
 const ORIGIN = "https://www.federalregister.gov";
 const ENDPOINT = `${ORIGIN}/api/v1/documents.json`;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/u;
-const DOCUMENT_RE = /^\d{4}-\d{4,7}$/u;
+// Actual official API result pages also include independent correction notices
+// such as C1-2026-20311. Preserve their distinct IDs; never collapse them
+// into the original document number or refuse the entire publisher page.
+const DOCUMENT_RE = /^(?:C[1-9][0-9]{0,2}-)?\d{4}-\d{4,7}$/u;
 const MAX_RESULTS = 100;
 
 export const FEDERAL_REGISTER_REUSE = Object.freeze({
