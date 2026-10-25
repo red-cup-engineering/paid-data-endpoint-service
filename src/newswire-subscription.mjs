@@ -6,6 +6,18 @@ const MEDIA_TYPES = new Set(['text/plain', 'text/html', 'text/markdown']);
 const SHA = /^sha256:[0-9a-f]{64}$/u;
 const MAX_ENTITLEMENT_BYTES = 64 * 1024;
 
+/** Known access refusals, distinct from a supplier or delivery failure. */
+export class NewswireSubscriptionRefusal extends Error {
+  constructor(code, message) {
+    if (!['subscriber-authentication-required', 'subscription-access-refused'].includes(code))
+      throw new TypeError('unknown Newswire subscription refusal');
+    super(message);
+    this.name = 'NewswireSubscriptionRefusal';
+    this.code = code;
+    this.status = code === 'subscriber-authentication-required' ? 401 : 403;
+  }
+}
+
 function object(value, label) {
   if (value === null || typeof value !== 'object' || Array.isArray(value))
     throw new TypeError(label + ' must be an object');
@@ -81,11 +93,11 @@ function entitlementProjection(value, input, subscriber, at, admitQuery) {
   if (bytes(raw) > MAX_ENTITLEMENT_BYTES) throw new RangeError('current subscription exceeds bounded contract size');
   if (raw.admitted !== true || raw.status !== 'active' ||
       raw.subscriptionId !== input.subscriptionId || raw.subscriber !== subscriber)
-    throw new Error('current subscription is inactive or belongs to another subscriber');
+    throw new NewswireSubscriptionRefusal('subscription-access-refused', 'current subscription is inactive or belongs to another subscriber');
   const notBefore = instant(raw.notBefore, 'subscription.notBefore');
   const expiresAt = instant(raw.expiresAt, 'subscription.expiresAt');
   if (notBefore > at || expiresAt <= at || expiresAt <= notBefore)
-    throw new Error('current subscription is outside its validity period');
+    throw new NewswireSubscriptionRefusal('subscription-access-refused', 'current subscription is outside its validity period');
   if (!Array.isArray(raw.profiles) || raw.profiles.length < 1 || raw.profiles.length > 32 ||
       new Set(raw.profiles.map(profile => profile?.id)).size !== raw.profiles.length)
     throw new TypeError('subscription requires unique bounded access profiles');
@@ -107,9 +119,10 @@ function entitlementProjection(value, input, subscriber, at, admitQuery) {
     return {id, channels: [...profile.channels], query: structuredClone(admittedQuery), maxPageSize, maxOffset, maxResponseBytes};
   });
   const selected = profiles.find(profile => profile.id === input.profileId);
-  if (!selected || !selected.channels.includes(input.channel)) throw new Error('subscription does not admit the selected profile/channel');
-  bounded(input.limit ?? selected.maxPageSize, 'requested page size', 1, selected.maxPageSize);
-  bounded(input.offset, 'requested offset', 0, selected.maxOffset);
+  if (!selected || !selected.channels.includes(input.channel))
+    throw new NewswireSubscriptionRefusal('subscription-access-refused', 'subscription does not admit the selected profile/channel');
+  if ((input.limit ?? selected.maxPageSize) > selected.maxPageSize || input.offset > selected.maxOffset)
+    throw new NewswireSubscriptionRefusal('subscription-access-refused', 'requested page is outside the subscription scope');
   return freezeProjection({
     subscriptionId: input.subscriptionId,
     subscriber,
@@ -177,12 +190,21 @@ export function createNewswireSubscriptionQueryHandlers({
 
   async function current(input, subscriber, stage) {
     const resolved = await resolveSubscription({subscriptionId: input.subscriptionId, subscriber, at: clock(), stage});
+    if (resolved === null || resolved === undefined)
+      throw new NewswireSubscriptionRefusal('subscription-access-refused', 'no current subscription was admitted');
     return entitlementProjection(resolved, input, subscriber, clock(), options.admitQuery);
   }
 
-  async function execute({request} = {}) {
-    const input = admitNewswireSubscriptionRequest(request?.body);
-    const subscriber = text(await authenticateSubscriber({request}), 'authenticated subscriber');
+  async function authenticated(request) {
+    const subscriber = await authenticateSubscriber({request});
+    if (subscriber === null || subscriber === undefined)
+      throw new NewswireSubscriptionRefusal('subscriber-authentication-required', 'a current authenticated subscriber is required');
+    return text(subscriber, 'authenticated subscriber');
+  }
+
+  async function execute({request, body = request?.body} = {}) {
+    const input = admitNewswireSubscriptionRequest(body);
+    const subscriber = await authenticated(request);
     const subscription = await current(input, subscriber, 'subscription-query');
     const profile = subscription.selected;
     if (input.channel !== 'machine-data' && !renderRendition)
@@ -204,10 +226,10 @@ export function createNewswireSubscriptionQueryHandlers({
     // Retained data stays local until both current rights and current subscriber
     // authority are re-observed after potentially slow query/rendering work.
     const requalified = await access.qualify(queryRequest, 'subscription-delivery', context);
-    const currentSubscriber = text(await authenticateSubscriber({request}), 'authenticated subscriber');
-    if (currentSubscriber !== subscriber) throw new Error('authenticated subscriber changed before delivery');
+    const currentSubscriber = await authenticated(request);
+    if (currentSubscriber !== subscriber) throw new NewswireSubscriptionRefusal('subscriber-authentication-required', 'authenticated subscriber changed before delivery');
     const latest = await current(input, subscriber, 'subscription-delivery');
-    if (!isDeepStrictEqual(subscription, latest)) throw new Error('subscription revision or scope changed before delivery');
+    if (!isDeepStrictEqual(subscription, latest)) throw new NewswireSubscriptionRefusal('subscription-access-refused', 'subscription revision or scope changed before delivery');
     const at = clock();
     if (latest.expiresAt <= at || instant(requalified.rights.expiresAt, 'rights.expiresAt') <= at)
       throw new Error('subscription or source rights expired before delivery');
