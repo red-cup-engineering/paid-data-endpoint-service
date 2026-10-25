@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { worldBankInventoryLot, INTERNATIONAL_SOURCES, chirpsV3AfricaAsset } from './international-data-inventory.mjs';
-import { createInternationalPaidReadHandlers, createInternationalPaidReadActor, internationalLotReadRequest } from './international-paid-read.mjs';
+import { worldBankInventoryLot, INTERNATIONAL_SOURCES, chirpsV3AfricaAsset } from '../src/international-data-inventory.mjs';
+import { createInternationalPaidReadHandlers, createInternationalPaidReadActor, internationalLotReadRequest } from '../src/international-paid-read.mjs';
 
 const when = '2026-10-21T23:10:00Z';
 const clock = Date.parse('2026-10-22T03:45:00Z');

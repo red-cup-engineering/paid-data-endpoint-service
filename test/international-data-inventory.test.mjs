@@ -4,7 +4,7 @@ import {
  INTERNATIONAL_SOURCES, qualifyInternationalSource, worldBankIndicatorURL,
  worldBankInventoryLot, verifyWorldBankInventoryLot, acquireWorldBankSeries,
  chirpsV3AfricaAsset,
-} from './international-data-inventory.mjs';
+} from '../src/international-data-inventory.mjs';
 const asOf = '2026-10-21';
 const observedAt = '2026-10-21T22:30:00-05:00';
 const sourceId = 'wdi-cn-inflation';

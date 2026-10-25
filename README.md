@@ -1,5 +1,21 @@
 # paid-data-endpoint-service
 
+## Subscription access to the same released data
+
+`./newswire-subscription` exports `createNewswireSubscriptionQueryHandlers`.
+`createNewswireCommerce` accepts `subscriptionAccess` to attach it to the same
+immutable release store used by the x402 seller. An authenticated current
+contract selects the resource, query profile, page limits and delivery channel;
+the request cannot expand that scope. The handler rechecks current contracts
+and source rights after query or rendering work, before returning data.
+
+Machine responses retain the original query and PROV-O identities. Newsletter
+and social responses require the original content renderer and an independent
+editorial verifier, with the same snapshot and source subjects. The handler
+returns content; it creates no subscription, bill or outbound message. See
+[the executable contract](docs/NEWSWIRE-SUBSCRIPTION-ACCESS.md) for suppliers,
+refusal rules and original-query integration receiving.
+
 <!-- 561-group-standards:badges:start -->
 [![Red Cup Engineering](https://img.shields.io/badge/561%20Group-Red%20Cup%20Engineering-c0392b)](https://github.com/red-cup-engineering)
 [![License: MIT](https://img.shields.io/badge/license-MIT-c0392b)](LICENSE)
