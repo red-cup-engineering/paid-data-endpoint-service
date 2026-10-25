@@ -19,7 +19,7 @@ test("builds bounded official keyless API URLs, not arbitrary seller-controlled 
   assert.equal(got.searchParams.get("conditions[agencies][]"), search.agency);
   assert.equal(got.searchParams.get("order"), "newest");
   assert.throws(() => federalRegisterSearchURL({ since: "2026-02-30" }), /real YYYY-MM-DD/);
-  assert.throws(() => federalRegisterSearchURL({ since: "2026-10-01", until: "2026-09-01" }), /precede/);
+  assert.throws(() => federalRegisterSearchURL({ since: "2026-10-01", until: "2026-09-01" }), { name: "RangeError", message: /non-inverted publication range/ });
   assert.throws(() => federalRegisterSearchURL({ since: "2026-10-01", perPage: 101 }), /perPage/);
   assert.throws(() => federalRegisterSearchURL({ since: "2026-10-01", page: 21, perPage: 100 }), /pagination/);
   assert.throws(() => federalRegisterSearchURL({ since: "2026-10-01", agency: "../evil" }), /slug/);

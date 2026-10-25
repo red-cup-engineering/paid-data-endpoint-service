@@ -198,6 +198,7 @@ test("seller only admits explicit RFC3339 timestamps and credential-free origina
 test("paid query result must describe an actual subset of the approved release, with consistent totals", async () => {
   for (const wrong of [
     {items:[{subject:"draft-not-in-snapshot"}],returnedCount:1,totalMatched:1,truncated:false},
+    {items:[{subject:"data:event-1"},{subject:"data:event-1"}],returnedCount:2,totalMatched:2,truncated:false},
     {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:0,truncated:false},
     {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:3,truncated:false},
     {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:1,truncated:true},
@@ -224,4 +225,42 @@ test("seller refuses unbounded resource budgets at construction before any payme
     {maxSnapshotBytes:1},{maxSnapshotBytes:100 * 1024 * 1024},
     {maxResponseBytes:0},{maxResponseBytes:10 * 1024 * 1024},
   ]) assert.throws(()=>createNewswirePaidQueryHandlers({...harness().functions,...opts}),/budget/);
+});
+
+test('verification, rights, authority and query suppliers cannot mutate the retained source or admitted query', async () => {
+  for (const name of ['verifySnapshot', 'qualifyRights', 'authorizeRequest', 'queryReleased']) {
+    const h = harness();
+    const original = h.functions[name];
+    const functions = {...h.functions, [name]: async (...args) => {
+      const source = name === 'queryReleased' ? args[0] : args[0].snapshot;
+      assert.equal(Object.isFrozen(source), true, name);
+      assert.equal(Reflect.set(source.public[0], 'headline', 'Changed after verification'), false, name);
+      assert.equal(Reflect.set(source.public, '0', {subject: 'unapproved'}), false, name);
+      const predicate = name === 'queryReleased' ? args[1] : args[0].query;
+      if (predicate) {
+        assert.equal(Reflect.set(predicate, 'limit', 100), false, name);
+        assert.equal(Reflect.set(predicate.topics, '0', 'private'), false, name);
+      }
+      return original(...args);
+    }};
+    const delivered = await createNewswirePaidQueryHandlers(functions).execute({intent: {request: request()}});
+    assert.equal(delivered.snapshotDigest, snapshotDigest);
+    assert.equal(delivered.result.items[0].subject, 'data:event-1');
+    assert.equal((await h.store.read({digest: snapshotDigest})).public[0].headline, 'Document updated');
+  }
+});
+
+test('supplier-retained rights and query output cannot change the delivered projection', async () => {
+  const rights = {admitted: true, evidenceUri: 'https://example.org/rights/original', expiresAt: '2026-10-25T00:00:00Z'};
+  const output = {items: [{subject: 'data:event-1'}], returnedCount: 1, totalMatched: 1, truncated: false};
+  const {handlers} = harness({
+    qualifyRights: async () => rights,
+    authorizeRequest: async () => { rights.evidenceUri = 'https://example.org/rights/replaced'; return {admitted: true}; },
+    queryReleased: async () => output,
+  });
+  const delivered = await handlers.execute({intent: {request: request()}});
+  output.items[0].subject = 'replaced-after-return';
+  assert.equal(delivered.qualifiedRightsEvidence, 'https://example.org/rights/original');
+  assert.equal(delivered.result.items[0].subject, 'data:event-1');
+  assert.equal(Object.isFrozen(delivered.result.items[0]), true);
 });

@@ -1,5 +1,6 @@
 import { createNewswireReleaseStore } from "./newswire-release-store.mjs";
 import { createNewswirePaidQueryActor } from "./paid-newswire-query.mjs";
+import { createNewswireSubscriptionQueryHandlers } from "./newswire-subscription.mjs";
 
 // Production composition: original Newsroom acceptance -> content-addressed
 // immutable Newswire release -> original x402 seller. A returned offering is
@@ -14,13 +15,23 @@ export async function createNewswireCommerce({
   sellerOffer, priceTerms, append, recoveredRecords, basePath,
   facilitatorUrl, facilitatorClient, paymentIdentity, settlementProjection,
   maxSnapshotAgeMs, maxSnapshotItems, maxSnapshotBytes, maxResponseBytes,
-  actorFactory, paymentBoundaryFactory,
+  actorFactory, paymentBoundaryFactory, subscriptionAccess,
 }={}) {
   if (typeof admitQuery !== "function" || typeof queryReleased !== "function") {
     throw new TypeError("original Newswire query admission and execution are mandatory");
   }
   const custody = createNewswireReleaseStore({
     root: releaseRoot, byteStore, verifyRelease: verifyEditorialRelease, now,
+  });
+  const subscriptions = subscriptionAccess === undefined ? undefined : createNewswireSubscriptionQueryHandlers({
+    ...subscriptionAccess,
+    snapshotStore: custody, verifySnapshot: custody.verifySnapshot,
+    admitQuery, queryReleased, qualifyRights, authorizeRequest,
+    ...(now === undefined ? {} : {now:()=>Date.parse(now())}),
+    ...(maxSnapshotAgeMs === undefined ? {} : {maxSnapshotAgeMs}),
+    ...(maxSnapshotItems === undefined ? {} : {maxSnapshotItems}),
+    ...(maxSnapshotBytes === undefined ? {} : {maxSnapshotBytes}),
+    ...(maxResponseBytes === undefined ? {} : {maxResponseBytes}),
   });
   const seller = await createNewswirePaidQueryActor({
     snapshotStore: custody,
@@ -44,5 +55,6 @@ export async function createNewswireCommerce({
     seller,
     snapshotStore: custody,
     onRelease: wire => custody.publish({wire}),
+    ...(subscriptions === undefined ? {} : {subscriptions}),
   });
 }
