@@ -80,9 +80,50 @@ separately against exact source. No test constitutes a billed subscription,
 editorial production acceptance or delivery to an external recipient.
 
 `createNewswireCommerce({subscriptionAccess: {...}})` attaches these handlers
-to its existing release store while retaining the original x402 seller. Omit the
-option to preserve the existing composition. The installed Web owner chooses the
-route and calls `subscriptions.execute({request})` after normal request parsing.
+to its existing release store while retaining the original x402 seller. It also
+returns `subscriptionResources`, ready for the existing HTTP application's
+`resources` list. The default resource is `POST /v1/newswire/subscription/query`;
+the host may select a fixed local `subscriptionPath`. No listener or independent
+server is created. Omit `subscriptionAccess` to preserve the existing composition.
+
+The resource uses the original HTTP composer's shared, bounded JSON intake,
+with 16 KiB encoded and decoded limits. It passes the unchanged Fetch Request
+to authentication and passes parsed selectors separately to
+`subscriptions.execute({request, body})`. Legacy callers may continue to use
+`execute({request})` with a parsed `request.body`. URL query selectors are refused.
+The original composer receives its own body failures, including when a parent
+Web Platform resolves a different installed HTTP edition.
+
+Successful deliveries and access refusals are JSON responses with
+`Cache-Control: private, no-store`, `Vary: Authorization, Cookie`, and
+`X-Content-Type-Options: nosniff`. These headers are set before this resource's
+body intake. A host's hooks that run before resource dispatch retain ownership
+of their own failure and cache policy. No credential, private principal or raw
+provider error is copied to a response. The body is sent only after the original
+subscriber, contract and rights rechecks succeed.
+
+| Condition | HTTP result |
+| --- | --- |
+| Invalid selectors or JSON | 400 |
+| Encoded or decoded body too large | 413 |
+| Unsupported request media type or encoding | 415 |
+| Missing authenticated subscriber | 403; 401 when the host supplies its authentication challenge |
+| Expired, cancelled, mismatched or changed access scope | 403 |
+| Provider failure, malformed provider contract or unqualified output | 503 |
+
+For a 401 challenge, the host supplies `subscriptionAuthenticationChallenge`
+to commerce (or `authenticationChallenge` to the resource factory). The transport
+does not invent the provider's authentication scheme. `NewswireSubscriptionRefusal`
+distinguishes known access refusals from unavailable providers. A malformed
+provider query or failed contract lookup remains unavailable, rather than being
+reported as an observed cancellation.
+
+The original Stripe provider's order/offering/actor bindings and item billing
+periods are inputs to the still-required recurring-contract resolver. A completed
+Checkout, a Shop purchase grant, an ASSIST gift, or a Market wallet allowance
+does not alone establish the current paid contract required here. The installed
+host must supply the original principal/order join and current renewal/revocation
+evidence; the HTTP resource neither synthesizes that join nor changes billing.
 
 The standalone package pins the actual original crypto, HTTP, x402, Web Platform
 and Datom dependencies instead of unresolved `workspace:*` references. Its npm

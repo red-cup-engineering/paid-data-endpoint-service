@@ -1,6 +1,7 @@
 import { createNewswireReleaseStore } from "./newswire-release-store.mjs";
 import { createNewswirePaidQueryActor } from "./paid-newswire-query.mjs";
 import { createNewswireSubscriptionQueryHandlers } from "./newswire-subscription.mjs";
+import { createNewswireSubscriptionResource } from "./newswire-subscription-resource.mjs";
 
 // Production composition: original Newsroom acceptance -> content-addressed
 // immutable Newswire release -> original x402 seller. A returned offering is
@@ -15,11 +16,13 @@ export async function createNewswireCommerce({
   sellerOffer, priceTerms, append, recoveredRecords, basePath,
   facilitatorUrl, facilitatorClient, paymentIdentity, settlementProjection,
   maxSnapshotAgeMs, maxSnapshotItems, maxSnapshotBytes, maxResponseBytes,
-  actorFactory, paymentBoundaryFactory, subscriptionAccess,
+  actorFactory, paymentBoundaryFactory, subscriptionAccess, subscriptionPath, subscriptionAuthenticationChallenge,
 }={}) {
   if (typeof admitQuery !== "function" || typeof queryReleased !== "function") {
     throw new TypeError("original Newswire query admission and execution are mandatory");
   }
+  if ((subscriptionPath !== undefined || subscriptionAuthenticationChallenge !== undefined) && subscriptionAccess === undefined)
+    throw new TypeError("a subscription route requires its original access providers");
   const custody = createNewswireReleaseStore({
     root: releaseRoot, byteStore, verifyRelease: verifyEditorialRelease, now,
   });
@@ -33,6 +36,13 @@ export async function createNewswireCommerce({
     ...(maxSnapshotBytes === undefined ? {} : {maxSnapshotBytes}),
     ...(maxResponseBytes === undefined ? {} : {maxResponseBytes}),
   });
+  const subscriptionResources = subscriptions === undefined ? undefined : Object.freeze([
+    createNewswireSubscriptionResource({
+      subscriptions,
+      ...(subscriptionPath === undefined ? {} : {path: subscriptionPath}),
+      ...(subscriptionAuthenticationChallenge === undefined ? {} : {authenticationChallenge: subscriptionAuthenticationChallenge}),
+    }),
+  ]);
   const seller = await createNewswirePaidQueryActor({
     snapshotStore: custody,
     verifySnapshot: custody.verifySnapshot,
@@ -55,6 +65,9 @@ export async function createNewswireCommerce({
     seller,
     snapshotStore: custody,
     onRelease: wire => custody.publish({wire}),
-    ...(subscriptions === undefined ? {} : {subscriptions}),
+    ...(subscriptions === undefined ? {} : {
+      subscriptions,
+      subscriptionResources,
+    }),
   });
 }

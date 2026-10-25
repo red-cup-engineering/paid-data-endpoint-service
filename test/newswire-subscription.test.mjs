@@ -3,8 +3,12 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { gzipSync } from 'node:zlib';
+import { createWebApplication } from '@red-cup-engineering/http-services-section/create-application';
+import { createWebApplication as createWebPlatformApplication } from '@red-cup-engineering/computer-web-platform/application';
 import { admitNewswireSubscriptionRequest, createNewswireSubscriptionQueryHandlers } from '../src/newswire-subscription.mjs';
 import { createNewswireCommerce } from '../src/newswire-commerce.mjs';
+import { createNewswireSubscriptionResource } from '../src/newswire-subscription-resource.mjs';
 
 const digest = character => 'sha256:' + character.repeat(64);
 const NOW = Date.parse('2026-10-25T12:00:00Z');
@@ -47,7 +51,7 @@ function harness(overrides={}) {
     queryReleased:async(wire,q)=>{calls.push(['query',q,wire]);return queryResult();},
     qualifyRights:async context=>{calls.push(['rights',context.stage,context.invocationContext.channel]);return {admitted:true,evidenceUri:'https://rights.example.org/one',expiresAt:'2026-11-01T00:00:00Z'};},
     authorizeRequest:async context=>{calls.push(['merchant',context.stage,context.invocationContext.channel]);return {admitted:true};},
-    authenticateSubscriber:async({request:incoming})=>{calls.push(['authenticate']);assert.equal(incoming.headers.authorization,'Bearer test-secret');return 'urn:customer:one';},
+    authenticateSubscriber:async({request:incoming})=>{calls.push(['authenticate']);assert.equal(incoming.headers instanceof Headers?incoming.headers.get('authorization'):incoming.headers.authorization,'Bearer test-secret');return 'urn:customer:one';},
     resolveSubscription:async args=>{calls.push(['subscription',args.stage]);return structuredClone(grant);},
     renderRendition:async({channel,delivery})=>{calls.push(['render',channel,delivery.snapshotDigest]);return rendition(delivery);},
     verifyRendition:async({channel})=>{calls.push(['editor',channel]);return true;},
@@ -246,9 +250,123 @@ test('commerce composes real create-only release custody with both subscription 
     const released=await commerce.onRelease(wire);
     assert.deepEqual(await commerce.snapshotStore.read({digest:released.digest}),released);
     const subscribed=await commerce.subscriptions.execute({request:request('machine-data',{snapshotDigest:released.digest})});
+    const web=createWebApplication({resources:commerce.subscriptionResources});
+    const hosted=await web.fetch(httpRequest({body:JSON.stringify(request('machine-data',{snapshotDigest:released.digest}).body)}));
+    assert.equal(hosted.status,200);
+    assert.deepEqual(await hosted.json(),subscribed);
     const paidDelivery=await paid.execute({intent:{request:{snapshotDigest:released.digest,query:{topics:['policy'],limit:2}}},settlement:{verified:true}});
     assert.equal(subscribed.snapshotDigest,paidDelivery.snapshotDigest);
     assert.deepEqual(subscribed.result,paidDelivery.result);
     assert.equal(commerce.seller.operation,'read-data');
   } finally { await rm(root,{recursive:true,force:true}); }
+});
+
+function httpHarness(overrides={}) {
+  const seen=[];
+  const h=harness({
+    authenticateSubscriber:async({request:incoming})=>{
+      assert.ok(incoming instanceof Request);
+      seen.push(incoming);
+      return incoming.headers.get('authorization')==='Bearer test-secret'?'urn:customer:one':null;
+    },
+    ...overrides,
+  });
+  return {...h,seen};
+}
+function httpRequest({channel='machine-data',body,headers={},search=''}={}) {
+  return new Request('https://filum.example.org/v1/newswire/subscription/query'+search,{
+    method:'POST',headers:{'content-type':'application/json','authorization':'Bearer test-secret',...headers},
+    body:body??JSON.stringify(request(channel).body),
+  });
+}
+
+test('original HTTP application delivers every admitted channel and preserves the authentication request',async()=>{
+  const h=httpHarness();
+  const web=createWebApplication({resources:[createNewswireSubscriptionResource({subscriptions:h.handlers})]});
+  for(const channel of ['machine-data','newsletter','social']) {
+    const incoming=httpRequest({channel});
+    const answer=await web.fetch(incoming);
+    assert.equal(answer.status,200);
+    assert.equal(answer.headers.get('cache-control'),'private, no-store');
+    assert.equal(answer.headers.get('vary'),'Authorization, Cookie');
+    assert.equal(answer.headers.get('x-content-type-options'),'nosniff');
+    const delivered=await answer.json();
+    assert.equal(delivered.channel,channel);
+    assert.equal(delivered.snapshotDigest,digest('a'));
+    assert.equal(delivered.paymentReceipt,null);
+    assert.deepEqual(h.seen.slice(-2),[incoming,incoming]);
+    assert.equal(JSON.stringify(delivered).includes('test-secret'),false);
+    assert.equal(JSON.stringify(delivered).includes('urn:customer:one'),false);
+  }
+});
+
+test('each installed HTTP composer receives its own parse/media/byte failures before subscription access',async()=>{
+  for(const compose of [createWebApplication,createWebPlatformApplication]) {
+    const h=httpHarness();
+    const web=compose({resources:[createNewswireSubscriptionResource({subscriptions:h.handlers})]});
+    const large=JSON.stringify({...request().body,extra:'x'.repeat(17*1024)});
+    for(const [options,status] of [
+      [{body:'{'},400],
+      [{headers:{'content-type':'text/plain'}},415],
+      [{body:large},413],
+      [{body:gzipSync(large),headers:{'content-encoding':'gzip'}},413],
+      [{body:JSON.stringify({...request().body,subscriber:'urn:customer:other'})},400],
+      [{search:'?subscriptionId=another'},400],
+    ]) {
+      const answer=await web.fetch(httpRequest(options));
+      assert.equal(answer.status,status);
+      assert.equal(answer.headers.get('cache-control'),'private, no-store');
+      await answer.text();
+    }
+    assert.equal(h.seen.length,0);
+    assert.equal(h.calls.length,0);
+    await web.stop?.();
+  }
+});
+
+test('HTTP authentication challenges are chosen by the host; unknown subscribers receive no data',async()=>{
+  for(const challenge of [undefined,'Bearer realm="newswire"']) {
+    const h=httpHarness();
+    const resource=createNewswireSubscriptionResource({subscriptions:h.handlers,authenticationChallenge:challenge});
+    const answer=await createWebApplication({resources:[resource]}).fetch(httpRequest({headers:{authorization:''}}));
+    assert.equal(answer.status,challenge===undefined?403:401);
+    assert.equal(answer.headers.get('www-authenticate'),challenge??null);
+    assert.deepEqual(await answer.json(),{error:'subscriber-authentication-required'});
+    assert.equal(h.calls.length,0);
+  }
+});
+
+test('HTTP delivery refuses cancellation during rendering and does not return its already rendered body',async()=>{
+  let h;
+  h=httpHarness({renderRendition:async({delivery})=>{
+    h.changeGrant({...h.grant(),status:'cancelled'});
+    return {...rendition(delivery),body:'never transmit this rendition'};
+  }});
+  const web=createWebApplication({resources:[createNewswireSubscriptionResource({subscriptions:h.handlers})]});
+  const answer=await web.fetch(httpRequest({channel:'newsletter'}));
+  assert.equal(answer.status,403);
+  assert.deepEqual(await answer.json(),{error:'subscription-access-refused'});
+});
+
+test('HTTP delivery distinguishes unavailable providers from an actual access refusal without diagnostics',async()=>{
+  for(const failure of [
+    {admitQuery:()=>{throw new Error('private-provider-credential');}},
+    {resolveSubscription:async()=>{throw new Error('private-provider-credential');}},
+    {resolveSubscription:async()=>({...entitlement(),profiles:'private-provider-credential'})},
+    {authenticateSubscriber:async()=>{throw new Error('private-provider-credential');}},
+  ]) {
+    const h=httpHarness(failure);
+    const web=createWebApplication({resources:[createNewswireSubscriptionResource({subscriptions:h.handlers})]});
+    const answer=await web.fetch(httpRequest());
+    assert.equal(answer.status,503);
+    assert.equal(answer.headers.get('cache-control'),'private, no-store');
+    assert.deepEqual(await answer.json(),{error:'subscription-delivery-unavailable'});
+  }
+});
+
+test('a route cannot be created with arbitrary hosts, patterns or header injection',()=>{
+  const subscriptions=httpHarness().handlers;
+  for(const path of ['https://evil.example/query','//evil/query','/v1/*','/query?token=x','/a/../b'])
+    assert.throws(()=>createNewswireSubscriptionResource({subscriptions,path}),/fixed local path/);
+  assert.throws(()=>createNewswireSubscriptionResource({subscriptions,authenticationChallenge:'Bearer\r\nX-Injected: yes'}));
 });
