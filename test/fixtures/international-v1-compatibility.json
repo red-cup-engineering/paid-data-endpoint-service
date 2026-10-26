@@ -1,0 +1,228 @@
+[
+  {
+    "input": {
+      "sourceId": "wdi-cn-gdp",
+      "fromYear": "2023",
+      "throughYear": "2025",
+      "observedAt": "2026-10-21T22:30:00-05:00",
+      "asOf": "2026-10-21",
+      "response": [
+        {
+          "page": 1,
+          "pages": 1,
+          "per_page": 200,
+          "total": 3
+        },
+        [
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "NY.GDP.MKTP.CD"
+            },
+            "date": "2025",
+            "value": 0.1
+          },
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "NY.GDP.MKTP.CD"
+            },
+            "date": "2024",
+            "value": null
+          },
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "NY.GDP.MKTP.CD"
+            },
+            "date": "2023",
+            "value": -0.3
+          }
+        ]
+      ]
+    },
+    "url": "https://api.worldbank.org/v2/country/CN/indicator/NY.GDP.MKTP.CD?format=json&date=2023%3A2025&per_page=200&page=1",
+    "lot": {
+      "schemaVersion": "561.international-inventory.v1",
+      "kind": "world-bank-indicator",
+      "sourceId": "wdi-cn-gdp",
+      "digest": "sha256:4edb5f2a1e4f1d3d7d4994619e2f500128781161f51a620dbd8f6c3f1a5a666e",
+      "lotId": "urn:561:international-inventory:4edb5f2a1e4f1d3d7d4994619e2f500128781161f51a620dbd8f6c3f1a5a666e",
+      "observedAt": "2026-10-22T03:30:00.000Z",
+      "rightsCheckedOn": "2026-10-21",
+      "metadata": {
+        "country": "CN",
+        "indicator": "NY.GDP.MKTP.CD",
+        "title": "China GDP (current US$)",
+        "unit": "current US dollars",
+        "originalSourceCredit": "Country official statistics, national statistical organizations and/or central banks; OECD; World Bank staff estimates",
+        "officialIndicatorUrl": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=CN",
+        "attribution": "The World Bank: World Development Indicators: GDP (current US$), China; original sources as indicated",
+        "rights": {
+          "state": "qualified-for-conditional-resale",
+          "license": "CC-BY-4.0",
+          "checkedOn": "2026-10-21",
+          "reviewBy": "2027-01-21",
+          "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+          "indicatorUrl": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=CN",
+          "attribution": "The World Bank: World Development Indicators: GDP (current US$), China; original sources as indicated",
+          "obligations": [
+            "attribution",
+            "mark transformations",
+            "pass-through attribution",
+            "no endorsement",
+            "recheck third-party restrictions per indicator"
+          ]
+        },
+        "sourceUrl": "https://api.worldbank.org/v2/country/CN/indicator/NY.GDP.MKTP.CD?format=json&date=2023%3A2025&per_page=200&page=1",
+        "sourceObservation": "one API response processed by the seller; not independently signed by the World Bank"
+      },
+      "request": {
+        "fromYear": "2023",
+        "throughYear": "2025"
+      },
+      "recordCount": 3,
+      "records": [
+        {
+          "year": "2023",
+          "value": -0.3
+        },
+        {
+          "year": "2024",
+          "value": null
+        },
+        {
+          "year": "2025",
+          "value": 0.1
+        }
+      ],
+      "sales": {
+        "state": "no-sale-recorded",
+        "payment": null,
+        "endUserAcceptance": null
+      }
+    }
+  },
+  {
+    "input": {
+      "sourceId": "wdi-cn-inflation",
+      "fromYear": "2023",
+      "throughYear": "2025",
+      "observedAt": "2026-10-21T22:30:00-05:00",
+      "asOf": "2026-10-21",
+      "response": [
+        {
+          "page": 1,
+          "pages": 1,
+          "per_page": 200,
+          "total": 3
+        },
+        [
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "FP.CPI.TOTL.ZG"
+            },
+            "date": "2025",
+            "value": 0.1
+          },
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "FP.CPI.TOTL.ZG"
+            },
+            "date": "2024",
+            "value": null
+          },
+          {
+            "country": {
+              "id": "CN"
+            },
+            "countryiso3code": "CHN",
+            "indicator": {
+              "id": "FP.CPI.TOTL.ZG"
+            },
+            "date": "2023",
+            "value": -0.3
+          }
+        ]
+      ]
+    },
+    "url": "https://api.worldbank.org/v2/country/CN/indicator/FP.CPI.TOTL.ZG?format=json&date=2023%3A2025&per_page=200&page=1",
+    "lot": {
+      "schemaVersion": "561.international-inventory.v1",
+      "kind": "world-bank-indicator",
+      "sourceId": "wdi-cn-inflation",
+      "digest": "sha256:200f16589bd0039cba6bba89b2489194328ac459834a58ed33260ec90d420599",
+      "lotId": "urn:561:international-inventory:200f16589bd0039cba6bba89b2489194328ac459834a58ed33260ec90d420599",
+      "observedAt": "2026-10-22T03:30:00.000Z",
+      "rightsCheckedOn": "2026-10-21",
+      "metadata": {
+        "country": "CN",
+        "indicator": "FP.CPI.TOTL.ZG",
+        "title": "China consumer-price inflation (annual %)",
+        "unit": "percent annual",
+        "originalSourceCredit": "International Monetary Fund, International Financial Statistics",
+        "officialIndicatorUrl": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=CN",
+        "attribution": "The World Bank: World Development Indicators: Inflation, consumer prices (annual %), China; IMF International Financial Statistics",
+        "rights": {
+          "state": "qualified-for-conditional-resale",
+          "license": "CC-BY-4.0",
+          "checkedOn": "2026-10-21",
+          "reviewBy": "2027-01-21",
+          "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+          "indicatorUrl": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=CN",
+          "attribution": "The World Bank: World Development Indicators: Inflation, consumer prices (annual %), China; IMF International Financial Statistics",
+          "obligations": [
+            "attribution",
+            "mark transformations",
+            "pass-through attribution",
+            "no endorsement",
+            "recheck third-party restrictions per indicator"
+          ]
+        },
+        "sourceUrl": "https://api.worldbank.org/v2/country/CN/indicator/FP.CPI.TOTL.ZG?format=json&date=2023%3A2025&per_page=200&page=1",
+        "sourceObservation": "one API response processed by the seller; not independently signed by the World Bank"
+      },
+      "request": {
+        "fromYear": "2023",
+        "throughYear": "2025"
+      },
+      "recordCount": 3,
+      "records": [
+        {
+          "year": "2023",
+          "value": -0.3
+        },
+        {
+          "year": "2024",
+          "value": null
+        },
+        {
+          "year": "2025",
+          "value": 0.1
+        }
+      ],
+      "sales": {
+        "state": "no-sale-recorded",
+        "payment": null,
+        "endUserAcceptance": null
+      }
+    }
+  }
+]

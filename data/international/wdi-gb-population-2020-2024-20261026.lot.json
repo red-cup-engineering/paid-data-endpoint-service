@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "561.international-inventory.v2",
+  "kind": "world-bank-indicator",
+  "sourceId": "wdi-gb-population",
+  "digest": "sha256:692993d90a5ce5c2815c6c491c301d339b18258032eea1143b64f2ad82d6b1b7",
+  "lotId": "urn:561:international-inventory:692993d90a5ce5c2815c6c491c301d339b18258032eea1143b64f2ad82d6b1b7",
+  "observedAt": "2026-10-26T04:47:57.455Z",
+  "rightsCheckedOn": "2026-10-26",
+  "metadata": {
+    "country": "GB",
+    "countryISO3": "GBR",
+    "indicator": "SP.POP.TOTL",
+    "title": "United Kingdom total population (midyear estimates)",
+    "unit": "people",
+    "originalSourceCredit": "UN Population Division (World Population Prospects); national statistical offices; Eurostat demographic statistics; UN Statistics Division (Population and Vital Statistics Report)",
+    "officialIndicatorUrl": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=GB",
+    "attribution": "The World Bank: World Development Indicators: Population, total, United Kingdom; UN Population Division, national statistical offices, Eurostat and UN Statistics Division",
+    "rights": {
+      "state": "qualified-for-conditional-resale",
+      "license": "CC-BY-4.0",
+      "checkedOn": "2026-10-26",
+      "reviewBy": "2027-01-26",
+      "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+      "indicatorUrl": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=GB",
+      "attribution": "The World Bank: World Development Indicators: Population, total, United Kingdom; UN Population Division, national statistical offices, Eurostat and UN Statistics Division",
+      "obligations": [
+        "attribute World Bank and listed original providers",
+        "mark transformations",
+        "pass through attribution and dataset terms",
+        "observe indicator-specific third-party conditions",
+        "avoid implied World Bank endorsement"
+      ],
+      "note": "Indicator and United Kingdom page list CC BY-4.0; annual population values are midyear estimates."
+    },
+    "sourceUrl": "https://api.worldbank.org/v2/country/GB/indicator/SP.POP.TOTL?format=json&date=2020%3A2024&per_page=200&page=1",
+    "sourceObservation": "World Bank API response normalized by the seller"
+  },
+  "request": {
+    "fromYear": "2020",
+    "throughYear": "2024"
+  },
+  "recordCount": 5,
+  "records": [
+    {
+      "year": "2020",
+      "value": 66740000
+    },
+    {
+      "year": "2021",
+      "value": 66978000
+    },
+    {
+      "year": "2022",
+      "value": 67636000
+    },
+    {
+      "year": "2023",
+      "value": 68526000
+    },
+    {
+      "year": "2024",
+      "value": 69281000
+    }
+  ],
+  "sales": {
+    "state": "no-sale-recorded",
+    "payment": null,
+    "endUserAcceptance": null
+  }
+}

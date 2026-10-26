@@ -1,0 +1,500 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paid-data-endpoint-service/international-source-declarations",
+  "title": "International data source declarations",
+  "description": "Operator-selected source definitions and rights editions. Runtime admission also verifies matching map IDs, calendar dates, review windows, and reserved source identities.",
+  "type": "object",
+  "minProperties": 1,
+  "maxProperties": 20000,
+  "propertyNames": {
+    "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+  },
+  "additionalProperties": {
+    "$ref": "#/$defs/source"
+  },
+  "properties": {
+    "wdi-cn-gdp": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "country",
+            "indicator",
+            "title",
+            "unit",
+            "sourceCredit",
+            "countryISO3",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "wdi-cn-gdp"
+            },
+            "family": {
+              "const": "world-bank-indicator"
+            },
+            "country": {
+              "const": "CN"
+            },
+            "indicator": {
+              "const": "NY.GDP.MKTP.CD"
+            },
+            "title": {
+              "const": "China GDP (current US$)"
+            },
+            "unit": {
+              "const": "current US dollars"
+            },
+            "sourceCredit": {
+              "const": "Country official statistics, national statistical organizations and/or central banks; OECD; World Bank staff estimates"
+            },
+            "countryISO3": {
+              "const": "CHN"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "wdi-cn-inflation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "country",
+            "indicator",
+            "title",
+            "unit",
+            "sourceCredit",
+            "countryISO3",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "wdi-cn-inflation"
+            },
+            "family": {
+              "const": "world-bank-indicator"
+            },
+            "country": {
+              "const": "CN"
+            },
+            "indicator": {
+              "const": "FP.CPI.TOTL.ZG"
+            },
+            "title": {
+              "const": "China consumer-price inflation (annual %)"
+            },
+            "unit": {
+              "const": "percent annual"
+            },
+            "sourceCredit": {
+              "const": "International Monetary Fund, International Financial Statistics"
+            },
+            "countryISO3": {
+              "const": "CHN"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "chirps3-africa-rainfall": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "coverage",
+            "title",
+            "unit",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "chirps3-africa-rainfall"
+            },
+            "family": {
+              "const": "climate-hazards-archive"
+            },
+            "coverage": {
+              "const": "Africa within CHIRPS v3 domain 60°S–60°N"
+            },
+            "title": {
+              "const": "CHIRPS v3 precipitation, Africa-targeted subsets"
+            },
+            "unit": {
+              "const": "millimetres daily precipitation"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "sse-market-data": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "country",
+            "title",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "sse-market-data"
+            },
+            "family": {
+              "const": "licensed-exchange-data"
+            },
+            "country": {
+              "const": "CN"
+            },
+            "title": {
+              "const": "Shanghai Stock Exchange market data"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "szse-market-data": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "country",
+            "title",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "szse-market-data"
+            },
+            "family": {
+              "const": "licensed-exchange-data"
+            },
+            "country": {
+              "const": "CN"
+            },
+            "title": {
+              "const": "Shenzhen Stock Exchange market data"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "china-nbs-website": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "country",
+            "title",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "china-nbs-website"
+            },
+            "family": {
+              "const": "restricted-website"
+            },
+            "country": {
+              "const": "CN"
+            },
+            "title": {
+              "const": "National Bureau of Statistics of China website data"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    },
+    "tahmo-stations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/source"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "family",
+            "coverage",
+            "title",
+            "rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "tahmo-stations"
+            },
+            "family": {
+              "const": "controlled-station-network"
+            },
+            "coverage": {
+              "const": "Multiple African countries"
+            },
+            "title": {
+              "const": "TAHMO cleaned station rainfall"
+            },
+            "rights": {
+              "$ref": "#/$defs/rights"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "family",
+        "title",
+        "rights"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+        },
+        "family": {
+          "enum": [
+            "world-bank-indicator",
+            "climate-hazards-archive",
+            "licensed-exchange-data",
+            "restricted-website",
+            "controlled-station-network"
+          ]
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "countryISO3": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "indicator": {
+          "type": "string",
+          "pattern": "^[A-Z0-9][A-Z0-9._-]{0,127}$"
+        },
+        "coverage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "sourceCredit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "rights": {
+          "$ref": "#/$defs/rights"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "family": {
+                "const": "world-bank-indicator"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "country",
+              "countryISO3",
+              "indicator",
+              "unit",
+              "sourceCredit"
+            ],
+            "properties": {
+              "rights": {
+                "required": [
+                  "indicatorUrl"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "rights": {
+      "type": "object",
+      "required": [
+        "state",
+        "license",
+        "checkedOn",
+        "reviewBy",
+        "termsUrl"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "qualified-for-conditional-resale",
+            "qualified-source-unacquired-assets",
+            "commercial-resale-held"
+          ]
+        },
+        "license": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "checkedOn": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "format": "date"
+        },
+        "reviewBy": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "format": "date"
+        },
+        "termsUrl": {
+          "type": "string",
+          "maxLength": 4096,
+          "pattern": "^https://[^/?#@]+(?:[/?][^#]*)?$",
+          "format": "uri"
+        },
+        "indicatorUrl": {
+          "type": "string",
+          "maxLength": 4096,
+          "pattern": "^https://[^/?#@]+(?:[/?][^#]*)?$",
+          "format": "uri"
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "obligations": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8192,
+            "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+          }
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "qualified-for-conditional-resale",
+                  "qualified-source-unacquired-assets"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "attribution",
+              "obligations"
+            ],
+            "properties": {
+              "license": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+              },
+              "obligations": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
