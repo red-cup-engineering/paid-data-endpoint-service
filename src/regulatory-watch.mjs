@@ -113,7 +113,7 @@ export async function readRegulatoryWatch(raw, configuration, {fetchImpl=globalT
   if (!entry || now-entry.at>180_000 || now<entry.at) {
     if (held.size>=4) held.clear();
     const pending=(async()=>{
-      const response=await fetchImpl(u.href,{redirect:'error',signal:AbortSignal.timeout(8000),headers:{accept:'application/json'},cf:{cacheTtl:180,cacheEverything:true}});
+      const response=await fetchImpl(u.href,{redirect:'manual',signal:AbortSignal.timeout(8000),headers:{accept:'application/json'},cf:{cacheTtl:180,cacheEverything:true}});
       const bytes=await sourceBytes(response);
       const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',bytes));
       const edition='sha256:'+Array.from(digest,n=>n.toString(16).padStart(2,'0')).join('');
