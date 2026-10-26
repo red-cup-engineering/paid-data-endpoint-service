@@ -93,7 +93,7 @@ export function projectRegulatoryWatch(feed, raw, {edition, now=Date.now(),maxAg
     if (until && !(d.commentDeadlineFieldRequested===true && d.commentsCloseOn && d.commentsCloseOn>=today && d.commentsCloseOn<=until)) continue;
     matches.push({subject:d.subject,revision:d.revision,documentNumber:d.documentNumber,documentUrl:d.documentUrl,title:d.title,abstract:d.abstract,documentType:d.documentType,publicationDate:d.publicationDate,agencies:d.agencies,matchedTerms,commentsCloseOn:d.commentsCloseOn??null,commentDeadlineFieldRequested:d.commentDeadlineFieldRequested===true,effectiveOn:d.effectiveOn??null,sourceAction:d.sourceAction??null,federalRegisterCitation:d.federalRegisterCitation??null,docketIds:d.docketIds,cfrReferences:d.cfrReferences,regulationIdNumbers:d.regulationIdNumbers,correctionOf:d.correctionOf??null,corrections:d.corrections??[],sourceResponseDigest:d.source.originalResponseDigest,...(d.sourcePublicationDateState ? {sourcePublicationDateState:d.sourcePublicationDateState} : {})});
   }
-  matches.sort((a,b)=>b.publicationDate.localeCompare(a.publicationDate)||a.subject.localeCompare(b.subject));
+  matches.sort((a,b)=>(deadlines ? a.commentsCloseOn.localeCompare(b.commentsCloseOn) : 0)||b.publicationDate.localeCompare(a.publicationDate)||a.subject.localeCompare(b.subject));
   const items=matches.slice(q.offset,q.offset+q.limit);
   const calendar=items.flatMap(d=>[
     ...(d.commentDeadlineFieldRequested && d.commentsCloseOn ? [{kind:'comment-close',date:d.commentsCloseOn,subject:d.subject,url:d.documentUrl}] : []),
