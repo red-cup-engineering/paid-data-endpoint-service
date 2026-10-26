@@ -1,5 +1,6 @@
 /** World Bank data products inherit the original durable x402 paid-data actor. */
 import { verifyWorldBankInventoryLot } from './international-data-inventory.mjs';
+import { INTERNATIONAL_SOURCES, admitInternationalSourceDeclarations } from './international-source-declarations.mjs';
 const SHA = /^sha256:[a-f0-9]{64}$/u;
 const DEFAULT_AGE = 30 * 24 * 3600_000;
 
@@ -12,12 +13,14 @@ export function internationalLotReadRequest(value) {
   return Object.freeze({ lotDigest: value.lotDigest });
 }
 
-export function createInternationalPaidReadHandlers({ lotStore, now = Date.now, maxAgeMs = DEFAULT_AGE } = {}) {
+export function createInternationalPaidReadHandlers({ lotStore, now = Date.now, maxAgeMs = DEFAULT_AGE,
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
   if (typeof lotStore?.read !== 'function') throw new TypeError('seller-owned immutable lotStore.read is required');
   if (typeof now !== 'function') throw new TypeError('seller clock is required');
   if (!Number.isSafeInteger(maxAgeMs) || maxAgeMs < 60_000 || maxAgeMs > 366 * 24 * 3600_000) {
     throw new TypeError('seller freshness window is not bounded');
   }
+  const sources = admitInternationalSourceDeclarations(sourceDeclarations);
   async function pinned(request) {
     const { lotDigest } = internationalLotReadRequest(request);
     const supplied = await lotStore.read({ digest: lotDigest });
@@ -25,7 +28,7 @@ export function createInternationalPaidReadHandlers({ lotStore, now = Date.now, 
     const lot = structuredClone(supplied);
     const millis = now();
     if (!Number.isSafeInteger(millis)) throw new Error('seller clock must provide epoch milliseconds');
-    verifyWorldBankInventoryLot(lot, { asOf: new Date(millis).toISOString().slice(0, 10) });
+    verifyWorldBankInventoryLot(lot, { asOf: new Date(millis).toISOString().slice(0, 10), sourceDeclarations: sources });
     if (lot.digest !== lotDigest) throw new Error('seller returned a different lot digest');
     const age = millis - Date.parse(lot.observedAt);
     if (!Number.isFinite(age) || age < -300_000 || age > maxAgeMs) {
@@ -56,6 +59,7 @@ export async function createInternationalPaidReadActor({
   basePath = '/x402/international-data', now, maxAgeMs,
   facilitatorUrl, facilitatorClient, actorFactory, paymentBoundaryFactory,
   paymentIdentity, settlementProjection,
+  sourceDeclarations = INTERNATIONAL_SOURCES,
 } = {}) {
   if (!sellerOffer || typeof sellerOffer !== 'object' || Array.isArray(sellerOffer)) {
     throw new TypeError('source-qualified original sellerOffer is required');
@@ -64,7 +68,7 @@ export async function createInternationalPaidReadActor({
       !(recoveredRecords?.terminals instanceof Map)) {
     throw new TypeError('the original durable append and recovered invocation Maps are required');
   }
-  const handlers = createInternationalPaidReadHandlers({ lotStore, now, maxAgeMs });
+  const handlers = createInternationalPaidReadHandlers({ lotStore, now, maxAgeMs, sourceDeclarations });
   const makeActor = actorFactory ?? (await import('./paid-data-endpoint.mjs')).createPaidDataEndpointActor;
   const makePaymentBoundary = paymentBoundaryFactory ??
     (await import('@red-cup-engineering/x402-services-section/server')).createExactEvmPaymentBoundary;

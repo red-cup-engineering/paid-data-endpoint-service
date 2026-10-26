@@ -1,0 +1,159 @@
+{
+  "wdi-cn-gdp": {
+    "id": "wdi-cn-gdp",
+    "family": "world-bank-indicator",
+    "country": "CN",
+    "indicator": "NY.GDP.MKTP.CD",
+    "title": "China GDP (current US$)",
+    "unit": "current US dollars",
+    "sourceCredit": "Country official statistics, national statistical organizations and/or central banks; OECD; World Bank staff estimates",
+    "rights": {
+      "state": "qualified-for-conditional-resale",
+      "license": "CC-BY-4.0",
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2027-01-21",
+      "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+      "indicatorUrl": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=CN",
+      "attribution": "The World Bank: World Development Indicators: GDP (current US$), China; original sources as indicated",
+      "obligations": [
+        "attribution",
+        "mark transformations",
+        "pass-through attribution",
+        "no endorsement",
+        "recheck third-party restrictions per indicator"
+      ]
+    },
+    "countryISO3": "CHN"
+  },
+  "wdi-cn-inflation": {
+    "id": "wdi-cn-inflation",
+    "family": "world-bank-indicator",
+    "country": "CN",
+    "indicator": "FP.CPI.TOTL.ZG",
+    "title": "China consumer-price inflation (annual %)",
+    "unit": "percent annual",
+    "sourceCredit": "International Monetary Fund, International Financial Statistics",
+    "rights": {
+      "state": "qualified-for-conditional-resale",
+      "license": "CC-BY-4.0",
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2027-01-21",
+      "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+      "indicatorUrl": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=CN",
+      "attribution": "The World Bank: World Development Indicators: Inflation, consumer prices (annual %), China; IMF International Financial Statistics",
+      "obligations": [
+        "attribution",
+        "mark transformations",
+        "pass-through attribution",
+        "no endorsement",
+        "recheck third-party restrictions per indicator"
+      ]
+    },
+    "countryISO3": "CHN"
+  },
+  "chirps3-africa-rainfall": {
+    "id": "chirps3-africa-rainfall",
+    "family": "climate-hazards-archive",
+    "coverage": "Africa within CHIRPS v3 domain 60°S–60°N",
+    "title": "CHIRPS v3 precipitation, Africa-targeted subsets",
+    "unit": "millimetres daily precipitation",
+    "rights": {
+      "state": "qualified-source-unacquired-assets",
+      "license": "CC-BY-4.0",
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2027-01-21",
+      "termsUrl": "https://www.chc.ucsb.edu/data/chirps3",
+      "indicatorUrl": "https://www.chc.ucsb.edu/data/chirps3",
+      "attribution": "Climate Hazards Center, UC Santa Barbara, CHIRPS3 Data Repository, doi:10.15780/G2JQ0P; accessed [date]",
+      "obligations": [
+        "attribution",
+        "cite specific product and version",
+        "document preliminary or final processing and missing values",
+        "record raster bytes and actual geographic subset"
+      ]
+    }
+  },
+  "sse-market-data": {
+    "id": "sse-market-data",
+    "family": "licensed-exchange-data",
+    "country": "CN",
+    "title": "Shanghai Stock Exchange market data",
+    "rights": {
+      "state": "commercial-resale-held",
+      "license": null,
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2026-10-21",
+      "termsUrl": "https://english.sse.com.cn/markets/dataservice/products/",
+      "note": "SSE permits real-time market-data redistribution only by qualified vendors; overseas arrangements are licensed through CIIS. No resale right is inferred from a public price page."
+    }
+  },
+  "szse-market-data": {
+    "id": "szse-market-data",
+    "family": "licensed-exchange-data",
+    "country": "CN",
+    "title": "Shenzhen Stock Exchange market data",
+    "rights": {
+      "state": "commercial-resale-held",
+      "license": null,
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2026-10-21",
+      "termsUrl": "https://investor.szse.cn/English/services/dataServices/index.html",
+      "note": "SZSE identifies SSIC as the exclusive manager and distributor of its market information; commercial rights require an original vendor contract."
+    }
+  },
+  "china-nbs-website": {
+    "id": "china-nbs-website",
+    "family": "restricted-website",
+    "country": "CN",
+    "title": "National Bureau of Statistics of China website data",
+    "rights": {
+      "state": "commercial-resale-held",
+      "license": null,
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2026-10-21",
+      "termsUrl": "https://www.stats.gov.cn/english/nbs/201312/t20131213_480293.html",
+      "note": "NBS published FAQ (2013) says use for free, not for commerce; review current terms or obtain written permission before commercial reuse."
+    }
+  },
+  "tahmo-stations": {
+    "id": "tahmo-stations",
+    "family": "controlled-station-network",
+    "coverage": "Multiple African countries",
+    "title": "TAHMO cleaned station rainfall",
+    "rights": {
+      "state": "commercial-resale-held",
+      "license": null,
+      "checkedOn": "2026-10-21",
+      "reviewBy": "2026-10-21",
+      "termsUrl": "https://tahmo.org/climate-data/",
+      "note": "Portal access and data policy; do not infer commercial redistribution rights from availability of sample data."
+    }
+  },
+  "wdi-gb-population": {
+    "id": "wdi-gb-population",
+    "family": "world-bank-indicator",
+    "country": "GB",
+    "countryISO3": "GBR",
+    "indicator": "SP.POP.TOTL",
+    "title": "United Kingdom total population (midyear estimates)",
+    "unit": "people",
+    "sourceCredit": "UN Population Division (World Population Prospects); national statistical offices; Eurostat demographic statistics; UN Statistics Division (Population and Vital Statistics Report)",
+    "rights": {
+      "state": "qualified-for-conditional-resale",
+      "license": "CC-BY-4.0",
+      "checkedOn": "2026-10-26",
+      "reviewBy": "2027-01-26",
+      "termsUrl": "https://data.worldbank.org/summary-terms-of-use",
+      "indicatorUrl": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=GB",
+      "attribution": "The World Bank: World Development Indicators: Population, total, United Kingdom; UN Population Division, national statistical offices, Eurostat and UN Statistics Division",
+      "obligations": [
+        "attribute World Bank and listed original providers",
+        "mark transformations",
+        "pass through attribution and dataset terms",
+        "observe indicator-specific third-party conditions",
+        "avoid implied World Bank endorsement"
+      ],
+      "note": "Indicator and United Kingdom page list CC BY-4.0; annual population values are midyear estimates."
+    }
+  }
+}
