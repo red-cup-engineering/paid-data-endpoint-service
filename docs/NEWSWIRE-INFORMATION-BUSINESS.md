@@ -2,6 +2,8 @@
 
 Status: commercial operating thesis grounded in observed 2026-10-24 source and seller readbacks; **not a sold, deployed, or legally guaranteed product**. Own this in the existing public-data/Newswire/Market system; no new merchant, catalog, rights registry, or publisher.
 
+**Current refinement scope:** The source-onboarding and edition contract below is a proposal grounded in current source. Earlier dated commercial observations remain historical evidence; their counts and prices are not current operating claims.
+
 ## Decision
 
 **Sell reduced cost and uncertainty of a customer's information decision, not mere access to public facts.** The original Newswire converts external observations into stable, revision-aware, source-attributed Living Web packets. One admitted source can support many *different buyer jobs* only when the output contracts, decision utility, source rights and actual fulfillment differ. A different headline, tag or storefront description is not a new SKU.
@@ -122,4 +124,171 @@ That input is a **source-operation example, not a quoted or buyable product**. T
 
 ## Explicitly unresolved
 
-There is a proven real official-source acquisition pipeline and a seller composition in draft code. There is **no verified live approved data-bulletin publication, install of the original seller, paid outside customer, external settlement, subscription, or established contribution margin** from this work. Do not assert professional-grade regulatory advice or financial viability before those facts exist.
+The source-acquisition pipeline has real receiving evidence. Current main also contains release custody and x402/subscription composition, while original Newswire PR #1 remains a draft at the source snapshot examined below. This work has not independently received the installed source-qualified merchant, an approved public data-bulletin release, paid outside customer, external settlement, active subscription or contribution margin. Source files and public observation publication do not establish those outcomes.
+
+## Source onboarding and edition boundaries — Work #6 refinement
+
+**Status: proposed source contract and architectural allocation, not implemented
+general onboarding or received commercial delivery.** This refines original
+[Work #6](https://github.com/red-cup-engineering/paid-data-endpoint-service/issues/6),
+the Group's merged [whole requirement](https://github.com/561-group/561-group-services-section/blob/d6731b679adb6af34fbf979105aa441aa965e283/lib/agency/requirements/continuous-agent-and-rich-human-services.json),
+and the existing [x402 section-preservation proposal](https://github.com/red-cup-engineering/x402-engineering-services-section/blob/9a09497af60aa1594d15269aab89fdc0a6816f20/content/text/documents/articles/specifications/2026-09-11-specification-of-the-561-group-x402-market.md#pending-source-section-preservation-contract).
+It does not complete those obligations or replace their broader acceptance.
+
+### Selected boundary and current evidence
+
+Keep source declarations and family-specific interpretation with their original
+acquisition providers; reuse this package's content-addressed custody,
+`createNewswireReleaseStore`, `createNewswireCommerce` and original query
+suppliers. A normal eligible source should change its provider declaration and
+selected existing adapter, not merchant payment, ledger, general query or feed
+serialization. A genuinely unsupported source meaning requires a qualified
+adapter change at that provider. Do not hide adapter development inside a
+declaration containing arbitrary executable transforms.
+
+This selects consolidation of the existing provider contracts over either
+continued country/industry-specific admission systems or a new universal data
+envelope/framework. Shared obligations below do not flatten domain schemas or
+create another serialized record format. Map them into the original source
+records and accepted consumer fields; missing mappings remain explicit.
+
+Evidence baseline is
+[paid-data main `2192eeb0`](https://github.com/red-cup-engineering/paid-data-endpoint-service/tree/2192eeb0a7954c25f03a73a85d60e5bf25f4e1ab).
+Its [successful publication run](https://github.com/red-cup-engineering/paid-data-endpoint-service/actions/runs/40244500036)
+produced the source catalog issued at `2026-10-25T23:23:04.558Z`.
+The workflow publishes observation files and explicitly requires
+`editorialStatus: "not-approved"` and `merchantSettlement: null`.
+It is evidence of working source acquisition/publication, not Newsroom release,
+availability of a paid endpoint, a subscription or customer acceptance.
+Original [Newswire PR #1](https://github.com/emsenn/newswire/pull/1), inspected at
+`ea90bec952838c74a0b8a1e428698aad0fb1d216`, remains a draft; source integration,
+current query installation and independent release receiving stay separate.
+
+### Identity and custody model
+
+| Existing identity | Meaning and preservation obligation |
+| --- | --- |
+| Provider declaration `id`, publisher and access endpoint | Identify the proposed source and access route. A declaration is not an acquired edition, release or offer. Retain its exact source revision and original rights review. |
+| Original response digest and observation time | Identify witnessed decoded response bytes and when they were received. Preserve query/field/page coverage and the original bytes needed to verify them; this is not a publisher signature. |
+| Stable record `subject` and `sourceEditionDigest` / `sourceEditionUri` | Identify a source item separately from its observed normalized edition. A correction changes the edition while retaining the appropriate source item identity; a rolling-window disappearance alone is not withdrawal. |
+| `provenance.editionUri` and `publicationReceiptUri` | Identify the independently accepted published edition and its publication receipt. Acquisition cannot manufacture these authorities. Preserve original source references through each topical projection. |
+| Merchant `snapshotDigest`, `wireUri`, `verifiedAt` | Pin the exact immutable commercially eligible query view. The existing snapshot hash includes verification time; a new snapshot digest alone does not prove a new source item or materially new information. |
+| Original offer SKU/cell/law and service `section` | Identify the selling service, its contract and owning section, independently of publisher, dataset, topic and data-record identities. The x402 proposal governs section legibility; this document does not implement its filters or covers. |
+
+The common onboarding contract must preserve the links among these identities,
+not replace them with one ID. A source edition may support several topics and
+buyer tasks while remaining one original observation. Another category,
+rendition, subscription term, pagination cursor, verification timestamp,
+replica, API alias or parameter expansion does not by itself create another
+materially distinct service offering. Count a separate capability only against
+its original source-owned, distinct customer outcome and input/output guarantee,
+with its actual availability and receiving state retained. Source counts, observed
+editions, releases, contract-defined offerings, calls, accepted deliveries and
+settled outside proceeds retain separate denominators.
+
+Custody must match the promised replay and customer-retention interval. The
+current publisher keeps source bodies in runner temporary storage and uploads
+success artifacts with seven-day retention; its public digest references alone
+do not establish later byte availability. Before promising replay beyond that
+period, the original operator must receive the necessary bytes into its
+existing durable custody or explicitly limit the promise. Do not create a
+second source archive or assume an immutable digest supplies storage.
+
+### Declaration obligations and worked mappings
+
+For each source, the existing declaration/admission owner must make the
+following inspectable: original publisher and source/revision; selected family
+adapter and actual input/output schema; units, missingness, time precision and
+field-selection coverage; authorized access method and credential owner;
+finite request/byte/rate/cumulative section budgets; distinct acquisition,
+processing, redistribution and sublicensing permissions with current evidence;
+refresh and rights-review policy; retained-byte/replay obligation; and the
+specific consumer task, permitted query and delivery contract. Unknown values
+are explicit, not permissive defaults. Rights evidence is evaluated by its
+competent original owner rather than inferred from a public URL.
+
+| Mapping | Current Federal Register provider | Draft NASS alternative |
+| --- | --- | --- |
+| Declaration/configuration today | Original source code and bounded acquisition arguments select the official API, date/query window and `regulatory-decision` fields profile. This is not yet general declaration-only onboarding. | [`usda-nass-quickstats.json`](https://github.com/red-cup-engineering/paid-data-endpoint-service/blob/c1e9ef0bd6161bfd1e36b6324324b383013245c0/data/records/agricultural-sources/usda-nass-quickstats.json) already declares publisher, dataset, access and separate rights states. Its agricultural admission module imports a fixed source set. |
+| Meaning that the adapter owns | Exact page/field coverage, civil-day publication and comment dates, source correction identifiers, absent versus unrequested deadline fields, and normalized record-edition identity. | Count-before-query behavior, authenticated provider access, exact returned-row count, per-row `unit_desc`, suppression/missingness and retained original bytes. These need NASS semantics, not a renamed Federal Register field map. |
+| What can be a declaration change | Another admitted window/field profile or source configuration within an already supported contract; no payment, ledger, generic query or serializer changes. A new unsupported field meaning still requires provider work. | Source metadata, current rights evidence and bounds within the candidate's admitted access/data model. JSON authoring alone cannot supply the new adapter, credentials, observed bytes or commercial rights. |
+| Actual boundary | Real witnessed source observations exist. Independently accepted Newsroom data release, compatible installed query/seller and real customer receiving remain distinct. | [PR #12](https://github.com/red-cup-engineering/paid-data-endpoint-service/pull/12) at `c1e9ef0b` is an unmerged draft with unreceived native tests/live acquisition. Commercial redistribution and sublicensing are explicitly `not-yet-qualified`; no NASS key or source lot was received in that work. |
+
+Preserve PR #12's useful declarations and provider work when consolidating the
+common obligations; do not introduce a competing source registry or declare
+the draft accepted. Federal Register and NASS are worked model comparisons,
+not a narrowing of Work #6 to agriculture/government or a new priority over
+its demand-led scholarly, cultural, physical or business-source scenarios.
+The older `INTERNATIONAL_SOURCES` JavaScript declarations are another migration
+input, not the required universal source schema.
+
+### One data meaning for agent and human delivery
+
+Use the existing [paid-query contract](NEWSWIRE-PAID-QUERY.md) unchanged:
+`{snapshotDigest, query}` enters the original query admission/execution.
+Use the existing [subscription contract](NEWSWIRE-SUBSCRIPTION-ACCESS.md)
+unchanged: the authenticated request selects its current subscription/profile,
+channel and bounded page; the provider-owned profile supplies the query.
+A human form must submit those same admitted values and receive the same
+refusals, not silently widen a subscription profile or invent a second query
+language. A source declaration must not supply a principal, payment authority
+or independently accepted result.
+
+`createNewswireCommerce` already connects x402 and subscription delivery to
+the same custody, query, rights and authorization suppliers. The existing
+subscription contract requires machine data and independently verified
+newsletter/social renditions to retain the same snapshot and exact selected
+source subjects; presentation and editorial interpretation remain with the
+original renderer/verifier. These source obligations do not establish an
+observed rendered/verified runtime delivery. A generic form implementation is
+not delivered by this specification.
+
+A restricted page or topic view preserves its source subjects and editions.
+Service-section grouping belongs to the owning offer/catalog relationship,
+not a new publisher/category permission rule. Neither a subset of records nor
+shared section labels supplies mathematical overlap compatibility or sheaf
+gluing evidence.
+
+The separate [report commission proposal](https://github.com/red-cup-engineering/topical-knowledge-cell-report-service/blob/120eccd8142edc3a7f07133e9d27a24bc7f4385b/content/specifications/report-commission-contract.md)
+owns prompt/form scope, accepted commission revision and eventual report
+delivery. An acquired observation, released query result, newsletter edition
+or rendered artifact can be an input or output of that work; none alone
+establishes the logical commission's completion or fulfills hours of research.
+Retain the commissioned artifact's link to its accepted request and original
+delivery/quality receiving; do not reuse a source edition as a commission ID.
+
+### Operator and implementation receiving
+
+The acquisition provider owns source meaning and acquisition evidence; the
+independent Newsroom/rights owners own publication and purpose-specific
+permission; the original merchant owns price, payment, recovery and aftercare;
+the subscription owner supplies current principal/contract entitlement.
+Dot owns any engineering and exact-source qualification; the actual operating
+and public-service recipients judge usefulness and delivery. This allocation
+creates no appointment, credential, spend or new deployment target.
+
+Carry this refinement through existing Work #6 with these distinguishing cases:
+
+1. Receive one actual supported source edition through original custody and
+   independent release; show the same pinned result and attribution through
+   the existing machine path and an admitted human projection, with actual
+   source/processing/storage costs and recipient use recorded separately.
+2. Map a materially different source such as the NASS candidate to the same
+   obligations. Identify declaration-only changes versus actual adapter work,
+   preserving domain units and missingness. Do not substitute fixture success
+   for rights, original observed bytes, installed suppliers or real receiving.
+3. Refuse stale/revoked rights, unavailable evidence, unreceived publication,
+   conflicting revisions and entitlement expansion at their actual boundaries.
+   Preserve previously delivered evidence and original refund/aftercare
+   obligations; never retry an uncertain charge as if it were a failed read.
+
+The next bounded implementation stays with these original paid-data acquisition,
+custody and commerce modules and their original Newswire consumer under Work #6.
+Before dot's implementation, bind the selected source record and supported
+adapter to its real consumer, and review the mappings and changed contracts at
+exact revisions. No new fields are
+silently added to the existing strict release snapshot or request formats.
+Measure onboarding work and the actual limiting workload before choosing an
+index or enlarging current bounds. Source integration, native qualification,
+installation, continuous operation and independent customer acceptance each
+need their own evidence.
