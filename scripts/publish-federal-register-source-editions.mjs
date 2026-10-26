@@ -246,7 +246,7 @@ export async function publishFederalRegisterSourceEditions({
   const since = dateOnly(nowDate - 7 * DAY), until = dateOnly(nowDate);
   const sourceWindow = await acquireFederalRegisterNewswireWindow({
     search:{since,until,profile:"regulatory-decision"},
-    root:sourceRoot,observedAt,perPage:100,maxPages:5,
+    root:sourceRoot,observedAt,perPage:100,maxPages:10,
   });
   // Not the same job: a comment period may be open for 30 days even when
   // its original Notice was published months before this seven-day feed.
@@ -267,7 +267,7 @@ export async function publishFederalRegisterSourceEditions({
   const snapshot = {
     kind:"561.newswire.federal-register-source-observation.v1",
     observedAt,
-    source:SOURCE,publisher,query:{since,until,profile:"regulatory-decision",perPage:100,maxPages:5},
+    source:SOURCE,publisher,query:{since,until,profile:"regulatory-decision",perPage:100,maxPages:10},
     sourcePages:sourceWindow.sourcePages,
     coverage:sourceWindow.coverage,
     costs:sourceWindow.observedCosts,
