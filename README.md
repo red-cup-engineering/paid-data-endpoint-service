@@ -1,3 +1,8 @@
+## Autonomous regulatory watch
+
+The `./regulatory-watch` supplier serves the existing continuously acquired Federal Register window. Machine buyers can select topics, agencies, CFR titles, dockets and upcoming comment deadlines, receiving original document revisions and an edition-pinned continuation cursor. The original acquisition runs every three hours; cache sharing avoids fetching a fresh source for every buyer. [Operation and API](docs/REGULATORY-WATCH.md).
+<!-- regulatory-watch-end -->
+
 # paid-data-endpoint-service
 
 ## Subscription access to the same released data
