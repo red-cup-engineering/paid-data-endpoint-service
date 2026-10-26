@@ -1,6 +1,6 @@
 /** Source-observation watch over the original acquired Federal Register editions. */
 const DAY = 86_400_000;
-const MAX_BYTES = 2 * 1024 * 1024;
+const MAX_BYTES = 5_000_000;
 const NI = /^ni:\/\/\/sha-256;[A-Za-z0-9_-]{43}$/u;
 const SHA = /^sha256:[a-f0-9]{64}$/u;
 const TYPES = ['Rule', 'Proposed Rule', 'Notice', 'Presidential Document'];
@@ -32,7 +32,7 @@ export function normalizeRegulatoryWatchQuery(raw = {}) {
   if (raw.type !== undefined) { if (!TYPES.includes(raw.type)) fail('unknown Federal Register document type'); q.type=raw.type; }
   if (raw.cfrTitle !== undefined) q.cfrTitle=integer(raw.cfrTitle,'cfrTitle',1,50);
   if (raw.publishedSince !== undefined) q.publishedSince=day(raw.publishedSince,'publishedSince');
-  if (raw.deadlineWithinDays !== undefined) q.deadlineWithinDays=integer(raw.deadlineWithinDays,'deadlineWithinDays',0,366);
+  if (raw.deadlineWithinDays !== undefined) q.deadlineWithinDays=integer(raw.deadlineWithinDays,'deadlineWithinDays',0,30);
   if (raw.edition !== undefined) { if (typeof raw.edition !== 'string' || !SHA.test(raw.edition)) fail('edition requires sha256:<64 lowercase hex>'); q.edition=raw.edition; }
   if (q.offset > 0 && !q.edition) fail('pagination requires the edition returned by the first page');
   return Object.freeze(q);
@@ -57,15 +57,28 @@ function sourceDocument(record) {
 export function projectRegulatoryWatch(feed, raw, {edition, now=Date.now(),maxAgeMs=12*60*60*1000}={}) {
   const q=normalizeRegulatoryWatchQuery(raw);
   if (!Number.isSafeInteger(now) || !Number.isSafeInteger(maxAgeMs) || maxAgeMs<60_000 || maxAgeMs>7*DAY) fail('bounded observation clock is required');
-  if (!object(feed) || feed.kind!=='561.newswire.federal-register-source-observation.v1' || feed.source!=='https://www.federalregister.gov' || !Array.isArray(feed.documents) || feed.documents.length>2000 || feed.documentCount!==feed.documents.length || !SHA.test(edition ?? '')) fail('original Federal Register source edition is required');
+  const deadlines=feed?.kind==='561.newswire.federal-register-comment-deadlines.v1';
+  if (!object(feed) || !SHA.test(edition ?? '')) fail('original Federal Register source edition is required');
+  let documents, sourceWindow, coverage;
+  if (deadlines) {
+    if (q.deadlineWithinDays===undefined || !Array.isArray(feed.records) || feed.records.length>2000 || feed.recordCount!==feed.records.length || !object(feed.sourceQuery)) fail('original deadline-query edition is required');
+    day(feed.sourceQuery.commentCloseFrom,'source deadline window start');
+    day(feed.sourceQuery.commentCloseBy,'source deadline window end');
+    documents=feed.records.map(d=>({...d,revision:d.sourceEdition,source:{originalResponseDigest:d.originalResponseDigest}}));
+    sourceWindow=feed.sourceQuery;coverage=feed.sourceCoverage;
+  } else {
+    if (feed.kind!=='561.newswire.federal-register-source-observation.v1' || feed.source!=='https://www.federalregister.gov' || q.deadlineWithinDays!==undefined || !Array.isArray(feed.documents) || feed.documents.length>2000 || feed.documentCount!==feed.documents.length) fail('original publication-query edition is required');
+    documents=feed.documents;sourceWindow=feed.query;coverage=feed.coverage;
+  }
   const observed=Date.parse(feed.observedAt);
   if (typeof feed.observedAt!=='string' || !/T.*(?:Z|[+-]\d{2}:\d{2})$/u.test(feed.observedAt) || !Number.isFinite(observed) || observed>now+300_000 || now-observed>maxAgeMs) fail('Federal Register observation is stale');
   if (q.edition && q.edition!==edition) fail('source edition advanced; restart with offset=0');
   const seen=new Set();
   const today=new Date(now).toISOString().slice(0,10);
   const until=q.deadlineWithinDays===undefined ? null : new Date(Date.parse(today+'T00:00:00Z')+q.deadlineWithinDays*DAY).toISOString().slice(0,10);
+  if (deadlines && (sourceWindow.commentCloseFrom>today || sourceWindow.commentCloseBy<until)) fail('source deadline window needs a refresh for the requested horizon');
   const matches=[];
-  for (const input of feed.documents) {
+  for (const input of documents) {
     const d=sourceDocument(input);
     if (seen.has(d.subject)) fail('duplicate source subject');
     seen.add(d.subject);
@@ -78,7 +91,7 @@ export function projectRegulatoryWatch(feed, raw, {edition, now=Date.now(),maxAg
     if (q.docket && !d.docketIds.some(id=>id.toLocaleLowerCase('en-US').includes(q.docket))) continue;
     if (q.publishedSince && d.publicationDate<q.publishedSince) continue;
     if (until && !(d.commentDeadlineFieldRequested===true && d.commentsCloseOn && d.commentsCloseOn>=today && d.commentsCloseOn<=until)) continue;
-    matches.push({subject:d.subject,revision:d.revision,documentNumber:d.documentNumber,documentUrl:d.documentUrl,title:d.title,abstract:d.abstract,documentType:d.documentType,publicationDate:d.publicationDate,agencies:d.agencies,matchedTerms,commentsCloseOn:d.commentsCloseOn??null,commentDeadlineFieldRequested:d.commentDeadlineFieldRequested===true,effectiveOn:d.effectiveOn??null,sourceAction:d.sourceAction??null,federalRegisterCitation:d.federalRegisterCitation??null,docketIds:d.docketIds,cfrReferences:d.cfrReferences,regulationIdNumbers:d.regulationIdNumbers,correctionOf:d.correctionOf??null,corrections:d.corrections??[],sourceResponseDigest:d.source.originalResponseDigest});
+    matches.push({subject:d.subject,revision:d.revision,documentNumber:d.documentNumber,documentUrl:d.documentUrl,title:d.title,abstract:d.abstract,documentType:d.documentType,publicationDate:d.publicationDate,agencies:d.agencies,matchedTerms,commentsCloseOn:d.commentsCloseOn??null,commentDeadlineFieldRequested:d.commentDeadlineFieldRequested===true,effectiveOn:d.effectiveOn??null,sourceAction:d.sourceAction??null,federalRegisterCitation:d.federalRegisterCitation??null,docketIds:d.docketIds,cfrReferences:d.cfrReferences,regulationIdNumbers:d.regulationIdNumbers,correctionOf:d.correctionOf??null,corrections:d.corrections??[],sourceResponseDigest:d.source.originalResponseDigest,...(d.sourcePublicationDateState ? {sourcePublicationDateState:d.sourcePublicationDateState} : {})});
   }
   matches.sort((a,b)=>b.publicationDate.localeCompare(a.publicationDate)||a.subject.localeCompare(b.subject));
   const items=matches.slice(q.offset,q.offset+q.limit);
@@ -87,7 +100,7 @@ export function projectRegulatoryWatch(feed, raw, {edition, now=Date.now(),maxAg
     ...(d.effectiveOn ? [{kind:'effective-on',date:d.effectiveOn,subject:d.subject,url:d.documentUrl}] : []),
   ]).sort((a,b)=>a.date.localeCompare(b.date)||a.subject.localeCompare(b.subject));
   const nextOffset=q.offset+items.length;
-  return {kind:'561.regulatory-watch.v1',edition,observedAt:feed.observedAt,source:feed.source,sourceWindow:feed.query,coverage:feed.coverage,query:q,sourceDocumentCount:feed.documentCount,totalMatched:matches.length,returnedCount:items.length,items,calendar,next:nextOffset<matches.length ? {edition,offset:nextOffset} : null};
+  return {kind:'561.regulatory-watch.v1',edition,observedAt:feed.observedAt,source:'https://www.federalregister.gov',sourceWindow,coverage,query:q,sourceDocumentCount:documents.length,totalMatched:matches.length,returnedCount:items.length,items,calendar,next:nextOffset<matches.length ? {edition,offset:nextOffset} : null};
 }
 async function sourceBytes(response) {
   if (!response.ok) throw new Error('regulatory source returned HTTP '+response.status);
@@ -104,14 +117,14 @@ async function sourceBytes(response) {
 const held=new Map();
 /** Native Market compute binding; source URL/budget are seller-owned configuration. */
 export async function readRegulatoryWatch(raw, configuration, {fetchImpl=globalThis.fetch,now=Date.now()}={}) {
-  normalizeRegulatoryWatchQuery(raw);
+  const query=normalizeRegulatoryWatchQuery(raw);
   if (!object(configuration)) fail('seller source configuration is required');
-  const u=new URL(configuration.sourceUrl);
+  const u=new URL(query.deadlineWithinDays===undefined ? configuration.sourceUrl : configuration.deadlineSourceUrl);
   if (u.protocol!=='https:' || u.username || u.password || u.hash) fail('seller source requires uncredentialed HTTPS');
   const maxAgeMs=configuration.maxAgeMs ?? 12*60*60*1000;
   let entry=held.get(u.href);
   if (!entry || now-entry.at>180_000 || now<entry.at) {
-    if (held.size>=4) held.clear();
+    if (held.size>=2) held.clear();
     const pending=(async()=>{
       const response=await fetchImpl(u.href,{redirect:'manual',signal:AbortSignal.timeout(8000),headers:{accept:'application/json'},cf:{cacheTtl:180,cacheEverything:true}});
       const bytes=await sourceBytes(response);
