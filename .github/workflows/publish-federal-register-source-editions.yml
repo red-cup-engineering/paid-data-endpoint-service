@@ -99,7 +99,11 @@ jobs:
             echo "Original public edition already matches selected source"
           else
             git commit -m 'Refresh actual original Federal Register Newswire data and source-event editions'
-            git push origin HEAD:main
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+            done
           fi
           git ls-remote origin refs/heads/main
           echo 'Original source changes accepted; paid Newswire approval and outside settlement remain separate.'
