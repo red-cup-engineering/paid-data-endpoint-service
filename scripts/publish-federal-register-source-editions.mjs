@@ -8,10 +8,10 @@
  * the original official HTTPS API, bounded pages, immutable response bytes,
  * independent byte reread, normalized source editions and rights notice.
  */
-import { readFile, mkdir, rename, writeFile } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { writeTextAtomically } from "../src/atomic-text.mjs";
 import { acquireFederalRegisterNewswireWindow } from "../src/federal-register-newswire-supply.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -43,11 +43,6 @@ async function previousEvents() {
     const contents = await readFile(EVENTS, "utf8");
     return contents.split("\n").filter(Boolean).map(line => JSON.parse(line)).slice(-MAX_EVENT_HISTORY);
   } catch (error) { if (error.code === "ENOENT") return []; throw error; }
-}
-async function atomicText(path, value) {
-  const pending = path + "." + randomUUID() + ".tmp";
-  await writeFile(pending, value, { mode: 0o644 });
-  await rename(pending, path);
 }
 function sourcePacket(candidate, sourceWindow) {
   const payloadCells = candidate?.potential?.filter(cell => cell.predicate === "data-payload") ?? [];
@@ -294,11 +289,11 @@ export async function publishFederalRegisterSourceEditions({
     deadlineWindow.coverage,deadlineSourceQuery,deadlineWindow.sourcePages,
     deadlineWindow.observedCosts,priorDeadlines);
   await mkdir(OUT,{recursive:true});
-  await atomicText(LATEST,encoded);
-  await atomicText(CHANGES,JSON.stringify(delta,null,2)+"\n");
-  await atomicText(EVENTS,history.map(event=>JSON.stringify(event)).join("\n")+"\n");
-  await atomicText(DEADLINES,JSON.stringify(deadlines,null,2)+"\n");
-  await atomicText(CATALOG,JSON.stringify(catalog(observedAt),null,2)+"\n");
+  await writeTextAtomically(LATEST,encoded);
+  await writeTextAtomically(CHANGES,JSON.stringify(delta,null,2)+"\n");
+  await writeTextAtomically(EVENTS,history.map(event=>JSON.stringify(event)).join("\n")+"\n");
+  await writeTextAtomically(DEADLINES,JSON.stringify(deadlines,null,2)+"\n");
+  await writeTextAtomically(CATALOG,JSON.stringify(catalog(observedAt),null,2)+"\n");
   return {
     publicRoot:BASE,
     acquired:sourceWindow.sourceCount,

@@ -43,3 +43,14 @@ The paid-read adapter `./src/federal-register-paid-read.mjs` now connects an exa
 ## Original Newswire commercial query boundary
 
 The `./paid-newswire-query` export composes the **existing Newswire's** qualified release snapshot and bounded topic/source/time query with this package's original durable x402 `read-data` actor. It requires seller-owned immutable snapshot read/verification, newsroom query schema and execution, source-commercial-rights review, buyer/merchant authorization, and real x402 merchant pricing/facilitator and persistent receipts. Each request pins an exact SHA-256 snapshot, rejects unauthorized/stale/substituted editions before the 402 challenge, and checks source rights and principal authorization again after settlement. No duplicate feed renderer, marketplace, payment ledger, wallet, editorial approval or public-data exclusivity claim is introduced. [Read original seller contract](docs/NEWSWIRE-PAID-QUERY.md). Ten focused standalone Node tests passed; actual native workspace and deployed paid end-user receiving remain owed.
+
+## What this service writes locally
+
+| Writer | Class | Bound |
+| --- | --- | --- |
+| Source custody (`NEWSWIRE_SOURCE_CUSTODY_ROOT`, `createContentAddressedDirectory`) | retention window | `DEFAULT_MAX_OBJECTS` objects and `DEFAULT_MAX_BYTES` bytes in `src/content-addressed-directory.mjs`; pass `maxObjects` and `maxBytes` to choose others. The oldest object is removed first; a write of existing bytes renews them. |
+| Staging file of one custody write | scratch | removed in a `finally`; one left by a dead process is removed by the next write after `STAGE_LIFETIME_MS`. |
+| Published Federal Register editions (`data/records/newswire/federal-register/*`) | current state | each file is replaced in place by `writeTextAtomically` (`src/atomic-text.mjs`); the one append log among them, `events.jsonl`, keeps the last `MAX_EVENT_HISTORY` events. The published URLs and paths are unchanged. |
+| Staging file of one edition write | scratch | removed in a `finally`. |
+
+`node --test test/bounded-writes.test.mjs` shows each bound holding after N operations and each scratch file removed after a failure.
