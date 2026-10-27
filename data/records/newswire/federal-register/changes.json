@@ -1,53 +1,8 @@
 {
   "kind": "561.newswire.source-edition-changes.v1",
-  "observedAt": "2026-10-27T00:37:55.105Z",
-  "newOrChangedCount": 4,
-  "disappearedFromRollingQueryCount": 146,
+  "observedAt": "2026-10-27T05:14:18.283Z",
+  "newOrChangedCount": 0,
+  "disappearedFromRollingQueryCount": 0,
   "disappearanceMeaning": "No withdrawal is inferred from a document leaving the rolling date window.",
-  "changes": [
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "subject": "federal-register:2026-21732",
-      "sourceEdition": "ni:///sha-256;ZUdedDhTq5YK_-ggwFG80Ff9mXcOiF_TLNXpiWZd2O4",
-      "previousEdition": "ni:///sha-256;HHBOmERI4W7NcWhLDhy-PkDIzK_RLxS3C6BgnPnBBYs",
-      "documentNumber": "2026-21732",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/26/2026-21732/wireless-telecommunications-bureau-announces-upper-c-band-clearinghouse-selection-criteria-and",
-      "commentsCloseOn": null,
-      "effectiveOn": null
-    },
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "subject": "federal-register:2026-21804",
-      "sourceEdition": "ni:///sha-256;jTAGpY_MkFOFW-g_w09ApwoudcfhNVS-O-zs01z2Djg",
-      "previousEdition": "ni:///sha-256;AbV7eO5Sq6_SRSTG_U6l2whW7biY4JxmFqIDy-UqLQo",
-      "documentNumber": "2026-21804",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/26/2026-21804/privacy-act-of-1974-system-of-records",
-      "commentsCloseOn": "2026-11-25",
-      "effectiveOn": null
-    },
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "subject": "federal-register:2026-21818",
-      "sourceEdition": "ni:///sha-256;3HS67wFqLF8A7cULNywLFYXNB7JH6N1EFU3jtKnCA-0",
-      "previousEdition": "ni:///sha-256;D6t9uXDUlf8PLjquq6paTr5OQikUIGLMfdJpbPXp3dk",
-      "documentNumber": "2026-21818",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/26/2026-21818/space-modernization-for-the-21st-century",
-      "commentsCloseOn": "2026-11-25",
-      "effectiveOn": null
-    },
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "subject": "federal-register:2026-21820",
-      "sourceEdition": "ni:///sha-256;LToxFQNnTmsY_dOW0oLHGIe2P43DMqOoLONRI1SXR5I",
-      "previousEdition": "ni:///sha-256;rIl-Jl2Lj8MP6GJ2yEoo9DgbGK-EBlQOXQlFqiKbG7w",
-      "documentNumber": "2026-21820",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/26/2026-21820/modernizing-the-ability-of-consumers-to-control-robocalls",
-      "commentsCloseOn": "2026-11-25",
-      "effectiveOn": null
-    }
-  ]
+  "changes": []
 }

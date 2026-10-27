@@ -1,6 +1,6 @@
 {
   "kind": "561.newswire.federal-register-comment-deadlines.v1",
-  "observedAt": "2026-10-27T00:37:55.105Z",
+  "observedAt": "2026-10-27T05:14:18.283Z",
   "utcCivilDate": "2026-10-27",
   "horizonDays": 30,
   "sourceQuery": {
@@ -116,37 +116,9 @@
   "recordCount": 660,
   "sourceDatesLaterThanObservation": 0,
   "legalReadinessCaveat": "Source search inclusion does not prove an official legal publication or an open comment period; future-dated source publications need separate original authority check.",
-  "changedSourceEditions": [
-    {
-      "subject": "federal-register:2026-21804",
-      "sourceEdition": "ni:///sha-256;jTAGpY_MkFOFW-g_w09ApwoudcfhNVS-O-zs01z2Djg",
-      "previousEdition": "ni:///sha-256;AbV7eO5Sq6_SRSTG_U6l2whW7biY4JxmFqIDy-UqLQo",
-      "commentsCloseOn": "2026-11-25",
-      "previousReportedClose": "2026-10-26",
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "kind": "source-edition-changed-in-query"
-    },
-    {
-      "subject": "federal-register:2026-21818",
-      "sourceEdition": "ni:///sha-256;3HS67wFqLF8A7cULNywLFYXNB7JH6N1EFU3jtKnCA-0",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-25",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-21820",
-      "sourceEdition": "ni:///sha-256;LToxFQNnTmsY_dOW0oLHGIe2P43DMqOoLONRI1SXR5I",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-25",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-27T00:37:55.105Z",
-      "kind": "first-observed-in-current-query"
-    }
-  ],
-  "changedSourceEditionCount": 3,
-  "previousQueryItemsNotPresent": 85,
+  "changedSourceEditions": [],
+  "changedSourceEditionCount": 0,
+  "previousQueryItemsNotPresent": 0,
   "disappearanceMeaning": "Comment dates expire, move out of the date window or change with corrected notices; missing from this query alone is NOT legal withdrawal.",
   "dateMeaning": "Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
   "records": [
