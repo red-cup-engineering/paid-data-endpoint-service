@@ -1,6 +1,6 @@
 {
   "kind": "561.newswire.federal-register-comment-deadlines.v1",
-  "observedAt": "2026-10-27T09:12:00.488Z",
+  "observedAt": "2026-10-27T15:27:39.480Z",
   "utcCivilDate": "2026-10-27",
   "horizonDays": 30,
   "sourceQuery": {
@@ -116,36 +116,8 @@
   "recordCount": 663,
   "sourceDatesLaterThanObservation": 0,
   "legalReadinessCaveat": "Source search inclusion does not prove an official legal publication or an open comment period; future-dated source publications need separate original authority check.",
-  "changedSourceEditions": [
-    {
-      "subject": "federal-register:2026-21857",
-      "sourceEdition": "ni:///sha-256;y3E_yqA_Ma32QVYTITxiKQKNSmVlB5tnhSeNiL8frxs",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-10-27",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-27T09:12:00.488Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-21858",
-      "sourceEdition": "ni:///sha-256;rfXqtnBnhtRlIg_Kc3q4Vc9BTAGw81ZUaY046Gs1t4o",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-10-27",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-27T09:12:00.488Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-21892",
-      "sourceEdition": "ni:///sha-256;FrRALybMUL68n7dkwBoZSBnurnbei0vCyUeld5QBM9w",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-16",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-27T09:12:00.488Z",
-      "kind": "first-observed-in-current-query"
-    }
-  ],
-  "changedSourceEditionCount": 3,
+  "changedSourceEditions": [],
+  "changedSourceEditionCount": 0,
   "previousQueryItemsNotPresent": 0,
   "disappearanceMeaning": "Comment dates expire, move out of the date window or change with corrected notices; missing from this query alone is NOT legal withdrawal.",
   "dateMeaning": "Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
