@@ -54,3 +54,7 @@ The `./paid-newswire-query` export composes the **existing Newswire's** qualifie
 | Staging file of one edition write | scratch | removed in a `finally`. |
 
 `node --test test/bounded-writes.test.mjs` shows each bound holding after N operations and each scratch file removed after a failure.
+
+## Agricultural data: original weather reuse, source-qualified NASS, and agent discovery
+
+`./agricultural-source-admission` reads two original machine-readable candidate source declarations for USDA NASS Quick Stats and existing NOAA/NWS weather. It projects **DCAT 3-style candidate discovery**, distinguishing the original publisher, as-yet-unacquired data and **commercial redistribution still held for review**. `./agricultural-nass` and the `acquire-agricultural-nass` CLI perform a bounded, credentialed actual NASS count/data retrieval, original content-addressed source custody/readback, unit-aware normalization and preservation of suppressed observations—**not** a paid dataset or approved Newswire release. Reuse original Forecasting for weather rather than fetching it twice. [Research, requirements, rights, service economics and operator runbook](docs/AGRICULTURAL-DATA.md). No farmer sensor connectors, buyer sales, royalty commitments, original Newsroom approval, live deployed application or source-production qualification are claimed by the introduction of these modules.

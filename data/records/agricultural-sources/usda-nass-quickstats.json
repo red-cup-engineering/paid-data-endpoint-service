@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "561.agricultural-source.v1",
+  "id": "usda-nass-quickstats",
+  "publisher": {
+    "name": "USDA National Agricultural Statistics Service",
+    "url": "https://www.nass.usda.gov/"
+  },
+  "dataset": {
+    "title": "NASS Quick Stats — published US agricultural estimates",
+    "description": "Original USDA agricultural estimates and census query results; a planned source for evidence-based agricultural Newswire editions, not a cached or sold 561 dataset.",
+    "theme": "https://www.wikidata.org/wiki/Q11451",
+    "spatialCoverage": "United States",
+    "temporalCoverage": "source- and record-dependent",
+    "measurementUnit": "per-row unit_desc; never assume a constant physical unit"
+  },
+  "access": {
+    "kind": "credentialed-api",
+    "endpoint": "https://quickstats.nass.usda.gov/api/",
+    "documentation": "https://www.nass.usda.gov/Quick_Stats/",
+    "requiresProviderKey": true,
+    "maxRecordsPerQuery": 50000
+  },
+  "rights": {
+    "reviewedOn": "2026-10-24",
+    "reviewDueOn": "2026-11-24",
+    "evidenceUrl": "https://www.nass.usda.gov/Data_and_Statistics/Citation_Request/",
+    "publicUse": "conditional-most-data-public-domain",
+    "commercialRedistribution": "not-yet-qualified",
+    "sublicensing": "not-yet-qualified",
+    "attribution": "USDA National Agricultural Statistics Service (NASS); original dataset and observed edition",
+    "provenanceRequirements": "Retain origin and edition; distinguish public facts from API terms and third-party exceptions; review dataset-specific rights before commercial publication."
+  },
+  "status": "source-candidate-not-published"
+}
