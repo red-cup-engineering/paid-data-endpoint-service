@@ -55,7 +55,7 @@ test("outsider collections, including traditional UNIX archives, default to righ
   thirdParty.rights = {basis: "item-by-item-license-review", commercialDelivery:true,
     redistribution:true, reviewedBy:"test-reviewer", reviewedOn:"2026-10-22",
     sourceLicenseEvidence:"https://example.org/license"};
-  assert.throws(() => qualifyShortTextPack(thirdParty), /individual commercial-delivery rights evidence/);
+  assert.throws(() => qualifyShortTextPack(thirdParty), /imported entry is missing rights evidence/);
   thirdParty.entries = original.entries.map(item => ({
     ...item, attribution:"fixture author",
     rights:{commercialDelivery:true,redistribution:true,evidenceUrl:"https://example.org/entry-license"},
