@@ -1,0 +1,42 @@
+name: Verify qualified original short-text source without merchant activation
+on:
+  pull_request:
+    paths:
+      - 'src/qualified-short-text-inventory.mjs'
+      - 'src/fortune-product.mjs'
+      - 'data/fortunes/**'
+      - 'test/qualified-short-text-inventory.test.mjs'
+      - 'package.json'
+      - '.github/workflows/qualified-short-text-source.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/qualified-short-text-inventory.mjs'
+      - 'src/fortune-product.mjs'
+      - 'data/fortunes/**'
+      - 'test/qualified-short-text-inventory.test.mjs'
+      - '.github/workflows/qualified-short-text-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-source-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '24.2.0'
+          package-manager-cache: false
+      - name: Execute original rights-admission and deterministic selection tests
+        run: |
+          set -euo pipefail
+          node --check src/qualified-short-text-inventory.mjs
+          node --check src/fortune-product.mjs
+          node --check test/qualified-short-text-inventory.test.mjs
+          node --test test/qualified-short-text-inventory.test.mjs test/federal-register-inventory.test.mjs
+      - name: Keep seller/rights/settlement separately held
+        run: echo 'No third-party corpus rights, public merchant SKU, approved authored material, paid settlement, or economic return is inferred from source checks.' >> "$GITHUB_STEP_SUMMARY"

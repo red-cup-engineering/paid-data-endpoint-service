@@ -1,0 +1,36 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@id": "https://raw.githubusercontent.com/red-cup-engineering/paid-data-endpoint-service/main/data/records/newswire/federal-register/latest.json#source-observation-dataset",
+  "@type": "dcat:Dataset",
+  "dct:title": "Source-verified Federal Register event observation packets",
+  "dct:description": "No-cost original government source observations, official comment date windows, exact content-addressed editions and bounded edition deltas. Not independently editorial-approved news, legal advice or settled market goods.",
+  "dct:issued": "2026-10-27T22:27:13.529Z",
+  "dct:publisher": "https://www.federalregister.gov",
+  "prov:wasDerivedFrom": "https://www.federalregister.gov/api/v1/documents.json",
+  "dcat:distribution": [
+    {
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": "https://raw.githubusercontent.com/red-cup-engineering/paid-data-endpoint-service/main/data/records/newswire/federal-register/latest.json",
+      "dcat:mediaType": "application/json"
+    },
+    {
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": "https://raw.githubusercontent.com/red-cup-engineering/paid-data-endpoint-service/main/data/records/newswire/federal-register/comment-deadlines.json",
+      "dcat:mediaType": "application/json"
+    },
+    {
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": "https://raw.githubusercontent.com/red-cup-engineering/paid-data-endpoint-service/main/data/records/newswire/federal-register/changes.json",
+      "dcat:mediaType": "application/json"
+    },
+    {
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": "https://raw.githubusercontent.com/red-cup-engineering/paid-data-endpoint-service/main/data/records/newswire/federal-register/events.jsonl",
+      "dcat:mediaType": "application/x-ndjson"
+    }
+  ]
+}

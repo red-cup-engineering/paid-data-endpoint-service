@@ -14,8 +14,19 @@ import { isDeepStrictEqual } from "node:util";
 const ORIGIN = "https://www.federalregister.gov";
 const ENDPOINT = `${ORIGIN}/api/v1/documents.json`;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/u;
-const DOCUMENT_RE = /^\d{4}-\d{4,7}$/u;
+// Actual official API result pages also include independent correction notices
+// such as C1-2026-20311. Preserve their distinct IDs; never collapse them
+// into the original document number or refuse the entire publisher page.
+const DOCUMENT_RE = /^(?:C[1-9][0-9]{0,2}-)?\d{4}-\d{4,7}$/u;
 const MAX_RESULTS = 100;
+// Request an official, task-ready regulatory result without scraping HTML.
+// Ordinary source acquisition stays on its cheap previous default projection.
+export const REGULATORY_DECISION_FIELDS = Object.freeze([
+  "document_number", "title", "type", "abstract", "html_url",
+  "publication_date", "agencies", "comments_close_on", "effective_on",
+  "action", "citation", "regulation_id_numbers", "cfr_references",
+  "docket_ids", "correction_of", "corrections",
+]);
 
 export const FEDERAL_REGISTER_REUSE = Object.freeze({
   status: "republication-permitted",
@@ -79,11 +90,25 @@ function apiURL(value) {
 }
 
 /** Construct ONLY the official documents API URL. No arbitrary external URLs. */
-export function federalRegisterSearchURL({ since, until, term, agency, perPage = 50, page = 1 } = {}) {
-  date(since, "since");
+export function federalRegisterSearchURL({ since, until, commentCloseFrom, commentCloseBy, term, agency, perPage = 50, page = 1, profile } = {}) {
+  if (profile !== undefined && profile !== "regulatory-decision") {
+    throw new TypeError("Federal Register source profile must be regulatory-decision or absent");
+  }
+  // A genuine comment-date query is a different Federal Register source
+  // slice from a *publication*-date query. Agents must not infer that a
+  // comment window opened during the latest publication lookback period.
+  if (since === undefined && commentCloseFrom === undefined)
+    throw new TypeError("Federal Register source query needs a publication date or comment-close date");
+  if (since !== undefined) date(since, "since");
   if (until !== undefined) {
     date(until, "until");
-    if (until < since) throw new RangeError("until must not precede since");
+    if (since === undefined || until < since) throw new RangeError("until needs a non-inverted publication range");
+  }
+  if (commentCloseFrom !== undefined) date(commentCloseFrom, "commentCloseFrom");
+  if (commentCloseBy !== undefined) {
+    date(commentCloseBy, "commentCloseBy");
+    if (commentCloseFrom === undefined || commentCloseBy < commentCloseFrom)
+      throw new RangeError("comment-close upper date needs an admitted non-inverted comment-close range");
   }
   if (!Number.isInteger(perPage) || perPage < 1 || perPage > MAX_RESULTS) {
     throw new RangeError(`perPage must be between 1 and ${MAX_RESULTS}`);
@@ -94,8 +119,10 @@ export function federalRegisterSearchURL({ since, until, term, agency, perPage =
     throw new RangeError("requested page exceeds the API 2,000-result pagination window");
   }
   const url = new URL(ENDPOINT);
-  url.searchParams.set("conditions[publication_date][gte]", since);
+  if (since !== undefined) url.searchParams.set("conditions[publication_date][gte]", since);
   if (until !== undefined) url.searchParams.set("conditions[publication_date][lte]", until);
+  if (commentCloseFrom !== undefined) url.searchParams.set("conditions[comment_date][gte]", commentCloseFrom);
+  if (commentCloseBy !== undefined) url.searchParams.set("conditions[comment_date][lte]", commentCloseBy);
   if (term !== undefined) url.searchParams.set("conditions[term]", boundedText(term, "term", 200));
   if (agency !== undefined) {
     const slug = boundedText(agency, "agency", 150);
@@ -105,7 +132,40 @@ export function federalRegisterSearchURL({ since, until, term, agency, perPage =
   url.searchParams.set("per_page", String(perPage));
   url.searchParams.set("page", String(page));
   url.searchParams.set("order", "newest");
+  if (profile === "regulatory-decision") {
+    // Without explicit fields the source's search response omits even known
+    // document deadlines; absence then means NOT REQUESTED, not no deadline.
+    for (const field of REGULATORY_DECISION_FIELDS) url.searchParams.append("fields[]", field);
+  }
   return url.toString();
+}
+
+function officialDocumentUri(value, name) {
+  if (value === null) return null;
+  const raw = boundedText(value, name, 2048);
+  const selected = new URL(raw);
+  if (selected.origin !== ORIGIN || !/^\/api\/v1\/documents\/[A-Za-z0-9-]+$/u.test(selected.pathname) ||
+      selected.username || selected.password || selected.search || selected.hash) {
+    throw new TypeError(name + " needs an official original document reference");
+  }
+  return selected.href;
+}
+function stringSet(values, name, limit = 32) {
+  if (!Array.isArray(values) || values.length > limit) throw new TypeError(name + " must be bounded source strings");
+  return [...new Set(values.map(value => boundedText(value, name, 400)))];
+}
+function cfrReferences(values) {
+  if (!Array.isArray(values) || values.length > 64) throw new TypeError("cfr_references must be bounded");
+  return values.map(ref => {
+    if (!ref || typeof ref !== "object" || Array.isArray(ref) ||
+        !Number.isSafeInteger(ref.title) || ref.title < 1 || ref.title > 50 ||
+        (ref.part !== null && (typeof ref.part !== "string" || ref.part.length > 100)) ||
+        (ref.chapter !== null && (typeof ref.chapter !== "string" || ref.chapter.length > 100)) ||
+        (ref.citation_url !== null && (typeof ref.citation_url !== "string" || ref.citation_url.length > 2048))) {
+      throw new TypeError("cfr_references must contain valid CFR title, part and chapter");
+    }
+    return {chapter:ref.chapter, citation_url:ref.citation_url, part:ref.part, title:ref.title};
+  });
 }
 
 function federalRegisterDocument(raw) {
@@ -127,16 +187,38 @@ function federalRegisterDocument(raw) {
   }
   const agencies = raw.agencies ?? [];
   if (!Array.isArray(agencies) || agencies.length > 40) throw new TypeError("agencies must be a bounded array");
-  const agency_names = [...new Set(agencies.map((a) =>
-    typeof a === "string" ? boundedText(a, "agency name", 250) : boundedText(a?.name, "agency name", 250),
-  ))].sort((a, b) => a.localeCompare(b));
+  const sourceAgencyNames = agencies.map(a => typeof a === "string" ? a : a?.name);
+  const missingAgencyNames = sourceAgencyNames.filter(name => typeof name !== "string" || !name.trim()).length;
+  const agency_names = [...new Set(sourceAgencyNames
+    .filter(name => typeof name === "string" && name.trim())
+    .map(name => boundedText(name, "agency name", 250)))].sort((a,b)=>a.localeCompare(b));
+  // Some genuine Federal Register results include a null/unnamed agency row.
+  // Keep every known issuer and report how many upstream entries lacked names;
+  // do not invent an organization name or refuse the entire official page.
+  const declaredMissing = raw.agency_names_missing ?? missingAgencyNames;
+  const declaredReported = raw.agencies_reported ?? agencies.length;
+  if (!Number.isSafeInteger(declaredMissing) || declaredMissing < 0 ||
+      !Number.isSafeInteger(declaredReported) || declaredReported < 0 ||
+      declaredReported > 40 || declaredMissing > declaredReported ||
+      agency_names.length + declaredMissing > declaredReported) {
+    throw new TypeError("original source agency-name coverage is inconsistent");
+  }
   return {
     document_number,
     title: boundedText(raw.title, "title", 8000),
     type: boundedText(raw.type, "type", 80),
     publication_date: date(raw.publication_date, "publication_date"),
     comments_close_on: raw.comments_close_on ? date(raw.comments_close_on, "comments_close_on") : null,
+    ...(Object.hasOwn(raw, "effective_on") ? {effective_on: raw.effective_on ? date(raw.effective_on, "effective_on") : null} : {}),
+    ...(Object.hasOwn(raw, "action") ? {action: raw.action === null ? null : boundedText(raw.action, "action", 5000)} : {}),
+    ...(Object.hasOwn(raw, "citation") ? {citation: raw.citation === null ? null : boundedText(raw.citation, "citation", 256)} : {}),
+    ...(Object.hasOwn(raw, "docket_ids") ? {docket_ids: stringSet(raw.docket_ids, "docket_ids", 32)} : {}),
+    ...(Object.hasOwn(raw, "regulation_id_numbers") ? {regulation_id_numbers: stringSet(raw.regulation_id_numbers, "regulation_id_numbers", 32)} : {}),
+    ...(Object.hasOwn(raw, "cfr_references") ? {cfr_references: cfrReferences(raw.cfr_references)} : {}),
+    ...(Object.hasOwn(raw, "correction_of") ? {correction_of: officialDocumentUri(raw.correction_of, "correction_of")} : {}),
+    ...(Object.hasOwn(raw, "corrections") ? {corrections: raw.corrections.map((uri) => officialDocumentUri(uri, "corrections"))} : {}),
     agency_names,
+    ...(declaredMissing ? {agency_names_missing:declaredMissing, agencies_reported:declaredReported} : {}),
     abstract: optionalText(raw.abstract, "abstract", 30_000),
     html_url,
   };
@@ -154,6 +236,15 @@ export function federalRegisterInventoryLot({ response, sourceUrl, observedAt } 
   const keys = records.map((item) => item.document_number);
   if (new Set(keys).size !== keys.length) throw new TypeError("source repeats a document number");
   const digest = inventoryDigest(records);
+  const pageNumber = Number(url.searchParams.get("page") ?? 1);
+  const totalPagesReported = Number.isSafeInteger(response.total_pages) && response.total_pages >= 1
+    ? response.total_pages : null;
+  // Real Federal Register v1 removes next_page_url entirely at the last
+  // page, rather than supplying next_page_url:null. Its reported total_pages
+  // and our exact requested page prove the finite cursor is exhausted.
+  const pageComplete = response.next_page_url === null ? true :
+    typeof response.next_page_url === "string" ? false :
+    (totalPagesReported !== null && pageNumber >= totalPagesReported ? true : null);
   return {
     schemaVersion: "561.public-data-inventory.v1",
     kind: "federal-register-published-documents",
@@ -164,7 +255,11 @@ export function federalRegisterInventoryLot({ response, sourceUrl, observedAt } 
       apiUrl: url.toString(),
       publisher: "Office of the Federal Register",
       totalResultsReported: Number.isInteger(response.count) && response.count >= 0 ? response.count : null,
-      pageComplete: response.next_page_url === null ? true : (typeof response.next_page_url === "string" ? false : null),
+      pageNumber,
+      totalPagesReported,
+      pageComplete,
+      fieldsProfile: url.searchParams.getAll("fields[]").length ? "regulatory-decision" : "basic",
+      requestedFieldNames: url.searchParams.getAll("fields[]"),
       observationLevel: "source-response-processed-by-seller; no independent cryptographic attestation",
       rights: FEDERAL_REGISTER_REUSE,
     },

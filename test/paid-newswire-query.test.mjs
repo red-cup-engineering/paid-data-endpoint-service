@@ -155,3 +155,112 @@ test('missing source seller, journal, merchant policies or bounds refuse at cons
   await assert.rejects(createNewswirePaidQueryActor({...fx,sellerOffer:null,actorFactory:async()=>({})}));
   await assert.rejects(createNewswirePaidQueryActor({...fx,sellerOffer:{},append:async()=>{},recoveredRecords:{intents:[],terminals:new Map()},actorFactory:async()=>({})}));
 });
+
+
+test("unapproved subjects and duplicate release identities refuse even if source verifier is permissive", async () => {
+  const snapshot=snap();
+  for (const malformed of [
+    {...snapshot,public:[...snapshot.public,{subject:"draft",isPublic:false,url:"https://filum.example.org/draft"}]},
+    {...snapshot,public:[snapshot.public[0],{...snapshot.public[0]}]},
+    {...snapshot,public:[{...snapshot.public[0],subject:""}]},
+    {...snapshot,wireUri:"http://invalid.example.org/wire"},
+    {...snapshot,wireUri:"https://buyer:secret@filum.example.org/wire"},
+  ]) {
+    const {handlers}=harness({snapshotStore:{read:async()=>malformed},verifySnapshot:async()=>true});
+    await assert.rejects(handlers.admit({request:{body:request()}}),/unreleased|conflicting|publisher wireUri/);
+  }
+});
+
+test("original seller enforces memory and transfer budgets before cloning or querying", async () => {
+  const large={...snap(),public:Array.from({length:12},(_,i)=>({...snap().public[0],subject:"s"+i}))};
+  let verified=0;
+  const {handlers}=harness({snapshotStore:{read:async()=>large},maxSnapshotItems:5,
+    verifySnapshot:async()=>{verified++;return true;}});
+  await assert.rejects(handlers.admit({request:{body:request()}}),/item budget/);
+  assert.equal(verified,0,"do not trigger original verification for oversized untrusted snapshots");
+  const giant={...snap(),description:"x".repeat(3000)};
+  await assert.rejects(harness({snapshotStore:{read:async()=>giant},maxSnapshotBytes:1024}).handlers.admit({request:{body:request()}}),/maximum bytes/);
+});
+
+test("seller only admits explicit RFC3339 timestamps and credential-free original rights evidence", async () => {
+  for (const verifiedAt of ["2026-10-22", "October 22, 2026", "2026-10-22T11:20:00", "invalid"]) {
+    await assert.rejects(harness({snapshotStore:{read:async()=>({...snap(),verifiedAt})}}).handlers.admit({request:{body:request()}}),/RFC 3339/);
+  }
+  for (const bad of [
+    {admitted:true,evidenceUri:"https://user:secret@evidence.example.org/rights",expiresAt:"2026-10-25T00:00:00Z"},
+    {admitted:true,evidenceUri:"http://evidence.example.org/rights",expiresAt:"2026-10-25T00:00:00Z"},
+    {admitted:true,evidenceUri:"https://evidence.example.org/rights",expiresAt:"2026-10-25"},
+  ]) {
+    await assert.rejects(harness({qualifyRights:async()=>bad}).handlers.admit({request:{body:request()}}),/HTTPS|RFC 3339/);
+  }
+});
+
+test("paid query result must describe an actual subset of the approved release, with consistent totals", async () => {
+  for (const wrong of [
+    {items:[{subject:"draft-not-in-snapshot"}],returnedCount:1,totalMatched:1,truncated:false},
+    {items:[{subject:"data:event-1"},{subject:"data:event-1"}],returnedCount:2,totalMatched:2,truncated:false},
+    {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:0,truncated:false},
+    {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:3,truncated:false},
+    {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:1,truncated:true},
+    {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:1,truncated:false,settlement:{transaction:"fabricated"}},
+    {items:[{subject:"data:event-1"}],returnedCount:1,totalMatched:1,truncated:false,buyerAcceptance:{approved:true}},
+  ]) {
+    const {handlers}=harness({queryReleased:async()=>wrong});
+    await assert.rejects(handlers.execute({intent:{request:request()}}),/unapproved|inconsistent|may not manufacture/);
+  }
+});
+
+test("postsettlement output enforces merchant bandwidth budget and does not manufacture a paid receipt", async () => {
+  const huge={items:[{subject:"data:event-1",text:"x".repeat(3000)}],returnedCount:1,totalMatched:1,truncated:false};
+  const {handlers}=harness({queryReleased:async()=>huge,maxResponseBytes:1024});
+  await assert.rejects(handlers.execute({intent:{request:request()}}),/maximum bytes/);
+  const acceptable=await harness({maxResponseBytes:1024}).handlers.execute({intent:{request:request()}});
+  assert.equal(acceptable.paymentReceipt,null);
+  assert.equal(acceptable.result.items[0].subject,"data:event-1");
+});
+
+test("seller refuses unbounded resource budgets at construction before any payment factory is created", () => {
+  for(const opts of [
+    {maxSnapshotItems:0},{maxSnapshotItems:100001},{maxSnapshotItems:1.5},
+    {maxSnapshotBytes:1},{maxSnapshotBytes:100 * 1024 * 1024},
+    {maxResponseBytes:0},{maxResponseBytes:10 * 1024 * 1024},
+  ]) assert.throws(()=>createNewswirePaidQueryHandlers({...harness().functions,...opts}),/budget/);
+});
+
+test('verification, rights, authority and query suppliers cannot mutate the retained source or admitted query', async () => {
+  for (const name of ['verifySnapshot', 'qualifyRights', 'authorizeRequest', 'queryReleased']) {
+    const h = harness();
+    const original = h.functions[name];
+    const functions = {...h.functions, [name]: async (...args) => {
+      const source = name === 'queryReleased' ? args[0] : args[0].snapshot;
+      assert.equal(Object.isFrozen(source), true, name);
+      assert.equal(Reflect.set(source.public[0], 'headline', 'Changed after verification'), false, name);
+      assert.equal(Reflect.set(source.public, '0', {subject: 'unapproved'}), false, name);
+      const predicate = name === 'queryReleased' ? args[1] : args[0].query;
+      if (predicate) {
+        assert.equal(Reflect.set(predicate, 'limit', 100), false, name);
+        assert.equal(Reflect.set(predicate.topics, '0', 'private'), false, name);
+      }
+      return original(...args);
+    }};
+    const delivered = await createNewswirePaidQueryHandlers(functions).execute({intent: {request: request()}});
+    assert.equal(delivered.snapshotDigest, snapshotDigest);
+    assert.equal(delivered.result.items[0].subject, 'data:event-1');
+    assert.equal((await h.store.read({digest: snapshotDigest})).public[0].headline, 'Document updated');
+  }
+});
+
+test('supplier-retained rights and query output cannot change the delivered projection', async () => {
+  const rights = {admitted: true, evidenceUri: 'https://example.org/rights/original', expiresAt: '2026-10-25T00:00:00Z'};
+  const output = {items: [{subject: 'data:event-1'}], returnedCount: 1, totalMatched: 1, truncated: false};
+  const {handlers} = harness({
+    qualifyRights: async () => rights,
+    authorizeRequest: async () => { rights.evidenceUri = 'https://example.org/rights/replaced'; return {admitted: true}; },
+    queryReleased: async () => output,
+  });
+  const delivered = await handlers.execute({intent: {request: request()}});
+  output.items[0].subject = 'replaced-after-return';
+  assert.equal(delivered.qualifiedRightsEvidence, 'https://example.org/rights/original');
+  assert.equal(delivered.result.items[0].subject, 'data:event-1');
+  assert.equal(Object.isFrozen(delivered.result.items[0]), true);
+});

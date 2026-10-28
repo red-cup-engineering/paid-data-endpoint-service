@@ -1,0 +1,54 @@
+{
+  "id": "2026-10-27-paid-data-endpoint-service-normalization",
+  "kind": "misfiled-resources-register",
+  "by": "apply-services-section-normalization",
+  "date": "2026-10-27",
+  "moved": [
+    {
+      "from": "data/records/systemd-unit-records/union-alpha-x402-data-market.service",
+      "to": "data/records/service-records/systemd-unit-service-records/union-alpha-x402-data-market.service",
+      "rule": "eavt-data-law",
+      "sourceSha256": "8dcf0bdd662ec69f13d15d9af473b977da7be08a5dfd07774e840c7455b34d35",
+      "destinationSha256": "8dcf0bdd662ec69f13d15d9af473b977da7be08a5dfd07774e840c7455b34d35",
+      "byteIdentical": true
+    }
+  ],
+  "owed": [
+    {
+      "rule": "stray-top-level",
+      "reason": ".npmrc/ is not an entry the services-section law knows; its owner decides where it belongs",
+      "directory": ".",
+      "count": 1
+    },
+    {
+      "rule": "stray-top-level",
+      "reason": "LICENSE/ is not an entry the services-section law knows; its owner decides where it belongs",
+      "directory": ".",
+      "count": 1
+    },
+    {
+      "rule": "data-fits-no-tier",
+      "reason": "data/international is not under a tier the data law files (data/logs/service-logs, data/state, data/records/service-records)",
+      "directory": "data/international",
+      "count": 3
+    },
+    {
+      "rule": "data-fits-no-service-directory",
+      "reason": "newswire is not <service>-records",
+      "directory": "data/records/newswire/federal-register",
+      "count": 5
+    },
+    {
+      "rule": "data-fits-no-tier",
+      "reason": "data/source-declarations is not under a tier the data law files (data/logs/service-logs, data/state, data/records/service-records)",
+      "directory": "data/source-declarations",
+      "count": 2
+    },
+    {
+      "rule": "stray-top-level",
+      "reason": "docs/ is not an entry the services-section law knows; its owner decides where it belongs",
+      "directory": "docs",
+      "count": 6
+    }
+  ]
+}
