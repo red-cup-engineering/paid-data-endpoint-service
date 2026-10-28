@@ -29,13 +29,19 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: '22.18.0'
+          package-manager-cache: false
       - name: Verify source syntax and pure source/admission semantics
         run: |
           node --check src/arxiv-oai-source.mjs
           node --check test/arxiv-oai-source.test.mjs
           node --check test/arxiv-oai-integration.test.mjs
           node --test test/arxiv-oai-source.test.mjs
+      - name: Receive exact declared XML reader dependency and native OAI integration
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund --registry=https://registry.561.group/
+          npm ls @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
+          node --test test/arxiv-oai-integration.test.mjs
       - name: Declare nonreceipt boundaries
         run: |
-          echo "Pure source tests do not qualify original XML reader installation, a live OAI host, distributed rate gate, accepted newsroom source, persisted subscription, or x402 settlement." >> "$GITHUB_STEP_SUMMARY"
-          echo "Run test/arxiv-oai-integration.test.mjs when the exact XML reader package is independently available in the approved dependency closure." >> "$GITHUB_STEP_SUMMARY"
+          echo "Successful native XML integration is not a live OAI host, distributed rate gate, accepted newsroom source, persisted subscription, or x402 settlement." >> "$GITHUB_STEP_SUMMARY"
+          echo "This workflow attempts original package installation and integration; inspect each step before qualification." >> "$GITHUB_STEP_SUMMARY"
