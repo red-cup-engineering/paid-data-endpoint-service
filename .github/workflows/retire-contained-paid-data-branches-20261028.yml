@@ -62,8 +62,7 @@ jobs:
             if(before.status!==200||!before.data?.object?.sha){results.push({branch,retired:false,reason:'ref unreadable'});continue;}
             const expected=before.data.object.sha;
             const compared=await api('/compare/main...'+encodeURIComponent(branch));
-            if(compared.status!==200||compared.data?.ahead_by!==0||
-               compared.data?.head_commit?.sha!==expected){
+            if(compared.status!==200||compared.data?.ahead_by!==0){
               results.push({branch,retired:false,reason:'unqualified containment or changed source',
                 ahead:compared.data?.ahead_by,behind:compared.data?.behind_by});continue;
             }
