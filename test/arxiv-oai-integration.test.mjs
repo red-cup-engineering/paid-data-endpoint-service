@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readXmlDocument } from '@red-cup-engineering/xml-document-rendering-service/document-read';
-import { parseArxivOaiDocument, acquireArxivOaiPage } from '../arxiv-oai-source.mjs';
+import { parseArxivOaiDocument, acquireArxivOaiPage } from '../src/arxiv-oai-source.mjs';
 import { createHash } from 'node:crypto';
 
 // Real namespace-aware XML reader and realistic arXiv OAI-PMH arXiv record
