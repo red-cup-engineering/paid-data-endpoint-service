@@ -12,6 +12,7 @@ on:
       - 'docs/ARXIV-DOMAIN-SEARCH.md'
       - 'data/records/newswire/arxiv/source.json'
       - 'package.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/arxiv-oai-source.yml'
   push:
     branches: [main]
@@ -52,7 +53,18 @@ jobs:
           node --check test/arxiv-oai-source.test.mjs
           node --check test/arxiv-oai-integration.test.mjs
           node --check test/refresh-arxiv-source-editions.test.mjs
-          node --test test/arxiv-oai-source.test.mjs test/refresh-arxiv-source-editions.test.mjs
+          node --test test/arxiv-oai-source.test.mjs test/refresh-arxiv-source-editions.test.mjs test/paid-newswire-query.test.mjs test/newswire-subscription.test.mjs test/federal-register-inventory.test.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const manifest=JSON.parse(readFileSync('package.json','utf8'));
+          const lock=readFileSync('pnpm-lock.yaml','utf8');
+          const name='@red-cup-engineering/xml-document-rendering-service';
+          assert.equal(manifest.dependencies[name],'0.1.7');
+          const importer=lock.split('\npackages:\n')[0];
+          assert.match(importer,/['"]?@red-cup-engineering\/xml-document-rendering-service['"]?:\s*\n\s*specifier: 0\.1\.7\s*\n\s*version: 0\.1\.7/);
+          assert.match(lock,/@red-cup-engineering\/xml-document-rendering-service@0\.1\.7/);
+          NODE
       - name: Receive exact published XML parser and run its real integration tests
         run: |
           set -euo pipefail
