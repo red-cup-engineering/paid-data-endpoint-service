@@ -1,0 +1,155 @@
+name: Receive and circulate real arXiv OAI research source editions
+on:
+  pull_request:
+    paths:
+      - 'src/arxiv-oai-source.mjs'
+      - 'src/content-addressed-directory.mjs'
+      - 'src/atomic-text.mjs'
+      - 'scripts/refresh-arxiv-source-editions.mjs'
+      - 'test/arxiv-oai-source.test.mjs'
+      - 'test/arxiv-oai-integration.test.mjs'
+      - 'test/refresh-arxiv-source-editions.test.mjs'
+      - 'docs/ARXIV-DOMAIN-SEARCH.md'
+      - 'data/records/newswire/arxiv/source.json'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/arxiv-oai-source.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/arxiv-oai-source.mjs'
+      - 'scripts/refresh-arxiv-source-editions.mjs'
+      - 'test/arxiv-oai-source.test.mjs'
+      - 'test/refresh-arxiv-source-editions.test.mjs'
+      - 'data/records/newswire/arxiv/source.json'
+      - '.github/workflows/arxiv-oai-source.yml'
+  schedule:
+    - cron: '37 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: original-561-arxiv-legacy-metadata-receiving
+  cancel-in-progress: false
+jobs:
+  native-source-and-actual-receiving:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Select original source-owning repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: true
+      - name: Select Node version
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '24.2.0'
+          package-manager-cache: false
+      - name: Run native source, watch-state and refusal tests
+        run: |
+          set -euo pipefail
+          node --check src/arxiv-oai-source.mjs
+          node --check scripts/refresh-arxiv-source-editions.mjs
+          node --check test/arxiv-oai-source.test.mjs
+          node --check test/arxiv-oai-integration.test.mjs
+          node --check test/refresh-arxiv-source-editions.test.mjs
+          node --test test/arxiv-oai-source.test.mjs test/refresh-arxiv-source-editions.test.mjs test/paid-newswire-query.test.mjs test/federal-register-inventory.test.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const manifest=JSON.parse(readFileSync('package.json','utf8'));
+          const lock=readFileSync('pnpm-lock.yaml','utf8');
+          const name='@red-cup-engineering/xml-document-rendering-service';
+          assert.equal(manifest.dependencies[name],'0.1.7');
+          const importer=lock.split('\npackages:\n')[0];
+          assert.match(importer,/['"]?@red-cup-engineering\/xml-document-rendering-service['"]?:\s*\n\s*specifier: 0\.1\.7\s*\n\s*version: 0\.1\.7/);
+          assert.match(lock,/@red-cup-engineering\/xml-document-rendering-service@0\.1\.7/);
+          NODE
+      - name: Receive exact published XML parser and run its real integration tests
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/arxiv-xml" node_modules/@red-cup-engineering
+          for attempt in 1 2 3; do
+            if timeout 110s npm install --prefix "$RUNNER_TEMP/arxiv-xml" --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000 --registry=https://registry.561.group/ @red-cup-engineering/xml-document-rendering-service@0.1.7; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Source-qualified XML package unavailable after three bounded registry attempts" >&2
+              exit 1
+            fi
+            sleep 4
+          done
+          npm ls --prefix "$RUNNER_TEMP/arxiv-xml" @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
+          ln -s "$RUNNER_TEMP/arxiv-xml/node_modules/@red-cup-engineering/xml-document-rendering-service" node_modules/@red-cup-engineering/xml-document-rendering-service
+          node --test test/arxiv-oai-integration.test.mjs
+      - name: Acquire actual official OAI pages and commit only fully witnessed source state
+        env:
+          ARXIV_OAI_SOURCE_POLICY: original-github-actions-exclusive
+          ARXIV_SOURCE_DECLARATION: data/records/newswire/arxiv/source.json
+          ARXIV_STATE_PATH: data/records/newswire/arxiv/latest.json
+          ARXIV_SOURCE_BYTES: data/records/newswire/arxiv/objects
+        run: |
+          set -euo pipefail
+          node scripts/refresh-arxiv-source-editions.mjs > "$RUNNER_TEMP/arxiv-harvest-result.json"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          const root='data/records/newswire/arxiv/';
+          const state=JSON.parse(await readFile(root+'latest.json','utf8'));
+          const config=JSON.parse(await readFile(root+'source.json','utf8'));
+          assert.equal(state.kind,'561.newswire.arxiv-observation.v1');
+          assert.equal(state.source,'https://oaipmh.arxiv.org/oai');
+          assert.equal(state.set,config.set);
+          assert.equal(state.coverage.complete,true);
+          assert.ok(state.sourcePages.length>=1 && state.sourcePages.length<=3);
+          assert.equal(state.editorialStatus,'not-approved');
+          assert.equal(state.merchantSettlement,null);
+          assert.ok(state.records.every(row=>row.subject==='arxiv:'+row.id && /^sha256:[a-f0-9]{64}$/.test(row.editionDigest)));
+          const digests=[];
+          for(const p of state.sourcePages) {
+            assert.match(p.sourceDigest,/^sha256:[a-f0-9]{64}$/);
+            const body=await readFile(root+'objects/'+p.sourceDigest.slice(7));
+            assert.equal(createHash('sha256').update(body).digest('hex'),p.sourceDigest.slice(7));
+            assert.equal(body.byteLength,p.sourceBytes);
+            digests.push(p.sourceDigest);
+          }
+          const receipt={kind:'561.arxiv.source-receiving.v1',source:state.source,set:state.set,
+            at:state.observedAt,from:state.from,sourceDigests:digests,sourceBytes:state.sourcePages.reduce((n,p)=>n+p.sourceBytes,0),
+            sourcePages:state.sourcePages.length,recordsRetained:state.records.length,
+            newOrRevised:state.changes.length,coverage:state.coverage,
+            editorialApproved:false,installedBuyerWatch:false,merchantSettlement:false};
+          await writeFile(process.env.RUNNER_TEMP+'/arxiv-qualified-source-receipt.json',JSON.stringify(receipt,null,2)+'\n');
+          console.log(JSON.stringify(receipt,null,2));
+          NODE
+      - name: Publish original source observation, not an invented Newsroom article
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git config user.name '561 Group Newswire source receiver'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/records/newswire/arxiv/latest.json data/records/newswire/arxiv/objects
+          if git diff --cached --quiet; then
+            echo 'Replayed arXiv source did not change original source state'
+          else
+            git commit -m 'Refresh witnessed original arXiv metadata source editions'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git ls-remote origin refs/heads/main
+      - name: Preserve original source bodies and independent qualification receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-arxiv-oai-source-editions
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/arxiv-harvest-result.json
+            ${{ runner.temp }}/arxiv-qualified-source-receipt.json
+            data/records/newswire/arxiv/source.json
+            data/records/newswire/arxiv/latest.json
+            data/records/newswire/arxiv/objects/
+      - name: Distinguish actual source receiving from consumer and merchant effects
+        run: |
+          echo 'An OAI source receipt is not an accepted Science research answer, approved Newsroom/Filum feed, distributed arXiv rate lease, subscriber delivery, or x402 settlement.' >> "$GITHUB_STEP_SUMMARY"

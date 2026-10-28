@@ -8,74 +8,8 @@ const YEAR = /^\d{4}$/u;
 const SHA = /^sha256:[0-9a-f]{64}$/u;
 const MAX_JSON_BYTES = 1_000_000;
 
-/** Dataset-level observed eligibility, NOT a license for an entire country. */
-export const INTERNATIONAL_SOURCES = Object.freeze({
-  'wdi-cn-gdp': Object.freeze({
-    id: 'wdi-cn-gdp', family: 'world-bank-indicator', country: 'CN', indicator: 'NY.GDP.MKTP.CD',
-    title: 'China GDP (current US$)', unit: 'current US dollars', sourceCredit: 'Country official statistics, national statistical organizations and/or central banks; OECD; World Bank staff estimates',
-    rights: Object.freeze({ state: 'qualified-for-conditional-resale', license: 'CC-BY-4.0',
-      checkedOn: '2026-10-21', reviewBy: '2027-01-21',
-      termsUrl: 'https://data.worldbank.org/summary-terms-of-use',
-      indicatorUrl: 'https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=CN',
-      attribution: 'The World Bank: World Development Indicators: GDP (current US$), China; original sources as indicated',
-      obligations: Object.freeze(['attribution', 'mark transformations', 'pass-through attribution', 'no endorsement', 'recheck third-party restrictions per indicator']),
-    }),
-  }),
-  'wdi-cn-inflation': Object.freeze({
-    id: 'wdi-cn-inflation', family: 'world-bank-indicator', country: 'CN', indicator: 'FP.CPI.TOTL.ZG',
-    title: 'China consumer-price inflation (annual %)', unit: 'percent annual', sourceCredit: 'International Monetary Fund, International Financial Statistics',
-    rights: Object.freeze({ state: 'qualified-for-conditional-resale', license: 'CC-BY-4.0',
-      checkedOn: '2026-10-21', reviewBy: '2027-01-21',
-      termsUrl: 'https://data.worldbank.org/summary-terms-of-use',
-      indicatorUrl: 'https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=CN',
-      attribution: 'The World Bank: World Development Indicators: Inflation, consumer prices (annual %), China; IMF International Financial Statistics',
-      obligations: Object.freeze(['attribution', 'mark transformations', 'pass-through attribution', 'no endorsement', 'recheck third-party restrictions per indicator']),
-    }),
-  }),
-  'chirps3-africa-rainfall': Object.freeze({
-    id: 'chirps3-africa-rainfall', family: 'climate-hazards-archive', coverage: 'Africa within CHIRPS v3 domain 60°S–60°N',
-    title: 'CHIRPS v3 precipitation, Africa-targeted subsets', unit: 'millimetres daily precipitation',
-    rights: Object.freeze({ state: 'qualified-source-unacquired-assets', license: 'CC-BY-4.0',
-      checkedOn: '2026-10-21', reviewBy: '2027-01-21',
-      termsUrl: 'https://www.chc.ucsb.edu/data/chirps3',
-      indicatorUrl: 'https://www.chc.ucsb.edu/data/chirps3',
-      attribution: 'Climate Hazards Center, UC Santa Barbara, CHIRPS3 Data Repository, doi:10.15780/G2JQ0P; accessed [date]',
-      obligations: Object.freeze(['attribution', 'cite specific product and version', 'document preliminary or final processing and missing values', 'record raster bytes and actual geographic subset']),
-    }),
-  }),
-  'sse-market-data': Object.freeze({
-    id: 'sse-market-data', family: 'licensed-exchange-data', country: 'CN',
-    title: 'Shanghai Stock Exchange market data',
-    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
-      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
-      termsUrl: 'https://english.sse.com.cn/markets/dataservice/products/',
-      note: 'SSE permits real-time market-data redistribution only by qualified vendors; overseas arrangements are licensed through CIIS. No resale right is inferred from a public price page.' }),
-  }),
-  'szse-market-data': Object.freeze({
-    id: 'szse-market-data', family: 'licensed-exchange-data', country: 'CN',
-    title: 'Shenzhen Stock Exchange market data',
-    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
-      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
-      termsUrl: 'https://investor.szse.cn/English/services/dataServices/index.html',
-      note: 'SZSE identifies SSIC as the exclusive manager and distributor of its market information; commercial rights require an original vendor contract.' }),
-  }),
-  'china-nbs-website': Object.freeze({
-    id: 'china-nbs-website', family: 'restricted-website', country: 'CN',
-    title: 'National Bureau of Statistics of China website data',
-    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
-      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
-      termsUrl: 'https://www.stats.gov.cn/english/nbs/201312/t20131213_480293.html',
-      note: 'NBS published FAQ (2013) says use for free, not for commerce; review current terms or obtain written permission before commercial reuse.' }),
-  }),
-  'tahmo-stations': Object.freeze({
-    id: 'tahmo-stations', family: 'controlled-station-network', coverage: 'Multiple African countries',
-    title: 'TAHMO cleaned station rainfall',
-    rights: Object.freeze({ state: 'commercial-resale-held', license: null,
-      checkedOn: '2026-10-21', reviewBy: '2026-10-21',
-      termsUrl: 'https://tahmo.org/climate-data/',
-      note: 'Portal access and data policy; do not infer commercial redistribution rights from availability of sample data.' }),
-  }),
-});
+import { INTERNATIONAL_SOURCES, admitInternationalSourceDeclarations, internationalSourceDefinition, internationalInventoryVersion } from './international-source-declarations.mjs';
+export { INTERNATIONAL_SOURCES, admitInternationalSourceDeclarations } from './international-source-declarations.mjs';
 
 function date(s, name) {
   if (typeof s !== 'string' || !DATE.test(s) || !Number.isFinite(Date.parse(s + 'T00:00:00Z')) ||
@@ -99,8 +33,10 @@ function canonical(v) {
 }
 export function internationalLotDigest(value) { return 'sha256:' + createHash('sha256').update(canonical(value)).digest('hex'); }
 
-export function qualifyInternationalSource(id, { asOf = new Date().toISOString().slice(0, 10), commercial = true } = {}) {
-  const source = INTERNATIONAL_SOURCES[id];
+export function qualifyInternationalSource(id, { asOf = new Date().toISOString().slice(0, 10), commercial = true,
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  const sources = admitInternationalSourceDeclarations(sourceDeclarations);
+  const source = Object.hasOwn(sources, id) ? sources[id] : undefined;
   if (!source) throw new TypeError('unlisted data source requires source-specific rights review');
   const rights = source.rights;
   date(asOf, 'asOf');
@@ -111,8 +47,9 @@ export function qualifyInternationalSource(id, { asOf = new Date().toISOString()
   return source;
 }
 
-export function worldBankIndicatorURL({ sourceId, fromYear, throughYear, perPage = 200, asOf = new Date().toISOString().slice(0, 10) } = {}) {
-  const source = qualifyInternationalSource(sourceId, { asOf });
+export function worldBankIndicatorURL({ sourceId, fromYear, throughYear, perPage = 200, asOf = new Date().toISOString().slice(0, 10),
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  const source = qualifyInternationalSource(sourceId, { asOf, sourceDeclarations });
   if (source.family !== 'world-bank-indicator') throw new TypeError('World Bank indicator source required');
   year(fromYear, 'fromYear'); year(throughYear, 'throughYear');
   if (throughYear < fromYear) throw new RangeError('time window inverted');
@@ -135,7 +72,7 @@ function worldBankSeriesRecords(body, source, fromYear, throughYear) {
   }
   const records = body[1].map(r => {
     if (r?.indicator?.id !== source.indicator || r?.country?.id !== source.country ||
-        (r.countryiso3code !== undefined && r.countryiso3code !== 'CHN')) {
+        (r.countryiso3code !== undefined && r.countryiso3code !== source.countryISO3)) {
       throw new TypeError('indicator or country does not match qualified source');
     }
     const period = year(r.date, 'indicator year');
@@ -149,40 +86,63 @@ function worldBankSeriesRecords(body, source, fromYear, throughYear) {
   return records;
 }
 
-export function worldBankInventoryLot({ sourceId, fromYear, throughYear, response, observedAt, asOf = new Date().toISOString().slice(0, 10) } = {}) {
-  const source = qualifyInternationalSource(sourceId, { asOf });
-  if (source.family !== 'world-bank-indicator') throw new TypeError('World Bank series required');
-  const url = worldBankIndicatorURL({ sourceId, fromYear, throughYear, asOf });
-  const records = worldBankSeriesRecords(response, source, fromYear, throughYear);
-  const digest = internationalLotDigest({ sourceId, fromYear, throughYear, records, rights: source.rights });
+function lotDigestInput(source, fromYear, throughYear, records) {
   return {
-    schemaVersion: '561.international-inventory.v1', kind: 'world-bank-indicator',
+    sourceId: source.id, fromYear, throughYear, records, rights: source.rights,
+    ...(internationalInventoryVersion(source.id) === '561.international-inventory.v1'
+      ? {} : { sourceDefinition: internationalSourceDefinition(source) }),
+  };
+}
+function sourceObservation(version) {
+  return version === '561.international-inventory.v1'
+    ? 'one API response processed by the seller; not independently signed by the World Bank'
+    : 'World Bank API response normalized by the seller';
+}
+
+export function worldBankInventoryLot({ sourceId, fromYear, throughYear, response, observedAt, asOf = new Date().toISOString().slice(0, 10),
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  const sources = admitInternationalSourceDeclarations(sourceDeclarations);
+  const source = qualifyInternationalSource(sourceId, { asOf, sourceDeclarations: sources });
+  if (source.family !== 'world-bank-indicator') throw new TypeError('World Bank series required');
+  const url = worldBankIndicatorURL({ sourceId, fromYear, throughYear, asOf, sourceDeclarations: sources });
+  const records = worldBankSeriesRecords(response, source, fromYear, throughYear);
+  const digest = internationalLotDigest(lotDigestInput(source, fromYear, throughYear, records));
+  const schemaVersion = internationalInventoryVersion(source.id);
+  return {
+    schemaVersion, kind: 'world-bank-indicator',
     sourceId, digest, lotId: `urn:561:international-inventory:${digest.slice(7)}`, observedAt: observed(observedAt),
-    rightsCheckedOn: asOf, metadata: { country: source.country, indicator: source.indicator, title: source.title,
+    rightsCheckedOn: asOf, metadata: { country: source.country,
+      ...(schemaVersion === '561.international-inventory.v1' ? {} : { countryISO3: source.countryISO3 }),
+      indicator: source.indicator, title: source.title,
       unit: source.unit, originalSourceCredit: source.sourceCredit, officialIndicatorUrl: source.rights.indicatorUrl,
       attribution: source.rights.attribution, rights: source.rights, sourceUrl: url,
-      sourceObservation: 'one API response processed by the seller; not independently signed by the World Bank' },
+      sourceObservation: sourceObservation(schemaVersion) },
     request: { fromYear, throughYear }, recordCount: records.length, records,
     sales: { state: 'no-sale-recorded', payment: null, endUserAcceptance: null },
   };
 }
 
 /** Check before a paid offer or deriving a new SKU. */
-export function verifyWorldBankInventoryLot(lot, { asOf = new Date().toISOString().slice(0, 10) } = {}) {
-  if (!lot || lot.kind !== 'world-bank-indicator' || lot.schemaVersion !== '561.international-inventory.v1') throw new TypeError('World Bank lot required');
-  const source = qualifyInternationalSource(lot.sourceId, { asOf });
+export function verifyWorldBankInventoryLot(lot, { asOf = new Date().toISOString().slice(0, 10),
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  if (!lot || lot.kind !== 'world-bank-indicator' || !['561.international-inventory.v1', '561.international-inventory.v2'].includes(lot.schemaVersion)) throw new TypeError('World Bank lot required');
+  const sources = admitInternationalSourceDeclarations(sourceDeclarations);
+  const source = qualifyInternationalSource(lot.sourceId, { asOf, sourceDeclarations: sources });
+  const schemaVersion = internationalInventoryVersion(source.id);
+  if (lot.schemaVersion !== schemaVersion) throw new Error('inventory version does not match the declared source identity');
   if (source.family !== 'world-bank-indicator' || !isDeepStrictEqual(lot.metadata?.rights, source.rights) ||
       lot.rightsCheckedOn > asOf || lot.rightsCheckedOn < source.rights.checkedOn ||
       !isDeepStrictEqual(lot.metadata?.attribution, source.rights.attribution)) {
     throw new Error('source license, edition or attribution not verified');
   }
   const { fromYear, throughYear } = lot.request ?? {};
-  const sourceUrl = worldBankIndicatorURL({ sourceId: lot.sourceId, fromYear, throughYear, asOf });
+  const sourceUrl = worldBankIndicatorURL({ sourceId: lot.sourceId, fromYear, throughYear, asOf, sourceDeclarations: sources });
   if (lot.metadata.sourceUrl !== sourceUrl || lot.metadata.country !== source.country ||
       lot.metadata.indicator !== source.indicator || lot.metadata.unit !== source.unit ||
       lot.metadata.title !== source.title || lot.metadata.originalSourceCredit !== source.sourceCredit ||
       lot.metadata.officialIndicatorUrl !== source.rights.indicatorUrl ||
-      lot.metadata.sourceObservation !== 'one API response processed by the seller; not independently signed by the World Bank') throw new Error('source definition does not match qualified dataset');
+      (schemaVersion === '561.international-inventory.v1' ? Object.hasOwn(lot.metadata, 'countryISO3') : lot.metadata.countryISO3 !== source.countryISO3) ||
+      lot.metadata.sourceObservation !== sourceObservation(schemaVersion)) throw new Error('source definition does not match qualified dataset');
   observed(lot.observedAt);
   if (!Array.isArray(lot.records) || lot.records.length > 500) throw new TypeError('bounded records required');
   let previous = '';
@@ -193,7 +153,7 @@ export function verifyWorldBankInventoryLot(lot, { asOf = new Date().toISOString
     if (r.value !== null && (typeof r.value !== 'number' || !Number.isFinite(r.value))) throw new TypeError('nonfinite value');
     previous = r.year;
   }
-  const digest = internationalLotDigest({ sourceId: lot.sourceId, fromYear, throughYear, records: lot.records, rights: source.rights });
+  const digest = internationalLotDigest(lotDigestInput(source, fromYear, throughYear, lot.records));
   if (digest !== lot.digest || lot.lotId !== `urn:561:international-inventory:${digest.slice(7)}` ||
       lot.recordCount !== lot.records.length) throw new Error('World Bank lot digest or record count does not verify');
   if (lot.sales?.state !== 'no-sale-recorded' || lot.sales.payment !== null || lot.sales.endUserAcceptance !== null) {
@@ -203,19 +163,22 @@ export function verifyWorldBankInventoryLot(lot, { asOf = new Date().toISOString
 }
 
 export async function acquireWorldBankSeries({ sourceId, fromYear, throughYear, fetchImpl = fetch,
-  observedAt = new Date().toISOString(), asOf = new Date().toISOString().slice(0, 10) } = {}) {
-  const url = worldBankIndicatorURL({ sourceId, fromYear, throughYear, asOf });
+  observedAt = new Date().toISOString(), asOf = new Date().toISOString().slice(0, 10),
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  const sources = admitInternationalSourceDeclarations(sourceDeclarations);
+  const url = worldBankIndicatorURL({ sourceId, fromYear, throughYear, asOf, sourceDeclarations: sources });
   const reply = await fetchImpl(url, { method: 'GET', redirect: 'error', headers: { accept: 'application/json' } });
   if (!reply?.ok) throw new Error(`World Bank upstream HTTP ${reply?.status}; no inventory acquired`);
   if (!/application\/json/u.test(reply.headers?.get('content-type') ?? '')) throw new Error('World Bank did not supply JSON');
   const body = await reply.text();
   if (Buffer.byteLength(body, 'utf8') > MAX_JSON_BYTES) throw new Error('World Bank source exceeds admission byte limit');
-  return worldBankInventoryLot({ sourceId, fromYear, throughYear, response: JSON.parse(body), observedAt, asOf });
+  return worldBankInventoryLot({ sourceId, fromYear, throughYear, response: JSON.parse(body), observedAt, asOf, sourceDeclarations: sources });
 }
 
 /** A climate *candidate*, not fetched/hashed raster bytes or saleable inventory. */
-export function chirpsV3AfricaAsset({ day, variant = 'rnl', asOf = new Date().toISOString().slice(0, 10) } = {}) {
-  const source = qualifyInternationalSource('chirps3-africa-rainfall', { asOf });
+export function chirpsV3AfricaAsset({ day, variant = 'rnl', asOf = new Date().toISOString().slice(0, 10),
+  sourceDeclarations = INTERNATIONAL_SOURCES } = {}) {
+  const source = qualifyInternationalSource('chirps3-africa-rainfall', { asOf, sourceDeclarations });
   date(day, 'day');
   if (day > asOf) throw new RangeError('cannot claim future source file availability');
   if (!['rnl', 'sat'].includes(variant)) throw new TypeError('CHIRPS daily variant must be rnl or sat');

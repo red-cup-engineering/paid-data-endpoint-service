@@ -4,6 +4,14 @@ on:
     branches:
       - main
       - feat/federal-register-source-editions-public-20261024
+      - feat/source-qualified-comment-date-window-20261024
+    paths:
+      - ".github/workflows/publish-federal-register-source-editions.yml"
+      - "scripts/publish-federal-register-source-editions.mjs"
+      - "src/federal-register-inventory.mjs"
+      - "src/federal-register-source-witness.mjs"
+      - "src/federal-register-newswire-supply.mjs"
+  pull_request:
     paths:
       - ".github/workflows/publish-federal-register-source-editions.yml"
       - "scripts/publish-federal-register-source-editions.mjs"
@@ -55,14 +63,23 @@ jobs:
                d.source.originalResponseDigest.startsWith("sha256:")) ||
              !Array.isArray(events) || !events.every(e=>e.specversion==="1.0" && e.source==="https://www.federalregister.gov") ||
              deadlines.kind!=="561.newswire.federal-register-comment-deadlines.v1" ||
+             deadlines.sourceQuery?.commentCloseFrom!==published.query.until ||
+             deadlines.sourceQuery?.commentCloseBy===undefined ||
+             !Array.isArray(deadlines.sourcePages) ||
+             !deadlines.sourcePages.every(page=>/^sha256:[a-f0-9]{64}$/.test(page.rawResponseDigest)) ||
+             deadlines.recordCount!==deadlines.records.length ||
              changes.kind!=="561.newswire.source-edition-changes.v1")
             throw new Error("real source product's original receiving boundary refused");
           console.log(JSON.stringify({
             event:"source-qualified-public-product-received",documents:published.documentCount,
             commentDeadlines:deadlines.recordCount,editionsChanged:changes.newOrChangedCount,
             officialSourcePages:published.sourcePages.length,completeWindow:published.coverage.complete,
-            sourceDecodedBytes:published.costs.decodedResponseBytes,
-            sourceNetworkCalls:published.costs.networkRequests,
+            deadlineSourcePages:deadlines.sourcePages.length,
+            deadlineSourceCoverage:deadlines.sourceCoverage.complete,
+            deadlineSourceWindow:deadlines.sourceQuery,
+            sourceObservedDeadlineUnits:deadlines.recordCount,
+            sourceDecodedBytes:published.costs.decodedResponseBytes+deadlines.sourceAcquisitionCosts.decodedResponseBytes,
+            sourceNetworkCalls:published.costs.networkRequests+deadlines.sourceAcquisitionCosts.networkRequests,
             editorialApproval:false,merchantSettlement:false,realBuyerReceived:false,
           }));
           NODE
@@ -82,7 +99,11 @@ jobs:
             echo "Original public edition already matches selected source"
           else
             git commit -m 'Refresh actual original Federal Register Newswire data and source-event editions'
-            git push origin HEAD:main
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+            done
           fi
           git ls-remote origin refs/heads/main
           echo 'Original source changes accepted; paid Newswire approval and outside settlement remain separate.'

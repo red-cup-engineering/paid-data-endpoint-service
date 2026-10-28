@@ -90,14 +90,25 @@ function apiURL(value) {
 }
 
 /** Construct ONLY the official documents API URL. No arbitrary external URLs. */
-export function federalRegisterSearchURL({ since, until, term, agency, perPage = 50, page = 1, profile } = {}) {
+export function federalRegisterSearchURL({ since, until, commentCloseFrom, commentCloseBy, term, agency, perPage = 50, page = 1, profile } = {}) {
   if (profile !== undefined && profile !== "regulatory-decision") {
     throw new TypeError("Federal Register source profile must be regulatory-decision or absent");
   }
-  date(since, "since");
+  // A genuine comment-date query is a different Federal Register source
+  // slice from a *publication*-date query. Agents must not infer that a
+  // comment window opened during the latest publication lookback period.
+  if (since === undefined && commentCloseFrom === undefined)
+    throw new TypeError("Federal Register source query needs a publication date or comment-close date");
+  if (since !== undefined) date(since, "since");
   if (until !== undefined) {
     date(until, "until");
-    if (until < since) throw new RangeError("until must not precede since");
+    if (since === undefined || until < since) throw new RangeError("until needs a non-inverted publication range");
+  }
+  if (commentCloseFrom !== undefined) date(commentCloseFrom, "commentCloseFrom");
+  if (commentCloseBy !== undefined) {
+    date(commentCloseBy, "commentCloseBy");
+    if (commentCloseFrom === undefined || commentCloseBy < commentCloseFrom)
+      throw new RangeError("comment-close upper date needs an admitted non-inverted comment-close range");
   }
   if (!Number.isInteger(perPage) || perPage < 1 || perPage > MAX_RESULTS) {
     throw new RangeError(`perPage must be between 1 and ${MAX_RESULTS}`);
@@ -108,8 +119,10 @@ export function federalRegisterSearchURL({ since, until, term, agency, perPage =
     throw new RangeError("requested page exceeds the API 2,000-result pagination window");
   }
   const url = new URL(ENDPOINT);
-  url.searchParams.set("conditions[publication_date][gte]", since);
+  if (since !== undefined) url.searchParams.set("conditions[publication_date][gte]", since);
   if (until !== undefined) url.searchParams.set("conditions[publication_date][lte]", until);
+  if (commentCloseFrom !== undefined) url.searchParams.set("conditions[comment_date][gte]", commentCloseFrom);
+  if (commentCloseBy !== undefined) url.searchParams.set("conditions[comment_date][lte]", commentCloseBy);
   if (term !== undefined) url.searchParams.set("conditions[term]", boundedText(term, "term", 200));
   if (agency !== undefined) {
     const slug = boundedText(agency, "agency", 150);

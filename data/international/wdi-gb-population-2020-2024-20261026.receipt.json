@@ -1,0 +1,16 @@
+{
+  "url": "https://api.worldbank.org/v2/country/GB/indicator/SP.POP.TOTL?format=json&date=2020%3A2024&per_page=200&page=1",
+  "status": 200,
+  "contentType": "application/json;charset=utf-8",
+  "observedAt": "2026-10-26T04:47:57.455Z",
+  "sourceBytes": 1106,
+  "sourceSha256": "3555f30e6a9c2c381a7d957c594794b8e791a9c15d2b90ffcc0483f7a1311947",
+  "lotDigest": "sha256:692993d90a5ce5c2815c6c491c301d339b18258032eea1143b64f2ad82d6b1b7",
+  "recordCount": 5,
+  "sourceId": "wdi-gb-population",
+  "definitionFile": "data/source-declarations/international.json",
+  "lotFile": "data/international/wdi-gb-population-2020-2024-20261026.lot.json",
+  "sourceFile": "data/international/wdi-gb-population-2020-2024-20261026.source.json",
+  "reviewedIndicatorUrl": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=GB",
+  "reviewedTermsUrl": "https://data.worldbank.org/summary-terms-of-use"
+}

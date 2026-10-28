@@ -1,0 +1,41 @@
+name: Qualify source-bound agricultural metadata and NASS adapter
+on:
+  pull_request:
+    paths:
+      - 'src/agricultural-*.mjs'
+      - 'test/agricultural-source.test.mjs'
+      - 'data/records/agricultural-sources/**'
+      - 'package.json'
+      - '.github/workflows/agricultural-source.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/agricultural-*.mjs'
+      - 'test/agricultural-source.test.mjs'
+      - 'data/records/agricultural-sources/**'
+      - '.github/workflows/agricultural-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-source-admission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '24.2.0'
+          package-manager-cache: false
+      - name: Run source admission, NASS response and existing Federal Register regressions
+        run: |
+          set -euo pipefail
+          node --check src/agricultural-source-admission.mjs
+          node --check src/agricultural-nass.mjs
+          node --check src/agricultural-nass-cli.mjs
+          node --check test/agricultural-source.test.mjs
+          node --test test/agricultural-source.test.mjs test/federal-register-inventory.test.mjs
+      - name: Preserve real-source and merchant nonreceiving boundary
+        run: echo 'Source admission tests do not establish a credentialed live NASS acquisition, redistributed dataset, approved Newswire, external x402 buyer, or revenue.' >> "$GITHUB_STEP_SUMMARY"
