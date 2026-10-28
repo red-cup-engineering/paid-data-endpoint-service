@@ -1,0 +1,85 @@
+name: Retire verified contained paid-data source branches
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retire-contained-paid-data-branches-20261028.yml']
+permissions:
+  contents: write
+concurrency:
+  group: 561-paid-data-contained-branch-retirement
+  cancel-in-progress: false
+jobs:
+  retire-contained-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Verify current Git containment, absence of open PR, and retire only exact branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const repo=process.env.REPOSITORY;
+          if(repo!=='red-cup-engineering/paid-data-endpoint-service')throw Error('wrong original source owner');
+          const branches=[
+            "chore/pnpm-conversion",
+            "design/data-source-edition-contract-20261026",
+            "earn/regulatory-watch-concurrent-supplier-20261026",
+            "earn/regulatory-watch-deadline-order-20261026",
+            "earn/regulatory-watch-deadline-supply-20261026",
+            "earn/regulatory-watch-edge-fetch-20261026",
+            "earn/regulatory-watch-source-budget-20261026",
+            "earn/regulatory-watch-supplier-20261026",
+            "feat/declarative-international-data-20261026",
+            "feat/newswire-subscription-access-20261025",
+            "feat/newswire-subscription-http-20261025",
+            "normalize/eavt-data-law-20261026",
+            "feat/arxiv-domain-search-oai-20261027"
+          ];
+          const base='https://api.github.com/repos/'+repo;
+          const heads={'Accept':'application/vnd.github+json','Authorization':'Bearer '+process.env.GH_TOKEN,
+            'X-GitHub-Api-Version':'2022-11-28'};
+          async function api(path,method='GET'){
+            const r=await fetch(base+path,{method,headers:heads});
+            let data=null;try{data=await r.json()}catch{}
+            return {status:r.status,data};
+          }
+          const repoInfo=await api('');
+          if(repoInfo.status!==200||repoInfo.data?.default_branch!=='main')throw Error('wrong current default branch');
+          const prs=await api('/pulls?state=open&per_page=100');
+          if(prs.status!==200||!Array.isArray(prs.data)||prs.data.length>=100)
+            throw Error('open PR inventory unavailable or incomplete');
+          const active=new Set(prs.data.filter(p=>p.head?.repo?.full_name===repo).map(p=>p.head.ref));
+          const results=[];
+          for(const branch of branches){
+            if(branch==='main'||active.has(branch)){
+              results.push({branch,retired:false,reason:'default or open PR'});continue;
+            }
+            const encoded=branch.split('/').map(encodeURIComponent).join('/');
+            const before=await api('/git/ref/heads/'+encoded);
+            if(before.status===404){results.push({branch,retired:true,reason:'already absent'});continue;}
+            if(before.status!==200||!before.data?.object?.sha){results.push({branch,retired:false,reason:'ref unreadable'});continue;}
+            const expected=before.data.object.sha;
+            const compared=await api('/compare/main...'+encodeURIComponent(branch));
+            if(compared.status!==200||compared.data?.ahead_by!==0||
+               compared.data?.head_commit?.sha!==expected){
+              results.push({branch,retired:false,reason:'unqualified containment or changed source',
+                ahead:compared.data?.ahead_by,behind:compared.data?.behind_by});continue;
+            }
+            const recheck=await api('/git/ref/heads/'+encoded);
+            if(recheck.status!==200||recheck.data?.object?.sha!==expected){
+              results.push({branch,retired:false,reason:'head moved before deletion'});continue;
+            }
+            const deleted=await api('/git/refs/heads/'+encoded,'DELETE');
+            const absence=await api('/git/ref/heads/'+encoded);
+            results.push({branch,retired:deleted.status===204&&absence.status===404,
+              deleteStatus:deleted.status,readbackStatus:absence.status,
+              retainedOnMain:true,originalHead:expected});
+          }
+          console.log(JSON.stringify({kind:'561.github.retire-contained-branches.v1',repo,
+            candidates:branches.length,retired:results.filter(r=>r.retired).length,results},null,2));
+          if(results.some(r=>!r.retired))process.exitCode=1;
+          NODE
+      - name: Refuse to equate branch deletion with customer delivery
+        run: echo 'Only commit-contained refs were retired; original open source, HITS, x402 and accepted customer Work remain separately owed.' >> "$GITHUB_STEP_SUMMARY"
