@@ -51,7 +51,7 @@ test("outsider collections, including traditional UNIX archives, default to righ
     ...original, sourceKind: "third-party",
     source: { name: "Unverified traditional fortune file", url: "https://example.org/fortunes" },
   };
-  assert.throws(() => qualifyShortTextPack(thirdParty), /dated, identified, evidenced rights review/);
+  assert.throws(() => qualifyShortTextPack(thirdParty), /imported entry is missing rights evidence/);
   thirdParty.rights = {basis: "item-by-item-license-review", commercialDelivery:true,
     redistribution:true, reviewedBy:"test-reviewer", reviewedOn:"2026-10-22",
     sourceLicenseEvidence:"https://example.org/license"};
