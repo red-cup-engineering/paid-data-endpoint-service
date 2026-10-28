@@ -58,3 +58,28 @@ The `./paid-newswire-query` export composes the **existing Newswire's** qualifie
 ## Agricultural data: original weather reuse, source-qualified NASS, and agent discovery
 
 `./agricultural-source-admission` reads two original machine-readable candidate source declarations for USDA NASS Quick Stats and existing NOAA/NWS weather. It projects **DCAT 3-style candidate discovery**, distinguishing the original publisher, as-yet-unacquired data and **commercial redistribution still held for review**. `./agricultural-nass` and the `acquire-agricultural-nass` CLI perform a bounded, credentialed actual NASS count/data retrieval, original content-addressed source custody/readback, unit-aware normalization and preservation of suppressed observations—**not** a paid dataset or approved Newswire release. Reuse original Forecasting for weather rather than fetching it twice. [Research, requirements, rights, service economics and operator runbook](docs/AGRICULTURAL-DATA.md). No farmer sensor connectors, buyer sales, royalty commitments, original Newsroom approval, live deployed application or source-production qualification are claimed by the introduction of these modules.
+
+## Qualified short-text merchandise: original fortunes first
+
+The new `./qualified-short-text-inventory` export is a **general product
+source**, not another payment provider. It admits content-addressed packs with
+source-class-specific commercial rights; parses the traditional Unix
+percent-separated `fortune` format without assuming distribution rights; and
+samples uniformly from exactly one approved edition and optional tag.
+`createQualifiedShortTextShelf` provides a finite, digest-pinned multi-corpus registry with precompiled topic indexes, rights reauthorization on both purchase admission and delivery, and a 20,000-entry/4 MiB capacity guard.
+Third-party entries need individually evidenced rights, while unknown and
+expired rights refuse.
+
+The first source-owned consumer is `./fortune-product`: fifty newly composed
+Unix-style fortunes, simultaneously available as an actual percent-delimited Unix fortune textfile in `data/fortunes/561-original-october-2026.fortune`, sold only through a future ordinary x402 Market compute
+binding (`drawRandomFortune` after the existing payment boundary and
+`admitRandomFortuneQuery` before it). Reuse the canonical merchant's
+facilitator, wallet authority, receipt and process-window cost meter. Neither
+this source nor its manifest reports a deployed market route, a signed
+payment, a sold fortune or earned cash. Read
+[the rights, source and market admission contract](docs/FORTUNE-LICENSED-TEXT-SELLING.md)
+and run `node --test test/qualified-short-text-inventory.test.mjs`.
+
+This same corpus/selection law supports future licensed proverbs, idioms,
+chengyu and glossary snippets without one-off payment stacks or an unjustified
+blanket license on traditional collections.
