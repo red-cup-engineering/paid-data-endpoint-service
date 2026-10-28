@@ -20,6 +20,9 @@ permissions:
   contents: read
 jobs:
   native-source-contract:
+    concurrency:
+      group: original-561-arxiv-legacy-metadata-receiving
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -41,6 +44,69 @@ jobs:
           npm install --ignore-scripts --no-audit --no-fund --registry=https://registry.561.group/
           npm ls @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
           node --test test/arxiv-oai-integration.test.mjs
+      - name: Receive one actual arXiv OAI source page into immutable original custody
+        env:
+          ARXIV_OAI_CUSTODY: ${{ runner.temp }}/original-arxiv-oai-bytes
+          ARXIV_OAI_RECEIPT: ${{ runner.temp }}/arxiv-oai-source-receipt.json
+        run: |
+          set -euo pipefail
+          mkdir -p "$ARXIV_OAI_CUSTODY"
+          node --input-type=module <<'NODE'
+          import assert from "node:assert/strict";
+          import { readFile, writeFile } from "node:fs/promises";
+          import { setTimeout as sleep } from "node:timers/promises";
+          import { acquireArxivOaiPage, arxivNewswireCandidates } from "./src/arxiv-oai-source.mjs";
+          // This job owns exactly one request and serializes its own arXiv polling.
+          // Other machines MUST share an independently qualified Group-level lease.
+          const rateGate = async ({provider,minimumIntervalMs,maxConnections}) => {
+            assert.equal(provider,"arxiv-legacy");
+            assert.equal(minimumIntervalMs,3000);
+            assert.equal(maxConnections,1);
+            await sleep(3100);
+            return async () => { await sleep(3100); };
+          };
+          const page = await acquireArxivOaiPage({
+            set:"math:math:CT",
+            from:"2026-10-26",
+            root:process.env.ARXIV_OAI_CUSTODY,
+            rateGate,
+          });
+          assert.ok(page.records.length>0,"real dated source page shall contain at least one article");
+          assert.ok(page.records.every(r=>r.subject.startsWith("arxiv:") && r.url.startsWith("https://arxiv.org/abs/")));
+          const raw = await readFile(process.env.ARXIV_OAI_CUSTODY+"/"+page.sourceDigest.slice(7));
+          assert.equal(raw.byteLength,page.sourceBytes);
+          const candidates = arxivNewswireCandidates(page);
+          assert.equal(candidates.editorialStatus,"not-approved");
+          assert.equal(candidates.candidates.length,page.records.length);
+          const receipt = {
+            kind:"561.newswire.arxiv-oai-actual-source-receipt.v1",
+            source:page.requestUrl,
+            sourceBytes:page.sourceBytes,
+            sourceDigest:page.sourceDigest,
+            sourceTime:page.responseDate,
+            observedAt:page.observedAt,
+            numberOfActualRecords:page.records.length,
+            sourceComplete:page.complete,
+            tokenPresent:!!page.resumptionToken,
+            firstRecord:page.records[0],
+            editorialAccepted:false,
+            distributedFleetRateGateReceived:false,
+            installedWatch:false,
+            x402CustomerPayment:false
+          };
+          await writeFile(process.env.ARXIV_OAI_RECEIPT,JSON.stringify({receipt,candidates},null,2)+"\\n");
+          console.log(JSON.stringify(receipt,null,2));
+          NODE
+      - name: Preserve original arXiv response and unapproved source packets
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-arxiv-oai-metadata-source-receiving
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/arxiv-oai-source-receipt.json
+            ${{ runner.temp }}/original-arxiv-oai-bytes/
       - name: Declare nonreceipt boundaries
         run: |
           echo "Successful native XML integration is not a live OAI host, distributed rate gate, accepted newsroom source, persisted subscription, or x402 settlement." >> "$GITHUB_STEP_SUMMARY"
