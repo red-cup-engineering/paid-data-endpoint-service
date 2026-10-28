@@ -1,0 +1,44 @@
+name: Verify received declarative international data source and x402 boundary
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/international-*.mjs'
+      - 'src/international-data-inventory-cli.mjs'
+      - 'data/source-declarations/international*'
+      - 'data/international/**'
+      - 'test/international-*.test.mjs'
+      - '.github/workflows/verify-international-source-data.yml'
+  pull_request:
+    paths:
+      - 'src/international-*.mjs'
+      - 'src/international-data-inventory-cli.mjs'
+      - 'data/source-declarations/international*'
+      - 'data/international/**'
+      - 'test/international-*.test.mjs'
+      - '.github/workflows/verify-international-source-data.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-buyer-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '24.2.0'
+          package-manager-cache: false
+      - name: Validate original source, declarations, and consumer acceptance tests
+        run: |
+          set -euo pipefail
+          node --check src/international-data-inventory.mjs
+          node --check src/international-paid-read.mjs
+          node --check src/international-source-declarations.mjs
+          node --check src/international-data-inventory-cli.mjs
+          node --test test/international-data-inventory.test.mjs test/international-paid-read.test.mjs test/international-source-declarations.test.mjs test/federal-register-inventory.test.mjs
+      - name: Preserve nonreceiving of commercial merchant
+        run: echo 'Native data, rights and paid-boundary tests do not prove live external purchase, current third-party terms, installed x402 merchant, or customer acceptance.' >> "$GITHUB_STEP_SUMMARY"
