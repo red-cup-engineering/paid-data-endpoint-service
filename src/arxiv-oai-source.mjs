@@ -231,9 +231,23 @@ export function advanceArxivWatch(previous = [], page) {
     const old=bySubject.get(row.subject);
     if (old?.editionDigest===row.editionDigest) continue;
     if (old && old.datestamp > row.datestamp) fail('stale OAI record must not replace newer metadata');
-    if (old && old.datestamp===row.datestamp) fail('contested source editions share an OAI datestamp');
-    bySubject.set(row.subject,row);
-    changes.push(Object.freeze({kind:!old?'observed':row.status==='deleted-from-oai'?'deleted-from-oai':'revised',subject:row.subject,
+    // OAI datestamps are DAYS, not unique ordered revisions. A genuine same-day
+    // replacement is admissible only if BOTH versions carry source-byte witnesses
+    // and the second OAI server response actually follows the first.
+    const witnessed = page.sourceKind === 'arxiv-oai-metadata-candidates' &&
+      page.editorialStatus === 'not-approved' && /^sha256:[a-f0-9]{64}$/.test(page.sourceDigest ?? '') &&
+      typeof page.responseDate === 'string' && !Number.isNaN(Date.parse(page.responseDate));
+    if (old?.sourceResponseAt && witnessed && page.responseDate < old.sourceResponseAt)
+      fail('stale OAI source response must not replace newer witnessed metadata');
+    const sameDay = !!old && old.datestamp === row.datestamp;
+    if (sameDay && !(witnessed && old.sourceResponseAt && old.sourceDigest &&
+        page.responseDate > old.sourceResponseAt))
+      fail('contested source editions share an OAI datestamp without ordered source witnesses');
+    const received = witnessed ? Object.freeze({...row, sourceResponseAt:page.responseDate,
+      sourceDigest:page.sourceDigest}) : row;
+    bySubject.set(row.subject,received);
+    changes.push(Object.freeze({kind:!old?'observed':row.status==='deleted-from-oai'?'deleted-from-oai':
+      sameDay?'revised-within-oai-day':'revised',subject:row.subject,
       editionDigest:row.editionDigest,priorDigest:old?.editionDigest??null}));
   }
   return Object.freeze({records:Object.freeze([...bySubject.values()].sort((a,b)=>a.subject.localeCompare(b.subject))),
