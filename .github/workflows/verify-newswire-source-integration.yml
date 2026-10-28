@@ -1,0 +1,57 @@
+name: Verify original Newswire data custody and x402 source integration
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/federal-register-*.mjs'
+      - 'src/newswire-*.mjs'
+      - 'src/paid-newswire-query.mjs'
+      - 'src/content-addressed-directory.mjs'
+      - 'src/atomic-text.mjs'
+      - 'scripts/publish-federal-register-source-editions.mjs'
+      - 'test/federal-register-*.test.mjs'
+      - 'test/paid-newswire-query.test.mjs'
+      - 'test/bounded-writes.test.mjs'
+      - '.github/workflows/verify-newswire-source-integration.yml'
+  pull_request:
+    paths:
+      - 'src/federal-register-*.mjs'
+      - 'src/newswire-*.mjs'
+      - 'src/paid-newswire-query.mjs'
+      - 'src/content-addressed-directory.mjs'
+      - 'src/atomic-text.mjs'
+      - 'scripts/publish-federal-register-source-editions.mjs'
+      - 'test/federal-register-*.test.mjs'
+      - 'test/paid-newswire-query.test.mjs'
+      - 'test/bounded-writes.test.mjs'
+      - '.github/workflows/verify-newswire-source-integration.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-and-merchant-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '24.2.0'
+          package-manager-cache: false
+      - name: Check source syntax and original consumer boundaries
+        run: |
+          set -euo pipefail
+          node --check src/federal-register-inventory.mjs
+          node --check src/federal-register-source-witness.mjs
+          node --check src/federal-register-newswire-supply.mjs
+          node --check src/newswire-release-store.mjs
+          node --check src/newswire-commerce.mjs
+          node --check src/paid-newswire-query.mjs
+          node --check src/content-addressed-directory.mjs
+          node --check src/atomic-text.mjs
+          node --check scripts/publish-federal-register-source-editions.mjs
+          node --test test/federal-register-inventory.test.mjs test/federal-register-paid-read.test.mjs test/paid-newswire-query.test.mjs test/bounded-writes.test.mjs
+      - name: Separate source receiving from installed merchant and external buyer
+        run: echo 'These source and buyer-boundary tests are not proof of a live x402 customer, current source rights, published Newsroom approval, subscription delivery or merchant settlement.' >> "$GITHUB_STEP_SUMMARY"
