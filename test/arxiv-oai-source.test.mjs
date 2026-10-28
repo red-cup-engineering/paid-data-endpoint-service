@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import {
   arxivOaiListUrl, parseArxivOaiDocument, acquireArxivOaiPage,
   advanceArxivWatch, arxivNewswireCandidates,
-} from '../arxiv-oai-source.mjs';
+} from '../src/arxiv-oai-source.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const el=(name,attrs={},...children)=>({kind:'element',name,attributes:attrs,children:children.flat()});
