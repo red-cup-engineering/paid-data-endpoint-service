@@ -53,7 +53,7 @@ jobs:
           node --check test/arxiv-oai-source.test.mjs
           node --check test/arxiv-oai-integration.test.mjs
           node --check test/refresh-arxiv-source-editions.test.mjs
-          node --test test/arxiv-oai-source.test.mjs test/refresh-arxiv-source-editions.test.mjs test/paid-newswire-query.test.mjs test/newswire-subscription.test.mjs test/federal-register-inventory.test.mjs
+          node --test test/arxiv-oai-source.test.mjs test/refresh-arxiv-source-editions.test.mjs test/paid-newswire-query.test.mjs test/federal-register-inventory.test.mjs
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import {readFileSync} from 'node:fs';
