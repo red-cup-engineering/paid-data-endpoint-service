@@ -159,3 +159,22 @@ test('source XML is retained before normalization refusal; redirects and bad MIM
   await assert.rejects(acquireArxivOaiPage({...input,fetchImpl:async()=>new Response(xml,{status:503,headers:{'content-type':'text/xml'}})}),/HTTP 503/);
   await assert.rejects(acquireArxivOaiPage({...input,maxBytes:1024,fetchImpl:async()=>new Response(Buffer.alloc(1200),{status:200,headers:{'content-type':'text/xml'}})}),/limit exceeded/);
 });
+
+// The source actually changes metadata within some days; day-level OAI timestamps
+// alone cannot order those records. A source-response witness can.
+test('same-day original metadata revision requires ordered independently witnessed source responses',()=>{
+  const original=parseArxivOaiDocument(page());
+  const newer=parseArxivOaiDocument(page([paper({title:'Better proof of sheaf closure'})]));
+  const witness=(p,at,digest)=>({...p,sourceKind:'arxiv-oai-metadata-candidates',
+    editorialStatus:'not-approved',sourceDigest:'sha256:'+digest.repeat(64),responseDate:at});
+  const first=advanceArxivWatch([],witness(original,'2026-10-27T12:00:00Z','a'));
+  const next=witness(newer,'2026-10-27T12:10:00Z','b');
+  const replaced=advanceArxivWatch(first.records,next);
+  assert.equal(replaced.changes[0].kind,'revised-within-oai-day');
+  assert.equal(replaced.records[0].sourceResponseAt,'2026-10-27T12:10:00Z');
+  assert.equal(replaced.records[0].sourceDigest,'sha256:'+'b'.repeat(64));
+  assert.deepEqual(advanceArxivWatch(replaced.records,next).changes,[]);
+  assert.throws(()=>advanceArxivWatch(replaced.records,witness(original,'2026-10-27T11:59:00Z','c')),/stale OAI source response/);
+  assert.throws(()=>advanceArxivWatch(first.records,witness(newer,'2026-10-27T12:00:00Z','d')),/contested source/);
+  assert.throws(()=>advanceArxivWatch(first.records,newer),/contested source/);
+});
