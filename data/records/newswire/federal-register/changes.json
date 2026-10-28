@@ -1,8 +1,8 @@
 {
   "kind": "561.newswire.source-edition-changes.v1",
-  "observedAt": "2026-10-27T22:27:13.529Z",
+  "observedAt": "2026-10-28T05:58:27.463Z",
   "newOrChangedCount": 0,
-  "disappearedFromRollingQueryCount": 0,
+  "disappearedFromRollingQueryCount": 82,
   "disappearanceMeaning": "No withdrawal is inferred from a document leaving the rolling date window.",
   "changes": []
 }
