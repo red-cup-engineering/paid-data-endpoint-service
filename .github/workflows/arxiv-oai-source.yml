@@ -41,8 +41,10 @@ jobs:
           node --test test/arxiv-oai-source.test.mjs
       - name: Receive exact declared XML reader dependency and native OAI integration
         run: |
-          npm install --ignore-scripts --no-audit --no-fund --registry=https://registry.561.group/
-          npm ls @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
+          mkdir -p "$RUNNER_TEMP/arxiv-xml" node_modules/@red-cup-engineering
+          timeout 120s npm install --prefix "$RUNNER_TEMP/arxiv-xml" --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000 --registry=https://registry.561.group/ @red-cup-engineering/xml-document-rendering-service@0.1.7
+          npm ls --prefix "$RUNNER_TEMP/arxiv-xml" @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
+          ln -s "$RUNNER_TEMP/arxiv-xml/node_modules/@red-cup-engineering/xml-document-rendering-service" node_modules/@red-cup-engineering/xml-document-rendering-service
           node --test test/arxiv-oai-integration.test.mjs
       - name: Receive one actual arXiv OAI source page into immutable original custody
         env:
