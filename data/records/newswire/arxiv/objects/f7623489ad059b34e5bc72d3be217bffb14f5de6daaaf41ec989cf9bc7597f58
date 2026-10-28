@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-10-28T11:34:49Z</responseDate>
+                <request verb="ListRecords" metadataPrefix="arXiv" from="2026-10-27" set="math:math:CT">http://oaipmh.arxiv.org/oai</request>
+
+
+    <ListRecords>
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:1701.06238</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:DG</setSpec>
+            <setSpec>physics:math-ph</setSpec>
+            <setSpec>math:math:MP</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>1701.06238</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Khavkine</keyname>
+                        <forenames>Igor</forenames>
+                </author>
+                <author>
+                    <keyname>Schreiber</keyname>
+                        <forenames>Urs</forenames>
+                </author>
+        </authors>
+        <title>Synthetic geometry of differential equations: I. Jets and comonad structure</title>
+            <categories>math.DG math-ph math.CT math.MP</categories>
+            <comments>72 pages, xypic and tikzcd commutative diagrams; v2: minor technical revisions, close to published version</comments>
+            <msc-class>51K10, 58A03, 58A20</msc-class>
+            <journal-ref>Journal of Geometry and Physics v.231 (2027) p.106025</journal-ref>
+            <doi>10.1016/j.geomphys.2026.106025</doi>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>We give an abstract formulation of the formal theory partial differential equations (PDEs) in synthetic differential geometry, one that would seamlessly generalize the traditional theory to a range of enhanced contexts, such as super-geometry, higher (stacky) differential geometry, or even a combination of both. A motivation for such a level of generality is the eventual goal of solving the open problem of covariant geometric pre-quantization of locally variational field theories, which may include fermions and (higher) gauge fields. (abridged)</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2311.14261</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2311.14261</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Hou</keyname>
+                        <forenames>Huijun</forenames>
+                </author>
+                <author>
+                    <keyname>Li</keyname>
+                        <forenames>Qingguo</forenames>
+                </author>
+        </authors>
+        <title>Commutation of Smyth and Hoare Power Constructions in Well-filtered Dcpos</title>
+            <categories>math.CT</categories>
+            <proxy>LMCS</proxy>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Prior work [11] established a commutativity result for the Hoare power construction and a modified version of the Smyth power construction consisting of strongly compact sets, which is defined for Us-admitting dcpos, where Us-admissability is well-filteredness with compact sets replaced by strongly compact sets. In this paper, we consider the Hoare power construction H and the Smyth power construction Q on the category WF of well-filtered dcpos with Scott-continuous maps. Actually, the functors H and Q can be extended to monads. We prove that H and Q commute, that is, HQ(L) is isomorphic to QH(L) for a well-filtered dcpo L, if and only if L satisfies a property similar to consonance that we call (KC) and the Scott topology coincides with the upper Vietoris topology on Q(L). We also investigate the Eilenberg-Moore category of the monad composed by H and Q under a distributive law on WF and characterize it to be a subcategory of the category Frm, which is composed of all frames and all frame homomorphisms.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2403.17961</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>cs:cs:LO</setSpec>
+            <setSpec>math:math:LO</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2403.17961</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Swan</keyname>
+                        <forenames>Andrew W.</forenames>
+                </author>
+        </authors>
+        <title>A categorical formulation of Kraus&#39; paradox</title>
+            <categories>math.CT cs.LO math.LO</categories>
+            <proxy>LMCS</proxy>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>We give a categorical formulation of Kraus&#39; &#34;magic trick&#34; for recovering information from truncated types. Rather than type theory, we work in Van den Berg-Moerdijk path categories with a univalent universe, and rather than propositional truncation we work with arbitrary cofibrations, which includes truncation as a special case. We show, using Kraus&#39; argument that any cofibration with homogeneous domain is a monomorphism. We give some simple concrete examples in groupoids to illustrate the interaction between homogeneous types, cofibrations and univalent fibrations.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2412.13123</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2412.13123</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Batista</keyname>
+                        <forenames>Eliezer</forenames>
+                </author>
+                <author>
+                    <keyname>Castro</keyname>
+                        <forenames>Felipe Lopes</forenames>
+                </author>
+                <author>
+                    <keyname>Khrypchenko</keyname>
+                        <forenames>Mykola</forenames>
+                </author>
+        </authors>
+        <title>Partial actions of groups on monoidal categories</title>
+            <categories>math.CT math.RT</categories>
+            <comments>50 pages</comments>
+            <msc-class>18M05, 18D25</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>In this work, we introduce the notion of a partial action of a group on a strict monoidal category. We propose, in the context of Monoidal categories, new constructions analogous to those existing for partial group actions over an algebra such as the globalization, the subalgebra of partial invariants, and the partial smash product.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2505.22832</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:AT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2505.22832</id>
+        <created>2026-10-24</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Marx</keyname>
+                        <forenames>Sophia E</forenames>
+                </author>
+                <author>
+                    <keyname>Mehta</keyname>
+                        <forenames>Rajan Amit</forenames>
+                </author>
+        </authors>
+        <title>2-Segal sets and pseudomonoids in the bicategory of spans</title>
+            <categories>math.CT math.AT</categories>
+            <comments>v2: Numerous changes, incorporating referee comments. Most notable changes are the addition of Section 6.1 and Example 6.6. To appear in Boletín de Matemáticas</comments>
+            <msc-class>18B10, 18B40, 18C40, 18N50</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>In this survey article, we give an introduction to the notion of a 2-Segal set and prove that 2-Segal sets are equivalent to pseudomonoids in the bicategory of spans. The proof utilizes graphical techniques for 2-Segal sets and spans that should be useful in more general settings.
+  There are procedures for obtaining an associative algebra from a 2-Segal set (satisfying finiteness conditions). We describe these procedures and give several examples of algebras arising from 2-Segal sets.
+  Wherever possible, we avoid higher category theory so as to make the paper accessible to a wide audience.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2605.22071</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:LO</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2605.22071</id>
+        <created>2026-10-24</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Ye</keyname>
+                        <forenames>Lingyuan</forenames>
+                </author>
+        </authors>
+        <title>Duality theory for categorical theories</title>
+            <categories>math.CT math.LO</categories>
+            <comments>Journal version: to appear in Journal of Symbolic Logic</comments>
+            <msc-class>03C35, 03G30, </msc-class>
+            <license>http://creativecommons.org/licenses/by-sa/4.0/</license>
+            <abstract>We have generalised the notion of categorical theory in model theory to the context of coherent theories. We prove a duality result between the full sub-2-category of pretopoi which are categorical, and the 2-category of profinite monoids. We also study the geometry of profinite monoids via the classifying topos construction, and show it identifies them as a full sub-2-category of the 2-category of topoi.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2607.16953</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:AT</setSpec>
+            <setSpec>math:math:QA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2607.16953</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Scheimbauer</keyname>
+                        <forenames>Claudia</forenames>
+                </author>
+                <author>
+                    <keyname>Steffens</keyname>
+                        <forenames>Pelle</forenames>
+                </author>
+                <author>
+                    <keyname>Stewart</keyname>
+                        <forenames>William</forenames>
+                </author>
+        </authors>
+        <title>On dualizability and invertibility in the higher Morita category</title>
+            <categories>math.CT math.AT math.QA</categories>
+            <comments>85 pages, comments welcome! Additions and changes in version 2: Pushforward functoriality of pointless constructible factorization algebras (Sections 2.2 and 2.3); Comparison of Morse and conical actions of factorization homology (Remark 3.3.9); Various typos and minor inaccuracies fixed</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We prove a conjecture of Lurie characterizing $(n+1)$-dualizability in higher Morita categories of $\mathbb{E}_n$-algebras in terms of dualizability over certain factorization homologies. A key ingredient is a higher Morita category based on the recently developed framework of pointless factorization algebras of Karlsson and the first author. We also verify an invertibility conjecture of Brochier--Jordan--Safranov--Snyder as an immediate corollary of our main result.
+  Moreover, we prove a relative version of the dualizability conjecture, yielding a new criterion for relative/twisted field theories. We give some examples, including Dirichlet and Neumann relative theories.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2607.17470</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:RA</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2607.17470</id>
+        <created>2026-10-24</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Banerjee</keyname>
+                        <forenames>Abhishek</forenames>
+                </author>
+                <author>
+                    <keyname>Kour</keyname>
+                        <forenames>Surjeet</forenames>
+                </author>
+                <author>
+                    <keyname>Paik</keyname>
+                        <forenames>Dipti</forenames>
+                </author>
+        </authors>
+        <title>Hochschild theory of multiplicative sequences of algebras and coalgebra measurings</title>
+            <categories>math.RA math.CT</categories>
+            <comments>Sections 2 &amp; 3 completely reorganized</comments>
+            <msc-class>16T15, 16E40</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We study coalgebra measurings between multiplicative sequences of algebras and the maps induced by them on Hochschild homology. The Hochschild theory of multiplicative sequences is introduced as a functor taking values in graded algebras in the symmetric monoidal category of chain complexes, constructed with the help of the shuffle product. We develop the universal measuring coalgebra, or Sweedler Hom for multiplicative sequences, as well as study several other Sweedler operations in this context. In particular, we obtain an enrichment of multiplicative sequences over cocommutative coalgebras. Using an appropriate theory of bimodules over multiplicative sequences, we study maps induced by comodule measurings on the Hochschild theory with coefficients, as well as the corresponding enriched categories. Finally, we consider measurings and generalized Sweedler operations between multiplicative sequences induced by comultiplicative sequences of coalgebras, and also the maps in Hochschild theory obtained from them.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2609.25185</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:QA</setSpec>
+            <setSpec>physics:hep-th</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:OA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2609.25185</id>
+        <created>2026-09-21</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Gannon</keyname>
+                        <forenames>Terry</forenames>
+                </author>
+                <author>
+                    <keyname>Schopieray</keyname>
+                        <forenames>Andrew</forenames>
+                </author>
+                <author>
+                    <keyname>Yadav</keyname>
+                        <forenames>Harshit</forenames>
+                </author>
+        </authors>
+        <title>On Haagerup-Izumi fusion categories</title>
+            <categories>math.QA hep-th math.CT math.OA</categories>
+            <comments>32 pages + appendices, comments welcome</comments>
+            <report-no>MPIM-Bonn-2026</report-no>
+            <msc-class>18M20, 18M15, </msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>For every odd $N$, we construct a Haagerup-Izumi (HI) category for $\mathbb Z/N$, using Barnes double-sine functions. Equivariantization gives near-group categories of type $((\mathbb Z/N)^2,N^2)$ for every odd $N$. We classify connected separable algebras up to Morita equivalence in such HI categories and describe their dual categories. These duals are often HI for noncyclic groups with nontrivial pointed associators. We prove the Evans-Gannon conjecture that the modular data of the center is always a smashed sum involving a finite metric group of order $N^2+4$ and recover this group and its quadratic form directly from the data of the HI category. We also give the HI equations and reconstruction in arbitrary characteristic and prove a Frobenius symmetry in characteristic two. Using this, we obtain the complete list of (untwisted, subfactor type) HI categories over $\mathbb{C}$ for odd $N\le 43$. Other applications include finding three pairwise non-Morita-equivalent $\mathbb Z/15$ categories whose centers have the same modular data. We show that the center of a $\mathbb Z/5$ HI category cannot be defined (i.e., admits no split ribbon form) over a cyclotomic field, disproving a conjecture of Davidovich-Hagge-Wang.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.25312</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:RT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.25312</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Asashiba</keyname>
+                        <forenames>Hideto</forenames>
+                </author>
+        </authors>
+        <title>Derived equivalence classification of twisted and generalized multifold extensions of affine type</title>
+            <categories>math.RT math.CT math.RA</categories>
+            <comments>43 pages. Appendix A has been revised: the proof of Proposition A.2 now uses a covering theorem for group actions rather than the more general 2-categorical machinery. The main results are unchanged</comments>
+            <msc-class>Primary 16E35, Secondary 16D50, 16G20, 16G70</msc-class>
+            <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>
+            <abstract>Let $B$ be a piecewise hereditary algebra of affine type over an algebraically closed field. In this paper we give a derived and stable equivalence classification of twisted multifold extensions of $B$. The types $\widetilde D$ and $\widetilde E$ are already covered by the classification for tree type. We therefore consider the remaining types $\widetilde{A}_{p,q}$. We show that the $n$th power of the Nakayama functor on the full subcategory of a transjective component determines the twist, including its action on morphisms, up to conjugacy in the derived Picard group of a hereditary algebra. Together with the hereditary derived type and the folding number, this gives a complete invariant for derived equivalence, and also for stable triangle equivalence. We then compute these conjugacy classes in the unbalanced, balanced, bypass, and Kronecker cases, keeping the finite rotation data. Finally, by the normalization theorem of Asashiba--Kimura--Nakashima--Yoshiwaki, we obtain the same classification for generalized multifold extensions with nonzero integer jump.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.31410</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.31410</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Bourke</keyname>
+                        <forenames>John</forenames>
+                </author>
+                <author>
+                    <keyname>Lobbia</keyname>
+                        <forenames>Gabriele</forenames>
+                </author>
+        </authors>
+        <title>The symmetric skew monoidal structure of Gray-categories</title>
+            <categories>math.CT</categories>
+            <comments>Added Arxiv identifier for simultaneous submission https://arxiv.org/abs/2610.31448</comments>
+            <msc-class>18M50, 18M65, 18N20</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>In previous work, we constructed a closed skew monoidal structure on the category of Gray-categories and Gray-functors whose internal hom Psd(A, B) captures pseudomaps and pseudo-transformations. In the present paper we give a symmetric description of the Gray-category Psd(A,B) and use this to prove that the skew monoidal structure is symmetric skew monoidal.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.31448</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.31448</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Bourke</keyname>
+                        <forenames>John</forenames>
+                </author>
+                <author>
+                    <keyname>Lobbia</keyname>
+                        <forenames>Gabriele</forenames>
+                </author>
+        </authors>
+        <title>Semi-strict 4-categories as enriched categories</title>
+            <categories>math.CT</categories>
+            <comments>Added Arxiv identifier for simultaneous submission https://arxiv.org/abs/2610.31410</comments>
+            <msc-class>18M50, 18M65, 18N20</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>We introduce several flavours of semi-strict 4-category as enriched categories. This is done using the framework of enrichment over skew monoidal categories of Gray-categories and their associated multicategories, as developed in our previous work. We give the axioms for semi-strict 4-categories in elementary terms and describe a wide range of examples. In particular, we answer the question of what exactly Gray-categories and the higher transformations between them form: namely, a left-sharp 4-category G-Cat$^4$. In addition, we describe examples arising from braided monoidal 2-categories, monoidal Gray-categories (herein defined) and Gray-categories with structure. We use the concepts introduced here and the relationships between them to unify various concepts in the literature, such as Crans&#39; 4-teisi. In the second part of the paper, we investigate homotopical aspects. In particular, we classify the equivalence n-cells in the left-sharp 4-category G-Cat$^4$ for each n. Using this, we show that the left-sharp skew monoidal structure on the category of Gray-categories induces a symmetric monoidal closed structure on the homotopy category of Gray-categories.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.33543</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:AT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.33543</id>
+        <created>2026-10-24</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Chorny</keyname>
+                        <forenames>Boris</forenames>
+                </author>
+                <author>
+                    <keyname>Leoncini</keyname>
+                        <forenames>Giuseppe</forenames>
+                </author>
+        </authors>
+        <title>On the enriched approximate completeness</title>
+            <categories>math.CT math.AT</categories>
+            <comments>14 pages</comments>
+            <msc-class>18D20, 18A30, 55P99</msc-class>
+            <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+            <abstract>We generalize to the enriched setting the classical theorem of Freyd, that the free cocompletion ${\mathscr PA}$ of a category ${\mathscr A}$ is complete if and only if ${\mathscr A}$ is approximately complete.
+  The work of Day and Lack, arXiv:math/0610439, has laid the foundations for such a generalization and has had multiple applications in homotopy theory and in category theory. Our result allows us to expand on some of these applications.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.33903</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:CO</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.33903</id>
+        <created>2026-10-24</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Edison</keyname>
+                        <forenames>Jeremy</forenames>
+                </author>
+                <author>
+                    <keyname>Sistko</keyname>
+                        <forenames>Alexander</forenames>
+                </author>
+        </authors>
+        <title>On Reed-Muller-Type Codes Associated to Proto-Exact Categories</title>
+            <categories>math.CT math.CO math.RT</categories>
+            <comments>32 pages</comments>
+            <msc-class>18D99 (Primary) 94B05, 05E10, 06A11, 16G20 (Secondary)</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>In this paper, we show how to associate a family of binary linear block codes to the class of admissibly cofinitary objects in any proto-exact category with rank function. This family naturally generalizes the well-studied family of binary Reed-Muller codes, and recovers this classical family for suitable choices of category. We also expand the list of known examples of proto-abelian categories to include incidence categories of posets. As an application of this result, we construct a binormal, combinatorial, proto-abelian category of Kashiwara crystals associated to any root system. In the case that the proto-exact category is a category of $\mathbb{F}_1$-representations of quivers, we show how to reconstruct our family via the language of algebraic geometry codes, in particular motivating an extension to arbitrary finite fields. We provide explicit computations of the dimension and minimum distance for select families of $\mathbb{F}_1$-representations of quivers.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.34119</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:RT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.34119</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Asashiba</keyname>
+                        <forenames>Hideto</forenames>
+                </author>
+        </authors>
+        <title>A nonstandard selfinjective algebra of Euclidean type</title>
+            <categories>math.RT math.CT math.RA</categories>
+            <comments>16 pages</comments>
+            <msc-class>16G20, 16G60, 16W50</msc-class>
+            <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>
+            <abstract>Let $\Bbbk$ be an algebraically closed field of characteristic different from $2$. We realize the four-dimensional selfinjective algebra $Ω(1)$ as an admissible infinite cyclic orbit algebra of the repetitive Kronecker category. Thus an algebra long stated to be nonstandard is of Euclidean type in the orbit-algebra sense. We also identify a gap in an earlier proof of its nonstandardness and give an independent proof by determining all connected Galois covering sources of $Ω(1)$. Together, these results disprove the implication from Euclidean type to standardness in the equivalence explicitly stated by Bocian--Holm--Skowroński (2004) and Bocian--Skowroński (2005). They also contradict the standardness conclusion of the Proposition in \S2.1 of Skowroński (1989); its main theorem in \S1.5 assumes standardness and is not contradicted by this example.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.34332</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:QA</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RA</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.34332</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Chirvasitu</keyname>
+                        <forenames>Alexandru</forenames>
+                </author>
+        </authors>
+        <title>Automatic cocommutativity for the quantum-group comonad</title>
+            <categories>math.QA math.CT math.RA math.RT</categories>
+            <comments>3 pages + references</comments>
+            <msc-class>16T05, 16T15, 18A40, 16T20, 18M05, 18C15</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We prove that the cofree Hopf algebra on a cocommutative bialgebra is again cocommutative, and in fact coincides with the latter&#39;s largest Hopf subalgebra. This answers a question of Ardizzoni-Menini-Saracco and provides a proof for a statement to the same effect in the literature, whose original justification contains an apparent gap. The result relies on (and is in fact equivalent to) the observation that cocommutative bialgebra quotients of arbitrary Hopf algebras are automatically Hopf. This latter statement strengthens the analogue due to Newman, which assumes cocommutativity for the Hopf domain.
+  One application of the above is the following quantum-rigidity result for Hopf algebras acted upon by a covariant quantum group: an action by one Hopf algebra on another which preserves the unital-algebra structure and the comultiplication factors through an action by a cocommutative Hopf algebra which moreover preserves the entire Hopf structure.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.34363</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.34363</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Monchenko</keyname>
+                        <forenames>Nikita</forenames>
+                </author>
+        </authors>
+        <title>On derived equivalences of exact structures on the category of representations $k[x]/(x^n)$</title>
+            <categories>math.CT math.RT</categories>
+            <journal-ref>Advances in Systems Science and Applications, 2026(1), 97-117</journal-ref>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>From the perspective of homological algebra, exact categories are interesting because they possess derived categories. Typically, an additive category admits many exact structures. If the original category is sufficiently nice (for example, quasi-abelian), a classification of exact structures can be given in terms of certain Serre subcategories in the category of contravariant functors. It turns out that the derived categories of different exact structures are functorially related. This work is concerned with sufficient conditions for the derived equivalence of different exact structures on certain categories.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.34469</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:AG</setSpec>
+            <setSpec>math:math:AC</setSpec>
+            <setSpec>math:math:AT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.34469</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Zhu</keyname>
+                        <forenames>Liangyu</forenames>
+                </author>
+        </authors>
+        <title>Spectra, Growth, and Localization in Half-Bounded Tensor Triangular Geometry</title>
+            <categories>math.AG math.AC math.AT math.CT math.RT</categories>
+            <comments>41 pages</comments>
+            <msc-class>13D09, 18G80, 18E35, 13C60, 13D30</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Over a noetherian scheme, classical cohomological support determines thick tensor ideals of perfect complexes. In half-bounded derived categories, complexes with the same support can generate different radical thick tensor ideals. We study how these distinctions affect the Balmer spectrum and localization. For a commutative noetherian ring $R$, we prove that $\operatorname{Spc}(\mathbf D^-_{\mathrm{fg}}(R))$ is noetherian if and only if $R$ is artinian. For a nonempty noetherian scheme $X$, the corresponding condition is $\dim X=0$. For such a ring $R$ and a finite group $G$, $\operatorname{Spc}(\mathbf D^-_{\mathrm{fg}}(RG))$ is noetherian if and only if $R$ is artinian and $|G|$ is invertible in $R$. Using the Sanders--Zhang classification over a discrete valuation ring, we compare objects whose annihilator exponents grow at different rates in different degrees. We lift the relevant generation relations before changing coefficients and obtain spectral retractions. These comparisons persist after thick quotients and algebraic localization under explicit uniform annihilation and nonvanishing conditions. A second argument uses nonnilpotent classes of positive degree and passes from cyclic subgroups to finite groups. Applications include relative results for schemes and bounded-below spectra with degreewise finitely generated homotopy. We also describe the cohomological information shared by the resulting ideals. The localization comparisons for bounded-below complexes of finitely generated modules and for bounded-below derived objects with finitely generated cohomology are established separately.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.34592</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:AG</setSpec>
+            <setSpec>math:math:RA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.34592</id>
+        <created>2026-10-25</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Bambozzi</keyname>
+                        <forenames>Federico</forenames>
+                </author>
+        </authors>
+        <title>Homological and homotopical epimorphisms in monoidal $\infty$-categories</title>
+            <categories>math.CT math.AG math.RA</categories>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>We compare homological and homotopical epimorphisms of associative algebras in monoidal $\infty$-categories. Assume that geometric realizations and pushouts of associative algebras exist and that tensoring preserves geometric realizations. Then every homological epimorphism is homotopical. If, in addition, the ambient category is additive and tensoring preserves finite coproducts, the converse holds. This extends the result of Chuang and Lazarev for dg-algebras. In the symmetric monoidal setting, we discuss consequences for centers and commutative refinements, as well as applications to derived analytic geometry.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.35232</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:KT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.35232</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Cabrera</keyname>
+                        <forenames>Javier Díaz</forenames>
+                </author>
+                <author>
+                    <keyname>Muro</keyname>
+                        <forenames>Fernando</forenames>
+                </author>
+        </authors>
+        <title>A cohomology operation encoding the octahedral axiom</title>
+            <categories>math.CT math.KT math.RT</categories>
+            <comments>32 pages</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We introduce a new secondary cohomology operation, the naturality defect product, associated with a graded natural transformation between the cohomology functors of two differential graded functors, and study its main properties. We then prove that a pretriangulated category satisfies the octahedral axiom if and only if the naturality defect product associated with the natural isomorphism given by a theorem of Heller vanishes on the homotopy category of acyclic complexes over it. This characterization extends immediately to n-angulated categories. As an application, we exhibit non-vanishing instances for the recently found examples of pretriangulated categories which are not triangulated. Finally, we show that horizontal composition of these natural isomorphisms preserves n-angulated structures, and we use it to obtain, from each of these examples and for every r &gt;= 1, a pre-3r-angulated category which is not 3r-angulated.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.35259</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:FA</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.35259</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Sánchez</keyname>
+                        <forenames>Félix Cabello</forenames>
+                </author>
+                <author>
+                    <keyname>Castillo</keyname>
+                        <forenames>Jesús M. F.</forenames>
+                </author>
+                <author>
+                    <keyname>Martínez-Bohórquez</keyname>
+                        <forenames>Raúl</forenames>
+                </author>
+                <author>
+                    <keyname>Garmendia</keyname>
+                        <forenames>José Navarro</forenames>
+                </author>
+        </authors>
+        <title>The Serre closure of Banach spaces</title>
+            <categories>math.FA math.CT</categories>
+            <comments>2 figures</comments>
+            <msc-class>46M18, 46B70, 46A16, 18E99</msc-class>
+            <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>
+            <abstract>We determine the Serre closure of Banach spaces in the category of quasi-Banach spaces, that is, the smallest class of quasi-Banach spaces that contains all Banach spaces and is stable under subspaces, quotients, and extensions. Precisely, a quasi-Banach space $X$ belongs to this closure if and only if there exist constants $M$ and $k\in\mathbb N$ such that $$ \frac{\|x_1+\dots+x_n\|}{\|x_1\|+\dots+\|x_n\|}\leq M\log^k n $$ for every $n\geq 2$ and every $x_1,\dots,x_n\in X$; equivalently, $X$ is a quotient of an Orlicz sequence space $\ell(I,f_l)$, where $I$ is an index set and $f_l(t)$ is equivalent to $t\log^l(1/t)$ near zero.
+  The proof combines geometrical estimates for quasi-Banach spaces and quasilinear maps with the study of higher order derived spaces associated to complex interpolation between $\ell_{2/3}$ and $\ell_2$. We provide examples of spaces in the Serre closure of Banach spaces that are not iterated extensions of Banach spaces and discuss some related problems.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.35534</identifier>
+        <datestamp>2026-10-27</datestamp>
+            <setSpec>math:math:GT</setSpec>
+            <setSpec>physics:math-ph</setSpec>
+            <setSpec>math:math:MP</setSpec>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:DG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.35534</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-27</updated>
+        <authors>
+                <author>
+                    <keyname>Elhamdadi</keyname>
+                        <forenames>Mohamed</forenames>
+                </author>
+                <author>
+                    <keyname>Virgin</keyname>
+                        <forenames>Bryce</forenames>
+                </author>
+        </authors>
+        <title>Classifying Leibniz racks</title>
+            <categories>math.GT math-ph math.CT math.DG math.MP</categories>
+            <comments>29 pages. Comments are welcome</comments>
+            <msc-class>57K12, 17A32, 22E60, 20N02</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Lie quandles were defined by T. Fritz as a nonlinear generalization of Lie algebras, to serve as a nonlinear algebras of observables in generalized form of Hamiltonian mechanics. These objects were subsequently generalized in a prequel article to objects referred to as smooth Lie group families of smooth racks by the authors. In this article, we investigate a particular system of nonlinear functional differential equations whose solution in general provides a pathway to the classification of smooth Lie group families of smooth rack structures on any given smooth manifold. We then discuss a particularly practical ansatz for solving these equations, and use it to construct new families of examples, as well as prove a result on the sense in which the Bloch sphere is the unique Lie quandle structure on the sphere.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2510.23767</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2510.23767</id>
+        <created>2026-10-27</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>De Deyn</keyname>
+                        <forenames>Timothy</forenames>
+                </author>
+                <author>
+                    <keyname>Miller</keyname>
+                        <forenames>Sam K.</forenames>
+                </author>
+        </authors>
+        <title>Re-framing the classification of ideals in noncommutative tensor triangular geometry</title>
+            <categories>math.CT math.RT</categories>
+            <comments>33 pages. v3: Final version, to appear in AiM</comments>
+            <msc-class>18G80, 06D22, 18F70, 18M05</msc-class>
+            <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>
+            <abstract>We prove that a &#39;pseudo-Hochster dual&#39; of the noncommutative Balmer spectrum of a monoidal triangulated category classifies its semiprime thick tensor ideals. This extends Balmer&#39;s classification of radical thick tensor ideals to noncommutative tensor triangular geometry. To achieve this, we utilize the notion of support data for lattices and frames, under which the classification follows via Stone duality. We also give a characterization for when the noncommutative Balmer spectrum behaves as it does in tensor triangular geometry, that is, when it is a spectral space with quasi-compact opens given by complements of supports. Finally, we show that rigid centrally generated monoidal triangulated categories satisfy this property, and we answer a question posed by Negron--Pevtsova regarding classification of one-sided tensor ideals via cohomological support.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2601.00209</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:AT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2601.00209</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Dey</keyname>
+                        <forenames>Tamal K.</forenames>
+                </author>
+                <author>
+                    <keyname>Lesnick</keyname>
+                        <forenames>Michael</forenames>
+                </author>
+        </authors>
+        <title>Limit Computation Over Posets via Minimal Initial Functors</title>
+            <categories>math.AT math.CT</categories>
+            <comments>Many expository improvements and minor fixes. 53 pages</comments>
+            <license>http://creativecommons.org/licenses/by-nc-nd/4.0/</license>
+            <abstract>It is well known that limits can be computed by restricting along an initial functor, and that this often simplifies limit computation. We systematically study the algorithmic implications of this idea for diagrams indexed by a poset. We say an initial functor $F\colon C\to D$ with $C$ small is minimal if the sets of objects and morphisms of $C$ each have minimum cardinality, among the sources of all initial functors with target $D$. For $Q$ a finite poset or $Q\subseteq \mathbb N^d$ an interval (i.e., a convex, connected subposet), we describe all minimal initial functors $F\colon P\to Q$. In particular, we show that such $F$ is always a subposet inclusion, up to isomorphism. We give efficient algorithms to compute a choice of minimal initial functor. In the case that $Q\subseteq \mathbb N^d$ is an interval, we give asymptotically optimal bounds on $|\hom P|$, the number of relations in $P$ (including identities), in terms of the number $n$ of minima of $Q$: We show that $|\hom P|=Θ(n)$ for $d\leq 3$, and $|\hom P|=Θ(n^2)$ for $d&gt;3$. We apply these results to give new bounds on the cost of computing $\lim G$ for a functor $G \colon Q\to \mathbf{Vec}$ valued in vector spaces. For $Q$ connected, we also give new bounds on the cost of computing the generalized rank of $G$ (i.e., the rank of the induced map $\lim G\to \operatorname{colim} G$), which is of interest in topological data analysis.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2602.08480</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:AG</setSpec>
+            <setSpec>math:math:AT</setSpec>
+            <setSpec>math:math:RT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2602.08480</id>
+        <created>2026-10-27</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Stevenson</keyname>
+                        <forenames>Greg</forenames>
+                </author>
+        </authors>
+        <title>Some notes on tensor triangular geometry</title>
+            <categories>math.CT math.AG math.AT math.RT</categories>
+            <comments>This is a preview of notes to appear in the Oberwolfach Seminars series published by Birkhäuser</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>These are notes from the lectures I gave at the Oberwolfach seminar `Tensor Triangular Geometry and Interactions&#39; which was held in October 2025.
+  The aim of these notes is to give an introduction to tensor triangular geometry, for both small and large categories, through the lens of lattice theory. We do not try to be exhaustive and this is reflected in both the content and the bibliography. For instance we are quite light on triangulated preliminaries, especially for compactly generated categories.
+  The first three sections treat the essentially small case and conclude with a tensor triangular proof of Thomason&#39;s theorem computing the spectrum of the perfect complexes on a quasi-compact and quasi-separated scheme. The last section treats the compactly generated case. This final section is somewhat experimental and contains some new thoughts.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.36119</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:SG</setSpec>
+            <setSpec>math:math:AG</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.36119</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Mamaev</keyname>
+                        <forenames>Daniil</forenames>
+                </author>
+        </authors>
+        <title>Fukaya categories of surfaces with DG coefficients</title>
+            <categories>math.SG math.AG math.CT</categories>
+            <comments>91 pages, 29 figures</comments>
+            <msc-class>53D37 (Primary), 53D12, 53D42, 18G70 (Secondary)</msc-class>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>Given a compact surface $S$ admitting a Liouville form, a finite set $Q \subset S$, a line field on $S$, and a local system of dg-categories on $S \setminus Q$ together with a section of the monodromy functor around each interior $q \in Q$, we construct a Fukaya category. We give examples where such Fukaya categories are quasi-equivalent to derived categories of projective completions of line bundles and of iterated blow-ups of the affine plane; and to wrapped Fukaya categories of cotangent bundles of spheres.
+  We define two versions of the Fukaya category, a topological, which is constructed combinatorially from a full arc system, and a geometric, which includes all Lagrangian branes supported on immersed curves. We prove that the topological category embeds into the geometric category in an essentially unique way. To define Lagrangian branes we develop a generalisation of the Chekanov--Eliashberg algebra incorporating dg-coefficients and wrapping along the boundary.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.36314</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:AG</setSpec>
+            <setSpec>math:math:AT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.36314</id>
+        <created>2026-10-26</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Dyckerhoff</keyname>
+                        <forenames>Tobias</forenames>
+                </author>
+                <author>
+                    <keyname>Heine</keyname>
+                        <forenames>Till</forenames>
+                </author>
+                <author>
+                    <keyname>Schneider</keyname>
+                        <forenames>Simon</forenames>
+                </author>
+        </authors>
+        <title>Sheaves on polynomials and polynomial sheaves</title>
+            <categories>math.AG math.AT math.CT</categories>
+            <comments>53 pages, 3 figures</comments>
+            <msc-class>18F20, 18G31, 55S15, 32S60</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We show that several Dold-Kan type equivalences can be understood as a passage from constructible sheaves on symmetric products (i.e. spaces of polynomials) to polynomial sheaves in the sense of Goodwillie-Weiss calculus, by means of a natural analytic expansion functor. This geometric perspective provides access to standard tools from sheaf theory such as the six functor formalism and $t$-structures. For example, the equivalence between filtered objects and coherent chain complexes in a stable $\infty$-category receives a geometric incarnation as Verdier duality between $!$-sheaves and $*$-cosheaves on an $\infty$-dimensional simplex. As a main application, we obtain an intrinsic geometric explanation for the appearance of vanishing cycle data for perverse sheaves in a paracyclic variant of the Dold--Kan correspondence pioneered by Dwyer and Kan, at the same time lifting their equivalence to stable $\infty$-categories.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.36966</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:RT</setSpec>
+            <setSpec>math:math:CT</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.36966</id>
+        <created>2026-10-27</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Slaftsos</keyname>
+                        <forenames>Anastasios</forenames>
+                </author>
+        </authors>
+        <title>Compact generation and perfect objects in homotopy categories of exact model structures</title>
+            <categories>math.RT math.CT</categories>
+            <comments>36 pages. Comments are welcome</comments>
+            <msc-class>18G25, 18G80, 18N40</msc-class>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Compact generation allows large triangulated categories to be studied through suitably small objects. For homotopy categories arising from exact model structures, a natural question is how this intrinsic notion of smallness relates to finite presentation in the underlying exact category. In this paper, we investigate this relation for hereditary projective model structures generated by finitely presented Gorenstein projective objects. We establish compact generation and study the stronger requirement that every compact object admits a finitely presented cofibrant representative. We call objects with such representatives perfect. Under local coherence and the existence of enough projectives among the finitely presented objects, the finitely presented cofibrant objects form a Frobenius category whose stable category describes the perfect objects and whose idempotent completion recovers all compact objects. The relative $Q$-shaped setting, for suitable small categories $Q$, makes explicit how these finiteness properties depend on the choice of exact structure. The pure exact structure yields a compactly generated homotopy category, called the $Q$-shaped pure derived category. On the other hand, the split exact structure yields the $Q$-shaped homotopy category, which is compactly generated only in the pure semisimple case, analogously to the classical homotopy category of complexes. Finally, for acyclic $Q$ and for left artinian rings, we show that every compact object admits a strictly perfect representative. In particular, we establish that compact and perfect objects coincide, proving the conjecture of Holm and Jorgensen under these hypotheses.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+                    <record>
+                <header>
+        <identifier>oai:arXiv.org:2610.37016</identifier>
+        <datestamp>2026-10-28</datestamp>
+            <setSpec>math:math:CT</setSpec>
+            <setSpec>math:math:QA</setSpec>
+    </header>
+
+            <metadata>
+                        <arXiv xmlns="http://arxiv.org/OAI/arXiv/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXiv/ https://oaipmh.arxiv.org/OAI/arXiv.xsd">
+        <id>2610.37016</id>
+        <created>2026-10-27</created>
+            <updated>2026-10-28</updated>
+        <authors>
+                <author>
+                    <keyname>Décoppet</keyname>
+                        <forenames>Thibault D.</forenames>
+                </author>
+                <author>
+                    <keyname>Stroiński</keyname>
+                        <forenames>Mateusz</forenames>
+                </author>
+                <author>
+                    <keyname>Zorman</keyname>
+                        <forenames>Tony</forenames>
+                </author>
+        </authors>
+        <title>Finite Tensor 2-Categories</title>
+            <categories>math.CT math.QA</categories>
+            <comments>39 pages, comments welcome!</comments>
+            <report-no>MPIM-Bonn-2026</report-no>
+            <msc-class>18N10, 18M05, 18M20, 16D90</msc-class>
+            <license>http://creativecommons.org/licenses/by-sa/4.0/</license>
+            <abstract>We propose a definition of a finite linear 2-category, as a 2-categorical analogue of the notion of a finite abelian category of Etingof-Ostrik. We go on to prove that finite linear 2-categories with adjunctible projectives are precisely the Morita 2-categories of (all) algebras in a finite multitensor category. Thus, finite linear 2-categories with adjunctible projectives can be viewed as `non-semisimple&#39; generalizations of the finite semisimple 2-categories of Douglas-Reutter.
+  Secondly, we study finite multitensor 2-categories, that is, finite linear 2-categories equipped with a monoidal structure for which every objects has duals. We extend several results about fusion 2-categories to our present setting. In particular, we investigate the properties of the 2-category of bimodules over a rigid algebra $\mathcal{A}$ in a finite tensor 2-category $\mathfrak{C}$. We show that, if $\mathfrak{C}$ has adjunctible projectives, then the 2-category of $\mathcal{A}$-$\mathcal{A}$-bimodules in $\mathfrak{C}$ is a finite multitensor 2-category. This construction provides many examples of finite tensor 2-categories. For instance, the Drinfeld center of a finite tensor 2-category with adjunctible projectives is a finite tensor 2-category.</abstract>
+    </arXiv>
+
+            </metadata>
+        </record>
+
+    </ListRecords>
+</OAI-PMH>
