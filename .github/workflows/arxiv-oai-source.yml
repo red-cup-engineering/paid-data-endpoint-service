@@ -1,0 +1,41 @@
+name: arXiv OAI source and replay contract
+on:
+  pull_request:
+    paths:
+      - 'src/arxiv-oai-source.mjs'
+      - 'src/content-addressed-directory.mjs'
+      - 'test/arxiv-oai-source.test.mjs'
+      - 'test/arxiv-oai-integration.test.mjs'
+      - 'docs/ARXIV-DOMAIN-SEARCH.md'
+      - 'package.json'
+      - '.github/workflows/arxiv-oai-source.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/arxiv-oai-source.mjs'
+      - 'test/arxiv-oai-source.test.mjs'
+      - '.github/workflows/arxiv-oai-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-source-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22.18.0'
+      - name: Verify source syntax and pure source/admission semantics
+        run: |
+          node --check src/arxiv-oai-source.mjs
+          node --check test/arxiv-oai-source.test.mjs
+          node --check test/arxiv-oai-integration.test.mjs
+          node --test test/arxiv-oai-source.test.mjs
+      - name: Declare nonreceipt boundaries
+        run: |
+          echo "Pure source tests do not qualify original XML reader installation, a live OAI host, distributed rate gate, accepted newsroom source, persisted subscription, or x402 settlement." >> "$GITHUB_STEP_SUMMARY"
+          echo "Run test/arxiv-oai-integration.test.mjs when the exact XML reader package is independently available in the approved dependency closure." >> "$GITHUB_STEP_SUMMARY"
