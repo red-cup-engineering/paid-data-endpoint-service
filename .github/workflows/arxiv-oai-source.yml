@@ -43,7 +43,7 @@ jobs:
       - name: Select Node version
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
-          node-version: '22.18.0'
+          node-version: '24.2.0'
           package-manager-cache: false
       - name: Run native source, watch-state and refusal tests
         run: |
@@ -69,7 +69,16 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/arxiv-xml" node_modules/@red-cup-engineering
-          timeout 120s npm install --prefix "$RUNNER_TEMP/arxiv-xml" --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000 --registry=https://registry.561.group/ @red-cup-engineering/xml-document-rendering-service@0.1.7
+          for attempt in 1 2 3; do
+            if timeout 110s npm install --prefix "$RUNNER_TEMP/arxiv-xml" --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000 --registry=https://registry.561.group/ @red-cup-engineering/xml-document-rendering-service@0.1.7; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Source-qualified XML package unavailable after three bounded registry attempts" >&2
+              exit 1
+            fi
+            sleep 4
+          done
           npm ls --prefix "$RUNNER_TEMP/arxiv-xml" @red-cup-engineering/xml-document-rendering-service @rgrove/parse-xml
           ln -s "$RUNNER_TEMP/arxiv-xml/node_modules/@red-cup-engineering/xml-document-rendering-service" node_modules/@red-cup-engineering/xml-document-rendering-service
           node --test test/arxiv-oai-integration.test.mjs
