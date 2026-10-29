@@ -3,15 +3,15 @@
   "source": "https://oaipmh.arxiv.org/oai",
   "set": "math:math:CT",
   "from": "2026-10-27",
-  "observedAt": "2026-10-28T11:34:45.878Z",
-  "lastResponseAt": "2026-10-28T11:34:49Z",
+  "observedAt": "2026-10-29T11:42:40.095Z",
+  "lastResponseAt": "2026-10-29T11:42:43Z",
   "sourcePages": [
     {
       "requestUrl": "https://oaipmh.arxiv.org/oai?verb=ListRecords&metadataPrefix=arXiv&set=math%3Amath%3ACT&from=2026-10-27",
-      "sourceDigest": "sha256:f7623489ad059b34e5bc72d3be217bffb14f5de6daaaf41ec989cf9bc7597f58",
+      "sourceDigest": "sha256:d73d31b169000a6ebd18f9aeeb00323b9a4f89fb33b05e51c63a3174fbcd39ee",
       "sourceBytes": 67164,
-      "observedAt": "2026-10-28T11:34:45.878Z",
-      "sourceTime": "2026-10-28T11:34:49Z",
+      "observedAt": "2026-10-29T11:42:40.095Z",
+      "sourceTime": "2026-10-29T11:42:43Z",
       "count": 29,
       "complete": true
     }
