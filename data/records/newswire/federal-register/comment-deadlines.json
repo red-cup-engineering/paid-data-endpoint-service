@@ -1,6 +1,6 @@
 {
   "kind": "561.newswire.federal-register-comment-deadlines.v1",
-  "observedAt": "2026-10-29T10:14:57.421Z",
+  "observedAt": "2026-10-29T18:34:36.002Z",
   "utcCivilDate": "2026-10-29",
   "horizonDays": 30,
   "sourceQuery": {
@@ -116,54 +116,8 @@
   "recordCount": 664,
   "sourceDatesLaterThanObservation": 0,
   "legalReadinessCaveat": "Source search inclusion does not prove an official legal publication or an open comment period; future-dated source publications need separate original authority check.",
-  "changedSourceEditions": [
-    {
-      "subject": "federal-register:2026-22075",
-      "sourceEdition": "ni:///sha-256;_kUdHeXoHPo0Mmw0fGwKS9CkISjoGim37xIi8g-UC4g",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-10-29",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-29T10:14:57.421Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-22086",
-      "sourceEdition": "ni:///sha-256;Yhuk8Pzf5EFwBLIv1QKzT8Q-Iehe5On0Ck-mGcKC4l0",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-03",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-29T10:14:57.421Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-22036",
-      "sourceEdition": "ni:///sha-256;SYVrsnY5E3957-3LNf7PPbqh6Q7vSMQKE8UrP__p9cw",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-23",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-29T10:14:57.421Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-22095",
-      "sourceEdition": "ni:///sha-256;PRB1nES-pHYgNtqPJPbQcnviKJxiNKMl2Gjn-4X-hM8",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-27",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-29T10:14:57.421Z",
-      "kind": "first-observed-in-current-query"
-    },
-    {
-      "subject": "federal-register:2026-22074",
-      "sourceEdition": "ni:///sha-256;tCArFWX5ILD3kDb9JAdayTPi_ELZqk_75OdxkWic7cY",
-      "previousEdition": null,
-      "commentsCloseOn": "2026-11-28",
-      "previousReportedClose": null,
-      "observedAt": "2026-10-29T10:14:57.421Z",
-      "kind": "first-observed-in-current-query"
-    }
-  ],
-  "changedSourceEditionCount": 5,
+  "changedSourceEditions": [],
+  "changedSourceEditionCount": 0,
   "previousQueryItemsNotPresent": 0,
   "disappearanceMeaning": "Comment dates expire, move out of the date window or change with corrected notices; missing from this query alone is NOT legal withdrawal.",
   "dateMeaning": "Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
