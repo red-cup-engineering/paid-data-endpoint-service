@@ -1,6 +1,6 @@
 {
   "kind": "561.newswire.federal-register-comment-deadlines.v1",
-  "observedAt": "2026-10-30T01:11:09.835Z",
+  "observedAt": "2026-10-30T10:16:27.501Z",
   "utcCivilDate": "2026-10-30",
   "horizonDays": 30,
   "sourceQuery": {
@@ -118,7 +118,7 @@
   "legalReadinessCaveat": "Source search inclusion does not prove an official legal publication or an open comment period; future-dated source publications need separate original authority check.",
   "changedSourceEditions": [],
   "changedSourceEditionCount": 0,
-  "previousQueryItemsNotPresent": 24,
+  "previousQueryItemsNotPresent": 0,
   "disappearanceMeaning": "Comment dates expire, move out of the date window or change with corrected notices; missing from this query alone is NOT legal withdrawal.",
   "dateMeaning": "Source-reported civil comment-close date only, not an official time-of-day, active docket verification, or legal advice. Check the original notice for corrections/extensions.",
   "records": [
