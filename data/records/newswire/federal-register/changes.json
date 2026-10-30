@@ -1,31 +1,8 @@
 {
   "kind": "561.newswire.source-edition-changes.v1",
-  "observedAt": "2026-10-30T18:07:05.415Z",
-  "newOrChangedCount": 2,
+  "observedAt": "2026-10-30T22:31:00.030Z",
+  "newOrChangedCount": 0,
   "disappearedFromRollingQueryCount": 0,
   "disappearanceMeaning": "No withdrawal is inferred from a document leaving the rolling date window.",
-  "changes": [
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-30T18:07:05.415Z",
-      "subject": "federal-register:2026-22075",
-      "sourceEdition": "ni:///sha-256;7VhZ24b0Hp0gNjSWCJXBV7G4j-uy4AWAoSjOpWLCNHg",
-      "previousEdition": "ni:///sha-256;_kUdHeXoHPo0Mmw0fGwKS9CkISjoGim37xIi8g-UC4g",
-      "documentNumber": "2026-22075",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/29/2026-22075/privacy-act-of-1974-system-of-records",
-      "commentsCloseOn": "2026-11-28",
-      "effectiveOn": null
-    },
-    {
-      "kind": "source-edition-changed",
-      "observedAt": "2026-10-30T18:07:05.415Z",
-      "subject": "federal-register:2026-22082",
-      "sourceEdition": "ni:///sha-256;mVltpvyteR8UZAbgbN3KXupDNhQllt9lfihtQI74tlA",
-      "previousEdition": "ni:///sha-256;lSi7kPALQJd3C1G-h_AH2xHHLoiuN7opf86WwiWMhSo",
-      "documentNumber": "2026-22082",
-      "sourceDocumentUrl": "https://www.federalregister.gov/documents/2026/10/29/2026-22082/additional-reconsideration-standards-of-performance-for-new-reconstructed-and-modified-sources-and",
-      "commentsCloseOn": "2026-12-16",
-      "effectiveOn": null
-    }
-  ]
+  "changes": []
 }
