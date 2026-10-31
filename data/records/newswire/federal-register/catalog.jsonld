@@ -8,7 +8,7 @@
   "@type": "dcat:Dataset",
   "dct:title": "Source-verified Federal Register event observation packets",
   "dct:description": "No-cost original government source observations, official comment date windows, exact content-addressed editions and bounded edition deltas. Not independently editorial-approved news, legal advice or settled market goods.",
-  "dct:issued": "2026-10-31T05:59:41.565Z",
+  "dct:issued": "2026-10-31T12:51:40.669Z",
   "dct:publisher": "https://www.federalregister.gov",
   "prov:wasDerivedFrom": "https://www.federalregister.gov/api/v1/documents.json",
   "dcat:distribution": [
